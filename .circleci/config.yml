@@ -1,0 +1,26 @@
+#
+# validate yml:
+# circleci config validate
+#
+version: 2.1
+
+#
+# Orbs
+#
+orbs:
+  # https://github.com/NaturalCycles/orbs/blob/master/naturalcycles/tools.yml
+  tools: naturalcycles/tools@volatile
+
+#
+# Workflows
+#
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - tools/deploy-gae-job:
+          filters:
+            branches:
+              only:
+                - master123
+      - tools/test-job

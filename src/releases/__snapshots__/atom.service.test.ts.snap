@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`releases.xml 1`] = `
+Array [
+  Object {
+    "author": "adailtonribeiro",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/5373683?s=60&v=4",
+    "descrHtml": "<p>add 'cordova-plugin-cocoapod-support' dependency</p>",
+    "tagName": "0.1.0",
+    "title": "0.1.0",
+    "updated": 1533668732,
+    "v": "0.1.0",
+  },
+  Object {
+    "author": "adailtonribeiro",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/5373683?s=60&v=4",
+    "descrHtml": "<p>change 'cordova-support-google-services' version range</p>",
+    "tagName": "0.0.7",
+    "title": "0.0.7",
+    "updated": 1532954082,
+    "v": "0.0.7",
+  },
+]
+`;
+
+exports[`releases2.xml 1`] = `
+Array [
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h2><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.14.0...v7.14.1\\">7.14.1</a> (2019-07-16)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>yarn build-copy to include dotfiles (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/4a34f51\\">4a34f51</a>)</li>
+</ul>",
+    "tagName": "v7.14.1",
+    "title": "v7.14.1: chore(release): 7.14.1 [skip ci]",
+    "updated": 1563299076,
+    "v": "7.14.1",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.13.0...v7.14.0\\">7.14.0</a> (2019-07-16)</h1>
+<h3>Features</h3>
+<ul>
+<li>remove generateBuildInfo.shell param (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/c94cda4\\">c94cda4</a>)</li>
+</ul>",
+    "tagName": "v7.14.0",
+    "title": "v7.14.0: chore(release): 7.14.0 [skip ci]",
+    "updated": 1563266127,
+    "v": "7.14.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.12.0...v7.13.0\\">7.13.0</a> (2019-07-05)</h1>
+<h3>Features</h3>
+<ul>
+<li>deps (few major bumps) (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/3a75276\\">3a75276</a>)</li>
+</ul>",
+    "tagName": "v7.13.0",
+    "title": "v7.13.0: chore(release): 7.13.0 [skip ci]",
+    "updated": 1562358550,
+    "v": "7.13.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.11.1...v7.12.0\\">7.12.0</a> (2019-06-02)</h1>
+<h3>Features</h3>
+<ul>
+<li>deps (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/423794a\\">423794a</a>)</li>
+</ul>",
+    "tagName": "v7.12.0",
+    "title": "v7.12.0: chore(release): 7.12.0 [skip ci]",
+    "updated": 1559475121,
+    "v": "7.12.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h2><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.11.0...v7.11.1\\">7.11.1</a> (2019-05-28)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>don't fail json2env if BASH_ENV doesn't exist (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/4b2c25d\\">4b2c25d</a>)</li>
+</ul>",
+    "tagName": "v7.11.1",
+    "title": "v7.11.1: chore(release): 7.11.1 [skip ci]",
+    "updated": 1559076189,
+    "v": "7.11.1",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.10.0...v7.11.0\\">7.11.0</a> (2019-05-24)</h1>
+<h3>Features</h3>
+<ul>
+<li>allow tests in /scripts (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/1766cc0\\">1766cc0</a>)</li>
+</ul>",
+    "tagName": "v7.11.0",
+    "title": "v7.11.0: chore(release): 7.11.0 [skip ci]",
+    "updated": 1558712134,
+    "v": "7.11.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.9.0...v7.10.0\\">7.10.0</a> (2019-05-24)</h1>
+<h3>Features</h3>
+<ul>
+<li>ts-jest diagnostics=false (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/8969b40\\">8969b40</a>)</li>
+</ul>",
+    "tagName": "v7.10.0",
+    "title": "v7.10.0: chore(release): 7.10.0 [skip ci]",
+    "updated": 1558691771,
+    "v": "7.10.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.8.0...v7.9.0\\">7.9.0</a> (2019-05-19)</h1>
+<h3>Features</h3>
+<ul>
+<li>bump js-lib (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/6c1980b\\">6c1980b</a>)</li>
+</ul>",
+    "tagName": "v7.9.0",
+    "title": "v7.9.0: chore(release): 7.9.0 [skip ci]",
+    "updated": 1558225009,
+    "v": "7.9.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.7.0...v7.8.0\\">7.8.0</a> (2019-05-18)</h1>
+<h3>Features</h3>
+<ul>
+<li>build-copy to copy *.js files (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/e557c1f\\">e557c1f</a>)</li>
+</ul>",
+    "tagName": "v7.8.0",
+    "title": "v7.8.0: chore(release): 7.8.0 [skip ci]",
+    "updated": 1558223235,
+    "v": "7.8.0",
+  },
+  Object {
+    "author": "semantic-release-bot",
+    "authorThumb": "https://avatars0.githubusercontent.com/u/32174276?s=60&v=4",
+    "descrHtml": "<h1><a href=\\"https://github.com/NaturalCycles/dev-lib/compare/v7.6.0...v7.7.0\\">7.7.0</a> (2019-05-18)</h1>
+<h3>Features</h3>
+<ul>
+<li>TZ=UTC for all tests, runInIDE detection (<a href=\\"https://github.com/NaturalCycles/dev-lib/commit/6b0546c\\">6b0546c</a>)</li>
+</ul>",
+    "tagName": "v7.7.0",
+    "title": "v7.7.0: chore(release): 7.7.0 [skip ci]",
+    "updated": 1558217872,
+    "v": "7.7.0",
+  },
+]
+`;
+
+exports[`releases3.xml 1`] = `
+Array [
+  Object {
+    "author": "Hazyzh",
+    "authorThumb": "https://avatars2.githubusercontent.com/u/21355783?s=60&v=4",
+    "descrHtml": "<p>my version 1.0.8</p>",
+    "tagName": "v1.0.8",
+    "title": "v1.0.8",
+    "updated": 1539436244,
+    "v": "1.0.8",
+  },
+]
+`;

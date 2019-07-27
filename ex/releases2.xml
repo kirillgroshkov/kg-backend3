@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:https://github.com/NaturalCycles/dev-lib/releases</id>
+  <link type="text/html" rel="alternate" href="https://github.com/NaturalCycles/dev-lib/releases"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/NaturalCycles/dev-lib/releases.atom"/>
+  <title>Release notes from dev-lib</title>
+  <updated>2019-07-16T19:44:36+02:00</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.14.1</id>
+    <updated>2019-07-16T19:44:36+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.14.1"/>
+    <title>v7.14.1: chore(release): 7.14.1 [skip ci]</title>
+    <content type="html">&lt;h2&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.14.0...v7.14.1&quot;&gt;7.14.1&lt;/a&gt; (2019-07-16)&lt;/h2&gt;
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;yarn build-copy to include dotfiles (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/4a34f51&quot;&gt;4a34f51&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.14.0</id>
+    <updated>2019-07-16T10:35:27+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.14.0"/>
+    <title>v7.14.0: chore(release): 7.14.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.13.0...v7.14.0&quot;&gt;7.14.0&lt;/a&gt; (2019-07-16)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;remove generateBuildInfo.shell param (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/c94cda4&quot;&gt;c94cda4&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.13.0</id>
+    <updated>2019-07-05T22:29:10+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.13.0"/>
+    <title>v7.13.0: chore(release): 7.13.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.12.0...v7.13.0&quot;&gt;7.13.0&lt;/a&gt; (2019-07-05)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;deps (few major bumps) (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/3a75276&quot;&gt;3a75276&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.12.0</id>
+    <updated>2019-06-02T13:32:01+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.12.0"/>
+    <title>v7.12.0: chore(release): 7.12.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.11.1...v7.12.0&quot;&gt;7.12.0&lt;/a&gt; (2019-06-02)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;deps (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/423794a&quot;&gt;423794a&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.11.1</id>
+    <updated>2019-05-28T22:43:09+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.11.1"/>
+    <title>v7.11.1: chore(release): 7.11.1 [skip ci]</title>
+    <content type="html">&lt;h2&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.11.0...v7.11.1&quot;&gt;7.11.1&lt;/a&gt; (2019-05-28)&lt;/h2&gt;
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;don&#39;t fail json2env if BASH_ENV doesn&#39;t exist (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/4b2c25d&quot;&gt;4b2c25d&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.11.0</id>
+    <updated>2019-05-24T17:35:34+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.11.0"/>
+    <title>v7.11.0: chore(release): 7.11.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.10.0...v7.11.0&quot;&gt;7.11.0&lt;/a&gt; (2019-05-24)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;allow tests in /scripts (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/1766cc0&quot;&gt;1766cc0&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.10.0</id>
+    <updated>2019-05-24T11:56:11+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.10.0"/>
+    <title>v7.10.0: chore(release): 7.10.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.9.0...v7.10.0&quot;&gt;7.10.0&lt;/a&gt; (2019-05-24)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ts-jest diagnostics=false (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/8969b40&quot;&gt;8969b40&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.9.0</id>
+    <updated>2019-05-19T02:16:49+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.9.0"/>
+    <title>v7.9.0: chore(release): 7.9.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.8.0...v7.9.0&quot;&gt;7.9.0&lt;/a&gt; (2019-05-19)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;bump js-lib (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/6c1980b&quot;&gt;6c1980b&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.8.0</id>
+    <updated>2019-05-19T01:47:15+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.8.0"/>
+    <title>v7.8.0: chore(release): 7.8.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.7.0...v7.8.0&quot;&gt;7.8.0&lt;/a&gt; (2019-05-18)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;build-copy to copy *.js files (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/e557c1f&quot;&gt;e557c1f&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/152873434/v7.7.0</id>
+    <updated>2019-05-19T00:17:52+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/NaturalCycles/dev-lib/releases/tag/v7.7.0"/>
+    <title>v7.7.0: chore(release): 7.7.0 [skip ci]</title>
+    <content type="html">&lt;h1&gt;&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/compare/v7.6.0...v7.7.0&quot;&gt;7.7.0&lt;/a&gt; (2019-05-18)&lt;/h1&gt;
+&lt;h3&gt;Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;TZ=UTC for all tests, runInIDE detection (&lt;a href=&quot;https://github.com/NaturalCycles/dev-lib/commit/6b0546c&quot;&gt;6b0546c&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;</content>
+    <author>
+      <name>semantic-release-bot</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars0.githubusercontent.com/u/32174276?s=60&amp;v=4"/>
+  </entry>
+</feed>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+  <id>tag:github.com,2008:https://github.com/Hazyzh/jest-html-reporters/releases</id>
+  <link type="text/html" rel="alternate" href="https://github.com/Hazyzh/jest-html-reporters/releases"/>
+  <link type="application/atom+xml" rel="self" href="https://github.com/Hazyzh/jest-html-reporters/releases.atom"/>
+  <title>Release notes from jest-html-reporters</title>
+  <updated>2018-10-13T15:10:44+02:00</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/149831957/v1.0.8</id>
+    <updated>2018-10-13T15:10:44+02:00</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/Hazyzh/jest-html-reporters/releases/tag/v1.0.8"/>
+    <title>v1.0.8</title>
+    <content type="html">&lt;p&gt;my version 1.0.8&lt;/p&gt;</content>
+    <author>
+      <name>Hazyzh</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars2.githubusercontent.com/u/21355783?s=60&amp;v=4"/>
+  </entry>
+</feed>

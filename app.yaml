@@ -1,0 +1,2 @@
+env_variables:
+  DEBUG: 'kg:*,nc:*'
