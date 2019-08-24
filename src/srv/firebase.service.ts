@@ -17,7 +17,7 @@ class FirebaseService {
 
     return firebaseAdmin.initializeApp({
       credential,
-      databaseURL: 'https://kg-backend3.firebaseio.com',
+      // databaseURL: 'https://kg-backend3.firebaseio.com',
     })
   }
 }

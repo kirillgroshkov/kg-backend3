@@ -1,5 +1,5 @@
 import { CommonDaoLogLevel } from '@naturalcycles/db-lib'
-import { mongoDB } from '@src/srv/firestore.db'
+import { mongoDB } from '@src/srv/db'
 
 export const defaultDaoCfg = {
   // db: firestoreCacheDB,

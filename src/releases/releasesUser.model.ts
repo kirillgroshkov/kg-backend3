@@ -27,7 +27,7 @@ export const releasesUserUnsavedSchema = objectSchema<Unsaved<ReleasesUser>>({
   accessToken: stringSchema.optional(),
 }).concat(unsavedDBEntitySchema)
 
-export const releasesUserDao = new CommonDao({
+export const releasesUserDao = new CommonDao<ReleasesUser>({
   ...defaultDaoCfg,
   table: 'ReleasesUser',
   bmUnsavedSchema: releasesUserUnsavedSchema,
