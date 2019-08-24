@@ -1,26 +1,40 @@
-import { CacheDB, SimpleFileDB } from '@naturalcycles/db-lib'
+import { SimpleFileDB } from '@naturalcycles/db-lib'
 import { FirestoreDB } from '@naturalcycles/firestore-lib/dist/firestore.db'
+import { MongoDB } from '@naturalcycles/mongo-lib'
+import { requireEnvKeys } from '@naturalcycles/nodejs-lib'
 import { tmpDir } from '@src/cnst/paths.cnst'
 import { firebaseService } from '@src/srv/firebase.service'
 
 const firestore = firebaseService.admin().firestore()
 
-const firestoreDB = new FirestoreDB({
+export const firestoreDB = new FirestoreDB({
   firestore,
 })
 
-const fileDB = new SimpleFileDB({
+const _fileDB = new SimpleFileDB({
   storageDir: `${tmpDir}/storage`,
+})
+
+// export const redisDB = new RedisDB({
+//   runQueries: true,
+// })
+
+const { MONGO_URI } = requireEnvKeys('MONGO_URI')
+
+export const mongoDB = new MongoDB({
+  uri: MONGO_URI,
+  db: 'db1',
 })
 
 // const inMemoryDB = new InMemoryDB()
 
-export const firestoreCacheDB = new CacheDB({
-  name: 'cache',
-  // cacheDB: new InMemoryDB(),
-  cacheDB: fileDB,
-  downstreamDB: firestoreDB,
-  logCached: true,
-  logDownstream: true,
-  awaitCache: true,
-})
+// export const firestoreCacheDB = new CacheDB({
+//   name: 'cache',
+//   // cacheDB: new InMemoryDB(),
+//   // cacheDB: fileDB,
+//   cacheDB: redisDB,
+//   downstreamDB: firestoreDB,
+//   logCached: true,
+//   logDownstream: true,
+//   awaitCache: true,
+// })

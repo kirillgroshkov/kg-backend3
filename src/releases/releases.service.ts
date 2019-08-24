@@ -79,7 +79,7 @@ class ReleasesService {
     concurrency = 1,
   ): Promise<void> {
     const ud = await releasesUserDataDao.getByIdOrEmpty(u.id)
-    const repoNames = ud.starredRepos.split(',')
+    const repoNames = ud.starredRepos.split(',').filter(Boolean)
     // console.log({repoNames})
 
     await pMap(
@@ -97,7 +97,15 @@ class ReleasesService {
     const repo = await releasesRepoDao.getById(releasesRepoDao.naturalId(repoFullName))
     const lastReleaseTag = repo && repo.lastReleaseTag
 
-    const releases = await this.fetchReleases(repoFullName, lastReleaseTag, limitReleasedPerRepo)
+    const releases = await this.fetchReleases(
+      repoFullName,
+      lastReleaseTag,
+      limitReleasedPerRepo,
+    ).catch(err => {
+      console.error(err)
+      // todo: collect errors
+      return []
+    })
     // console.log(releases)
 
     if (releases.length) {

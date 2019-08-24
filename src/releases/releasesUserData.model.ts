@@ -19,10 +19,22 @@ export interface ReleasesUserData extends BaseDBEntity {
 }
 
 export const releasesUserDataUnsavedSchema = objectSchema<Unsaved<ReleasesUserData>>({
-  starredRepos: stringSchema.allow(''),
+  starredRepos: stringSchema
+    .allow('')
+    .default('')
+    .optional(),
 }).concat(unsavedDBEntitySchema)
 
-export const releasesUserDataDao = new CommonDao({
+class ReleasesUserDataDao extends CommonDao<ReleasesUserData> {
+  // beforeCreate (bm: Unsaved<ReleasesUserData>): Unsaved<ReleasesUserData> {
+  //   return {
+  //     ...bm,
+  //     starredRepos: '',
+  //   }
+  // }
+}
+
+export const releasesUserDataDao = new ReleasesUserDataDao({
   ...defaultDaoCfg,
   table: 'ReleasesUserData',
   bmUnsavedSchema: releasesUserDataUnsavedSchema,

@@ -1,8 +1,9 @@
 import { CommonDaoLogLevel } from '@naturalcycles/db-lib'
-import { firestoreCacheDB } from '@src/srv/firestore.db'
+import { mongoDB } from '@src/srv/firestore.db'
 
 export const defaultDaoCfg = {
-  db: firestoreCacheDB,
+  // db: firestoreCacheDB,
+  db: mongoDB,
   throwOnDaoCreateObject: true,
   throwOnEntityValidationError: true,
   logStarted: true,
