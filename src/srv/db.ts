@@ -1,3 +1,4 @@
+import { CacheDB, InMemoryDB } from '@naturalcycles/db-lib'
 import { MongoDB } from '@naturalcycles/mongo-lib'
 import { secret } from '@naturalcycles/nodejs-lib'
 
@@ -18,6 +19,15 @@ import { secret } from '@naturalcycles/nodejs-lib'
 export const mongoDB = new MongoDB({
   uri: secret('SECRET_MONGO_URI'),
   db: 'db1',
+})
+
+export const mongoMemoryCachedDB = new CacheDB({
+  name: 'cache',
+  cacheDB: new InMemoryDB(),
+  downstreamDB: mongoDB,
+  logCached: true,
+  logDownstream: true,
+  awaitCache: true,
 })
 
 // const inMemoryDB = new InMemoryDB()

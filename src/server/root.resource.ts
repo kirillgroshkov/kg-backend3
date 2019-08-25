@@ -1,5 +1,11 @@
-import { getDefaultRouter, loginHtml, okHandler, statusHandler } from '@naturalcycles/backend-lib'
+import {
+  getDefaultRouter,
+  loginHtml,
+  okHandler,
+  statusHandlerData,
+} from '@naturalcycles/backend-lib'
 import { adminService, reqAdmin } from '@src/admin/admin.service'
+import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 import { env } from '@src/srv/env.service'
 import { slackService } from '@src/srv/slack.service'
 import { warmup } from '@src/warmup'
@@ -11,7 +17,17 @@ router.get('/', okHandler())
 
 router.get('/login.html', loginHtml(adminService))
 
-router.get('/status', reqAdmin(), statusHandler())
+router.get('/status', reqAdmin(), async (req, res) => {
+  res.json({
+    ...statusHandlerData(),
+    userStarsUpdater: {
+      lastStarted: userStarsUpdater.lastStarted ? userStarsUpdater.lastStarted.toPretty() : 'never',
+      lastFinished: userStarsUpdater.lastFinished
+        ? userStarsUpdater.lastFinished.toPretty()
+        : 'never',
+    },
+  })
+})
 
 router.get('/debug', reqAdmin(), async (req, res) => {
   res.json({

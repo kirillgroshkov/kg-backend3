@@ -1,0 +1,123 @@
+import { pMap } from '@naturalcycles/js-lib'
+import { Debug } from '@naturalcycles/nodejs-lib'
+import { Dayjs, dayjs, since } from '@naturalcycles/time-lib'
+import { githubService } from '@src/releases/github.service'
+import { releasesRepoDao } from '@src/releases/releasesRepo.model'
+import { ReleasesUser, releasesUserDao } from '@src/releases/releasesUser.model'
+import { slackService } from '@src/srv/slack.service'
+import c from 'chalk'
+
+const log = Debug('app:stars')
+
+const updateAfterMinutes = 5
+
+/**
+ * If takes longer - job will be started anyway.
+ * No way to "cancel" previous hanged job.
+ */
+const timeoutToRestartMinutes = 10
+
+class UserStarsUpdater {
+  lastStarted?: Dayjs
+  lastFinished?: Dayjs
+
+  async start (forceUpdateAll = false): Promise<void> {
+    if (this.lastStarted) {
+      if (this.lastStarted.isBefore(dayjs().subtract(timeoutToRestartMinutes, 'minute'))) {
+        void slackService.send(
+          `userStarsUpdater timeout! Will start new job anyway. LastStarted: ${this.lastStarted.toPretty()}`,
+        )
+      } else {
+        void slackService.send(
+          `userStarsUpdater was already started since ${this.lastStarted.fromNow()}`,
+        )
+        return
+      }
+    }
+
+    this.lastStarted = dayjs()
+
+    void slackService.sendMsg({
+      text: 'userStarsUpdater.start',
+      kv: {
+        lastFinished: this.lastFinished ? this.lastFinished.toPretty() : 'never',
+      },
+    })
+
+    const updatedUserIds = await this.run(forceUpdateAll)
+
+    void slackService.send(
+      `userStarsUpdater ${updatedUserIds.length} users have stars updated (${updatedUserIds.join(
+        ', ',
+      )}) in ${since(this.lastStarted.valueOf())}`,
+    )
+
+    this.lastFinished = dayjs()
+    this.lastStarted = undefined
+  }
+
+  /**
+   * Returns array of updated user ids.
+   */
+  async run (forceUpdateAll = false): Promise<string[]> {
+    // 1. Fetch users that need to be updated
+    const updatedThreshold = dayjs().subtract(forceUpdateAll ? 0 : updateAfterMinutes, 'minute')
+    const q = releasesUserDao
+      .createQuery()
+      .filter('accessToken', '>', '')
+      .filter('updated', '<', updatedThreshold.unix())
+
+    const users = await releasesUserDao.runQuery(q)
+    log(
+      `${c.white(String(users.length))} user(s) with accessToken and .updated < ${c.dim(
+        updatedThreshold.toPretty(),
+      )} (${c.dim(users.map(u => [u.id, u.displayName].join('_')).join(', '))})`,
+    )
+
+    void slackService.send(
+      `${
+        users.length
+      } user(s) with accessToken and .updated < ${updatedThreshold.toPretty()} (${users
+        .map(u => [u.id, u.displayName].join('_'))
+        .join(', ')})`,
+    )
+
+    // if (!users.length) return
+
+    const updatedUserIds = (await pMap(
+      users,
+      async user => {
+        const updated = await this.updateUser(user)
+        return updated ? user.id : undefined
+      },
+      { concurrency: 1 },
+    )).filter(Boolean) as string[]
+
+    return updatedUserIds
+  }
+
+  /**
+   * Returns true if user has new stars
+   */
+  async updateUser (u: ReleasesUser): Promise<boolean> {
+    const initialStarredRepos = u.starredRepos
+
+    const repos = await githubService.getUserStarredRepos(u)
+
+    if (!repos) {
+      log(`${u.id} unchanged (${initialStarredRepos.length} stars)`)
+    } else {
+      log(`${u.id} stars ${initialStarredRepos.length} > ${repos.length}`)
+      u.starredRepos = repos.map(r => r.fullName)
+
+      // todo: should we update it every time?..
+      await releasesRepoDao.saveBatch(repos)
+    }
+
+    await releasesUserDao.save(u) // updates .updated field
+
+    return !!repos
+  }
+}
+
+export const userStarsUpdater = new UserStarsUpdater()

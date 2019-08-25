@@ -1,9 +1,12 @@
+import { coloredHttpCode } from '@naturalcycles/backend-lib'
 import { Unsaved } from '@naturalcycles/db-lib'
-import { StringMap } from '@naturalcycles/js-lib'
+import { filterFalsyValues, StringMap } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { since } from '@naturalcycles/time-lib'
+import { Etag, etagDao } from '@src/releases/etag.model'
 import { ReleasesRepo } from '@src/releases/releasesRepo.model'
 import { ReleasesUser } from '@src/releases/releasesUser.model'
+import c from 'chalk'
 import { GotJSONOptions } from 'got'
 import * as got from 'got'
 
@@ -25,66 +28,101 @@ class GithubService {
    */
   async getUserStarredRepos (
     u: ReleasesUser,
-    etagMap: StringMap = {},
-    maxPages = 999,
+    maxPages = 100, // 10.000 stars is a cap now
   ): Promise<Unsaved<ReleasesRepo>[] | undefined> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
+    let unchanged = false
     const allRepos: Unsaved<ReleasesRepo>[] = []
     let repos: Unsaved<ReleasesRepo>[] | undefined
     let page = 0
+    const [lastStarredRepo] = u.starredRepos
 
     do {
       page++
-      repos = await this.getUserStarredReposPage(page, u, etagMap)
-      if (!repos) return undefined // not changed
+      repos = await this.getUserStarredReposPage(page, u)
+      if (!repos) {
+        unchanged = true
+        break
+      }
 
-      if (page === 1 && repos[0].fullName === u.lastStarredRepo) return undefined // not changed
       log(`page ${page} repos: ${repos.length}`)
+
+      if (page === 1 && lastStarredRepo && repos.length && repos[0].fullName === lastStarredRepo) {
+        unchanged = true
+        break
+      }
+
       allRepos.push(...repos)
     } while (repos.length === per_page && page < maxPages)
+
+    if (unchanged) {
+      return
+    }
 
     return allRepos
   }
 
-  async getUserStarredReposPage (
-    page = 0,
+  /**
+   * Returns undefined if not changed (practically possible only on page1).
+   *
+   * Manages etag cache internally (via etagDao).
+   * Only uses etag cache for page 1 - loads (sync), saves (async) if non-304 (200) is returned.
+   */
+  private async getUserStarredReposPage (
+    page: number,
     u: ReleasesUser,
-    etagMap: StringMap,
   ): Promise<Unsaved<ReleasesRepo>[] | undefined> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
 
+    let ifNoneMatch: string | undefined
+    let urlEtag: Unsaved<Etag> | undefined
+
     const url = `${API}/users/${u.username}/starred?per_page=${per_page}&page=${page}`
-    const etag = etagMap[url]
+
+    if (page === 1) {
+      urlEtag = await etagDao.getByIdOrEmpty(url, { skipValidation: true }) // todo: figure out validation here
+      ifNoneMatch = urlEtag.etag
+    }
+
     const opt: GotJSONOptions = {
       json: true,
-      headers: {
+      headers: filterFalsyValues({
         ...this.headers(u.accessToken!),
         Accept: 'application/vnd.github.v3.star+json', // will include "star creation timestamps" starred_at
-        'If-None-Match': etag,
-      },
+        'If-None-Match': ifNoneMatch,
+      }),
       timeout: 10000,
     }
 
     const started = Date.now()
-    log(`>> GET ${url} ${etag || ''}`)
+    log(`>> GET ${c.dim(url)} ${ifNoneMatch || ''}`)
 
     const resp = await got.get(url, opt)
-    const etagReturned = resp.headers.etag as string
+    const etagReturned = resp.headers.etag as string | undefined
 
-    log(`<< ${resp.statusCode} GET ${url} ${etagReturned || ''} in ${since(started)}`)
+    log(
+      `<< ${coloredHttpCode(resp.statusCode)} GET ${c.dim(url)} ${etagReturned || ''} in ${c.dim(
+        since(started),
+      )}`,
+    )
 
-    if (etagReturned) {
-      etagMap[url] = this.stripW(etagReturned)
+    if (resp.statusCode === 304) {
+      // not changed
+      return
     }
 
-    if (resp.statusCode === 304) return undefined // not changed
+    if (etagReturned && urlEtag) {
+      urlEtag.etag = this.stripW(etagReturned)
+      void etagDao.save(urlEtag)
+    }
 
     return ((resp.body as any) as any[]).map(r => this.mapRepo(r))
   }
 
-  stripW (etag: string): string {
+  stripW (etag?: string): string {
+    if (!etag) return undefined as any
     if (etag.startsWith('W/')) {
       return etag.substr(2)
     }
