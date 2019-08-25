@@ -5,6 +5,7 @@ import {
   statusHandlerData,
 } from '@naturalcycles/backend-lib'
 import { adminService, reqAdmin } from '@src/admin/admin.service'
+import { releasesUpdater } from '@src/releases/releasesUpdater'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 import { env } from '@src/srv/env.service'
 import { slackService } from '@src/srv/slack.service'
@@ -24,6 +25,12 @@ router.get('/status', reqAdmin(), async (req, res) => {
       lastStarted: userStarsUpdater.lastStarted ? userStarsUpdater.lastStarted.toPretty() : 'never',
       lastFinished: userStarsUpdater.lastFinished
         ? userStarsUpdater.lastFinished.toPretty()
+        : 'never',
+    },
+    releasesUpdater: {
+      lastStarted: releasesUpdater.lastStarted ? releasesUpdater.lastStarted.toPretty() : 'never',
+      lastFinished: releasesUpdater.lastFinished
+        ? releasesUpdater.lastFinished.toPretty()
         : 'never',
     },
   })

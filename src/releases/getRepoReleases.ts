@@ -1,6 +1,6 @@
 import { Release, releaseDao } from '@src/releases/release.model'
 import { ReleasesQuery } from '@src/releases/releases.model'
-import { releasesService } from '@src/releases/releases.service'
+import { releasesUpdater } from '@src/releases/releasesUpdater'
 
 export async function getRepoReleases (
   repoFullName: string,
@@ -26,11 +26,10 @@ export async function getRepoReleases (
 
   if (!releases.length) {
     // hit origin!
-    const unsavedReleases = await releasesService.fetchReleases(
-      repoFullName,
-      undefined,
-      maxReleasesTotal,
-    )
+    const unsavedReleases = await releasesUpdater.fetchReleases(repoFullName, {
+      updateExisting: true,
+      maxReleasesPerRepo: maxReleasesTotal,
+    })
     releases = await releaseDao.saveBatch(unsavedReleases)
   }
 

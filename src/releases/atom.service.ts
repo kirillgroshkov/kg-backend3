@@ -1,4 +1,4 @@
-import { Unsaved } from '@naturalcycles/db-lib'
+import { createdUpdatedFields } from '@naturalcycles/db-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { Release, ReleaseType } from '@src/releases/release.model'
 import * as semver from 'semver'
@@ -25,7 +25,7 @@ interface GithubReleasesAtomEntry {
   author: {
     name: string[]
   }[]
-  'media:thumbnail': {
+  'media:thumbnail'?: {
     url: string[]
   }[]
 }
@@ -45,23 +45,23 @@ class AtomService {
     atom: string,
     repoFullName: string,
     type: ReleaseType = ReleaseType.RELEASE,
-  ): Promise<Unsaved<Release>[]> {
+  ): Promise<Release[]> {
     const atomReleases = await this.parse(atom)
     return atomReleases.map(a => this.mapToRelease(a, repoFullName, type))
   }
 
-  mapToRelease (a: AtomRelease, repoFullName: string, type: ReleaseType): Unsaved<Release> {
+  mapToRelease (a: AtomRelease, repoFullName: string, type: ReleaseType): Release {
     return {
       published: a.updated,
       repoFullName,
       descrHtml: a.descrHtml,
       author: a.author,
       authorThumb: a.authorThumb,
-      v: a.v,
-      tagName: a.tagName,
+      v: a.v.toLowerCase(),
+      tagName: a.tagName.toLowerCase(),
       type,
-      // id: [...repoFullName.split('/'), a.v].join('_').toLowerCase(),
-      // ...createdUpdatedFields(),
+      id: [repoFullName, a.tagName].join('_').toLowerCase(),
+      ...createdUpdatedFields(),
     }
   }
 
@@ -78,16 +78,20 @@ class AtomService {
     // console.log(res.feed!.entry![0])
 
     return (res.feed.entry || []).map(entry => {
-      const [tagName] = entry.id[0].split('/').reverse()
+      const tagName = entry.id[0]
+        .split('/')
+        .reverse()[0]
+        .toLowerCase()
       // const v = tagName.replace(/^\D/g,'') // remove leading non-digits
       const v = semver.clean(tagName, { loose: true }) || tagName
+      const mediaThumbnail = (entry['media:thumbnail'] || [])[0]
 
       return {
         updated: dayjs(entry.updated[0]).unix(),
         title: entry.title[0],
         descrHtml: entry.content[0]._,
         author: entry.author[0].name[0],
-        authorThumb: entry['media:thumbnail'][0].url[0],
+        authorThumb: mediaThumbnail && mediaThumbnail.url[0],
         tagName,
         v,
       }

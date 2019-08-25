@@ -33,7 +33,7 @@ export const releasesUserUnsavedSchema = objectSchema<Unsaved<ReleasesUser>>({
   notifyEmailDaily: booleanSchema.optional(),
   notifyEmailRealtime: booleanSchema.optional(),
   accessToken: stringSchema.optional(),
-  starredRepos: arraySchema(stringSchema)
+  starredRepos: arraySchema(stringSchema.lowercase())
     .default([])
     .optional(),
 }).concat(unsavedDBEntitySchema)

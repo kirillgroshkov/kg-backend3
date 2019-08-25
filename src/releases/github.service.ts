@@ -48,7 +48,7 @@ class GithubService {
 
       log(`page ${page} repos: ${repos.length}`)
 
-      if (page === 1 && lastStarredRepo && repos.length && repos[0].fullName === lastStarredRepo) {
+      if (page === 1 && lastStarredRepo && repos.length && repos[0].id === lastStarredRepo) {
         unchanged = true
         break
       }
@@ -131,9 +131,13 @@ class GithubService {
 
   private mapRepo (r: any): Unsaved<ReleasesRepo> {
     // console.log('mapRepo', r, r.repo.full_name)
+    const [author, name] = r.repo.full_name.toLowerCase().split('/')
+
     return {
+      id: r.repo.full_name.toLowerCase(),
+      author,
+      name,
       githubId: r.repo.id,
-      fullName: r.repo.full_name,
       // owner: r.repo.owner.login,
       // name: r.repo.name,
       descr: r.repo.description,
@@ -141,6 +145,7 @@ class GithubService {
       stargazersCount: r.repo.stargazers_count,
       avatarUrl: r.repo.owner.avatar_url,
       // starredAt: dayjs(r.starred_at).unix(),
+      releasesChecked: 0,
     }
   }
 }

@@ -1,9 +1,4 @@
-import {
-  BaseDBEntity,
-  CommonDao,
-  Unsaved,
-  unsavedDBEntitySchema,
-} from '@naturalcycles/db-lib'
+import { BaseDBEntity, CommonDao, Unsaved } from '@naturalcycles/db-lib'
 import {
   objectSchema,
   stringSchema,
@@ -20,11 +15,13 @@ export enum ReleaseType {
 export const RELEASE_TYPE_VALUES = [ReleaseType.RELEASE, ReleaseType.TAG]
 
 export interface Release extends BaseDBEntity {
+  // id = ${repoFullName}_${tagName}
+
   published: number
   repoFullName: string
   descrHtml?: string
   author: string
-  authorThumb: string
+  authorThumb?: string
 
   /**
    * @example 0.3.6
@@ -40,20 +37,23 @@ export interface Release extends BaseDBEntity {
 }
 
 export const releaseUnsavedSchema = objectSchema<Unsaved<Release>>({
+  id: stringSchema.lowercase().optional(),
+  created: unixTimestampSchema.optional(),
+  updated: unixTimestampSchema.optional(),
   published: unixTimestampSchema,
-  repoFullName: stringSchema,
+  repoFullName: stringSchema.lowercase(),
   descrHtml: stringSchema.optional(),
   author: stringSchema,
-  authorThumb: urlSchema(),
-  v: stringSchema,
-  tagName: stringSchema,
+  authorThumb: urlSchema().optional(),
+  v: stringSchema.lowercase(),
+  tagName: stringSchema.lowercase(),
   type: stringSchema.valid(RELEASE_TYPE_VALUES),
-}).concat(unsavedDBEntitySchema)
+})
 
 class ReleaseDao extends CommonDao<Release> {
-  createId (dbm: Release): string {
-    return [...dbm.repoFullName.split('/'), dbm.v].join('_').toLowerCase()
-  }
+  // createId (dbm: Release): string {
+  //   return [...dbm.repoFullName.split('/'), dbm.v].join('_').toLowerCase()
+  // }
 }
 
 export const releaseDao = new ReleaseDao({

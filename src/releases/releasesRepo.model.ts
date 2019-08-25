@@ -1,4 +1,4 @@
-import { BaseDBEntity, CommonDao, Unsaved } from '@naturalcycles/db-lib'
+import { BaseDBEntity, CommonDao, ObjectWithId, Unsaved } from '@naturalcycles/db-lib'
 import {
   integerSchema,
   objectSchema,
@@ -9,12 +9,19 @@ import {
 import { defaultDaoCfg } from '@src/releases/dao'
 
 export interface ReleasesRepo extends BaseDBEntity {
-  githubId: number
+  // id == fullName, e.g `facebook/react`
 
   /**
-   * @example facebook/react
+   * Left part of fullName, e.g `facebook`
    */
-  fullName: string
+  author: string
+
+  /**
+   * Right part of fullName, e.g `react`
+   */
+  name: string
+
+  githubId: number
 
   descr?: string
 
@@ -22,31 +29,38 @@ export interface ReleasesRepo extends BaseDBEntity {
 
   homepage?: string
 
-  stargazersCount: number
+  stargazersCount?: number
 
   /**
    * Unixtime. Exists only in memory, not persisted to DB.
    */
   // starredAt?: number
 
-  lastReleaseTag?: string
+  // lastReleaseTag?: string // will be queried from Release.tag
+  /**
+   * @default to 0 when repo is just added
+   */
+  releasesChecked: number
 }
 
 export const releasesRepoUnsavedSchema = objectSchema<Unsaved<ReleasesRepo>>({
-  id: stringSchema.optional(),
+  id: stringSchema.lowercase().optional(),
   created: unixTimestampSchema.optional(),
   updated: unixTimestampSchema.optional(),
+  author: stringSchema.lowercase(),
+  name: stringSchema.lowercase(),
   githubId: integerSchema,
-  fullName: stringSchema,
   descr: stringSchema.optional(),
   avatarUrl: urlSchema(),
   homepage: stringSchema.optional(),
-  stargazersCount: integerSchema,
-  lastReleaseTag: stringSchema.optional(),
+  stargazersCount: integerSchema.optional(),
+  // lastReleaseTag: stringSchema.optional(),
+  releasesChecked: unixTimestampSchema.default(0).optional(),
 })
 // .concat(unsavedDBEntitySchema)
 
 class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
+  /*
   createId (dbm: ReleasesRepo): string {
     return dbm.fullName
       .split('/')
@@ -59,6 +73,11 @@ class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
       .split('/')
       .join('_')
       .toLowerCase()
+  }*/
+
+  async getAllIds (): Promise<string[]> {
+    const items: ObjectWithId[] = await this.runQuery(this.createQuery().select([]))
+    return items.map(i => i.id)
   }
 }
 

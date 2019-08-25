@@ -9,13 +9,15 @@ import c from 'chalk'
 
 const log = Debug('app:stars')
 
-const updateAfterMinutes = 5
+export const userStarsUpdaterSchedule = '30 */4 * * *' // every 4 hours
+
+const updateAfterMinutes = 30
 
 /**
  * If takes longer - job will be started anyway.
  * No way to "cancel" previous hanged job.
  */
-const timeoutToRestartMinutes = 10
+const timeoutToRestartMinutes = 60
 
 class UserStarsUpdater {
   lastStarted?: Dayjs
@@ -82,12 +84,14 @@ class UserStarsUpdater {
         .join(', ')})`,
     )
 
-    // if (!users.length) return
+    if (!users.length) return []
+
+    const existingRepoIds = new Set(await releasesRepoDao.getAllIds())
 
     const updatedUserIds = (await pMap(
       users,
       async user => {
-        const updated = await this.updateUser(user)
+        const updated = await this.updateUser(user, existingRepoIds)
         return updated ? user.id : undefined
       },
       { concurrency: 1 },
@@ -97,21 +101,32 @@ class UserStarsUpdater {
   }
 
   /**
-   * Returns true if user has new stars
+   * Returns true if user has new stars.
+   *
+   * Mutates existingRepoIds set
    */
-  async updateUser (u: ReleasesUser): Promise<boolean> {
+  async updateUser (u: ReleasesUser, existingRepoIds: Set<string>): Promise<boolean> {
     const initialStarredRepos = u.starredRepos
 
     const repos = await githubService.getUserStarredRepos(u)
 
     if (!repos) {
       log(`${u.id} unchanged (${initialStarredRepos.length} stars)`)
+      void slackService.send(`${u.id} unchanged (${initialStarredRepos.length} stars)`)
     } else {
       log(`${u.id} stars ${initialStarredRepos.length} > ${repos.length}`)
-      u.starredRepos = repos.map(r => r.fullName)
+      u.starredRepos = repos.map(r => r.id!)
 
-      // todo: should we update it every time?..
-      await releasesRepoDao.saveBatch(repos)
+      // Save only new (non-existing) repos
+
+      const newRepos = repos.filter(r => !existingRepoIds.has(r.id!))
+      await releasesRepoDao.saveBatch(newRepos)
+      newRepos.forEach(r => existingRepoIds.add(r.id!))
+
+      void slackService.send(
+        `${u.id} stars ${initialStarredRepos.length} > ${repos.length}, newRepos: ${newRepos.length}`,
+      )
+      // log(newRepos.map(r => r.id))
     }
 
     await releasesUserDao.save(u) // updates .updated field

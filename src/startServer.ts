@@ -29,7 +29,8 @@ import { filterUndefinedValues, pHang } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { ms } from '@naturalcycles/time-lib'
 import { expressApp } from '@src/express.app'
-import { userStarsUpdater } from '@src/releases/userStarsUpdater'
+import { releasesUpdater, releasesUpdaterSchedule } from '@src/releases/releasesUpdater'
+import { userStarsUpdater, userStarsUpdaterSchedule } from '@src/releases/userStarsUpdater'
 import { slackService } from '@src/srv/slack.service'
 import { warmup } from '@src/warmup'
 import * as nodeSchedule from 'node-schedule'
@@ -71,8 +72,9 @@ runScript(async () => {
 
     await warmup()
 
-    // every hour
-    nodeSchedule.scheduleJob('*/10 * * * *', () => userStarsUpdater.start())
+    // schedule
+    nodeSchedule.scheduleJob(userStarsUpdaterSchedule, () => userStarsUpdater.start())
+    nodeSchedule.scheduleJob(releasesUpdaterSchedule, () => releasesUpdater.start())
   }
 
   await pHang() // keep server running

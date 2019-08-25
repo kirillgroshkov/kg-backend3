@@ -655,9 +655,9 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/backend-lib@^2.4.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.10.0.tgz#f301776d84311bf70076c4579bbd9edb04274a1b"
-  integrity sha512-t7xr53iofjU8plq4qC3wYMdBfjtvdh4oTy3TFHs7oyZ0aD4QnR9WLQpTiERskRxhzEM6T1yKVcy+9cdxtGhaUw==
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.11.2.tgz#4e137a7a44879d00b0cd6fd06624b02ba037e3f6"
+  integrity sha512-Q3ePadbfkJH87jtjL7KfEEEtu3wwch59PDlCiuM0x67EOqO7z1eKrwblmmo3CMc30vddHGagElcRvJ8rnEfYhA==
   dependencies:
     "@naturalcycles/fs-lib" "^2.3.0"
     "@naturalcycles/js-lib" "^8.0.0"
@@ -759,9 +759,9 @@
     type-fest "^0.7.1"
 
 "@naturalcycles/mongo-lib@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/mongo-lib/-/mongo-lib-1.1.0.tgz#ac21450370734067a06314fddc26725e5d8384aa"
-  integrity sha512-e/SKwmuLqE6CttDWJPhxrdrjW4qDcFSqsyXSFvcCAbak88fAqXwjMVEnJg4EChoNfq2iBUXfUBkDrPn0CyHpzg==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/mongo-lib/-/mongo-lib-1.1.1.tgz#bdf25b3e7a69d8d2a7bc9a7abc56355bfb9a3900"
+  integrity sha512-F/QeedVnAs9l4ad2d316qOQFS1+Ylegz+2Y18ya7trqgSGN4zmShayr78sM5G5bkP+ibrewWmYijiOAuKbgtTg==
   dependencies:
     "@naturalcycles/db-lib" "^1.9.1"
     "@naturalcycles/js-lib" "^8.6.1"
@@ -772,9 +772,9 @@
     rxjs "^6.5.2"
 
 "@naturalcycles/nodejs-lib@^6.11.1", "@naturalcycles/nodejs-lib@^6.13.0", "@naturalcycles/nodejs-lib@^6.15.0", "@naturalcycles/nodejs-lib@^6.3.1", "@naturalcycles/nodejs-lib@^6.5.0", "@naturalcycles/nodejs-lib@^6.8.0":
-  version "6.16.2"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.16.2.tgz#75097feef94e7f00d2d75f2014f4a7af59869ef8"
-  integrity sha512-L8z41vFPftrGU+H7SJ9u2eLSGW3pEVsysnLPoXyU/+8Qy7R+hQHuwbG3wFK/K28K5RpLM2VJ5V6+InRawUxxoQ==
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.17.0.tgz#6058859b8a687b86749735933e334df363ec77eb"
+  integrity sha512-mbBL276OML5aA+VA627+XHN0az1YhUGtc/T8g6lmH6CzWAum+5d7Q2I5RNygHInYubGwEfb5Db7sKZ+ODRsD/w==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"

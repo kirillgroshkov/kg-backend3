@@ -7,10 +7,12 @@ APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateUserStars.ts
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib'
+import { releasesRepoDao } from '@src/releases/releasesRepo.model'
 import { releasesUserDao } from '@src/releases/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 runScript(async () => {
   const u = await releasesUserDao.requireById('xlmyalsayaftqgcz')
-  await userStarsUpdater.updateUser(u)
+  const existingRepoIds = new Set(await releasesRepoDao.getAllIds())
+  await userStarsUpdater.updateUser(u, existingRepoIds)
 })

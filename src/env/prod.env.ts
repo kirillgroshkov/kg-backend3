@@ -1,4 +1,4 @@
-import { SentrySharedServiceCfg, SlackSharedServiceCfg } from '@naturalcycles/backend-lib'
+import { SentrySharedServiceCfg } from '@naturalcycles/backend-lib'
 
 export class EnvProd {
   name = 'prod'
@@ -14,16 +14,6 @@ export class EnvProd {
   sentryEnabled = true
 
   authEnabled = true
-
-  slackServiceCfg: SlackSharedServiceCfg = {
-    // webhookUrl is secret
-    defaults: {
-      channel: '#kg-backend3',
-      username: 'bot',
-      icon_emoji: ':spider_web:',
-      text: 'no text',
-    },
-  }
 
   slackEnabled = true
 }

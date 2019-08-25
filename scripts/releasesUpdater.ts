@@ -1,6 +1,6 @@
 /*
 
-APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/userStarsUpdater.ts
+APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/releasesUpdater.ts
 
  */
 
@@ -8,10 +8,12 @@ APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/userStarsUpdater.ts
 import '@src/bootstrap'
 import { pDelay } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib'
-import { userStarsUpdater } from '@src/releases/userStarsUpdater'
+import { releasesUpdater } from '@src/releases/releasesUpdater'
 
 runScript(async () => {
-  await userStarsUpdater.start() // no force
-  // await userStarsUpdater.start(true)
+  await releasesUpdater.start({
+    // forceUpdateAll: true,
+    concurrency: 32,
+  })
   await pDelay(1000) // for slack to send msg
 })
