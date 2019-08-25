@@ -7,5 +7,5 @@ export const defaultDaoCfg = {
   throwOnDaoCreateObject: true,
   throwOnEntityValidationError: true,
   logStarted: true,
-  logLevel: CommonDaoLogLevel.DATA_FULL,
+  logLevel: CommonDaoLogLevel.OPERATIONS,
 }

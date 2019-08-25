@@ -8,15 +8,24 @@ export class EnvProd {
   swaggerStatsEnabled = true
 
   sentryServiceCfg: SentrySharedServiceCfg = {
-    environment: 'prod',
-    // dsn: '',
+    // dsn is secret
   }
+
+  sentryEnabled = true
 
   authEnabled = true
 
   slackServiceCfg: SlackSharedServiceCfg = {
-    // webhookUrl: 'https://hooks.slack.com/services/...',
+    // webhookUrl is secret
+    defaults: {
+      channel: '#kg-backend3',
+      username: 'bot',
+      icon_emoji: ':spider_web:',
+      text: 'no text',
+    },
   }
+
+  slackEnabled = true
 }
 
 export type Env = EnvProd

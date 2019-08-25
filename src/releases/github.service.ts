@@ -9,7 +9,7 @@ import * as got from 'got'
 
 const API = 'https://api.github.com'
 
-const log = Debug('kg:backend:gh')
+const log = Debug('app:gh')
 
 class GithubService {
   headers (token: string): StringMap {

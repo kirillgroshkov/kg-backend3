@@ -1,9 +1,11 @@
 /*
 
-DEBUG=kg:*,nc:* yarn tsn-script ./scripts/updateUserReleases.ts
+DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateUserReleases.ts
 
  */
 
+/* tslint:disable:ordered-imports */
+import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { releasesService } from '@src/releases/releases.service'
 import { releasesUserDao } from '@src/releases/releasesUser.model'

@@ -1,2 +1,2 @@
 env_variables:
-  DEBUG: 'kg:*,nc:*'
+  DEBUG: 'app*,kg:*,nc:*'

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "serve": "DEBUG=kg:*,nc:* APP_ENV=dev nodemon",
+    "serve": "DEBUG=app*,kg:*,nc:* APP_ENV=dev nodemon",
     "startJs": "TS_NODE_PROJECT=./tsconfig.dist.json APP_ENV=dev yarn start",
     "start": "node ./dist/startServer.js"
   },

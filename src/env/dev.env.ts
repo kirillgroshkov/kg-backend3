@@ -1,4 +1,3 @@
-import { SlackSharedServiceCfg } from '@naturalcycles/backend-lib'
 import { EnvProd } from './prod.env'
 
 export class EnvDev extends EnvProd {
@@ -8,15 +7,15 @@ export class EnvDev extends EnvProd {
 
   swaggerStatsEnabled = false
 
-  sentryServiceCfg = {
-    // dsn: undefined,
-  }
+  // sentryServiceCfg: SentrySharedServiceCfg = {
+  //   // dsn: undefined,
+  // }
+
+  sentryEnabled = false
 
   authEnabled = false
 
-  slackServiceCfg: SlackSharedServiceCfg = {
-    // webhookUrl: undefined
-  }
+  slackEnabled = true
 }
 
 const envDev = new EnvDev()

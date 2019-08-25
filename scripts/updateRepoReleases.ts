@@ -1,9 +1,11 @@
 /*
 
-DEBUG=kg:*,nc:* yarn tsn-script ./scripts/updateRepoReleases.ts
+DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateRepoReleases.ts
 
  */
 
+/* tslint:disable:ordered-imports */
+import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { releasesService } from '@src/releases/releases.service'
 

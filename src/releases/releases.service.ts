@@ -175,7 +175,7 @@ class ReleasesService {
     const q = releaseDao
       .createQuery()
       .order('published', true)
-      .limit(1000)
+      .limit(200)
     return releaseDao.runQuery(q, { onlyCache: true })
   }
 
