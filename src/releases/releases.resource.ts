@@ -7,6 +7,7 @@ import { getRepoReleases } from '@src/releases/getRepoReleases'
 import { requireUserFromRequest } from '@src/releases/getUserFromRequest'
 import { getFeed } from '@src/releases/handlers/getFeed'
 import { authUser } from '@src/releases/handlers/releasesAuthHandler'
+import { releasesInit } from '@src/releases/handlers/releasesInit'
 import { saveUserSettings } from '@src/releases/handlers/saveUserSettings'
 import {
   authInputSchema,
@@ -96,4 +97,9 @@ router.put('/userSettings', reqValidation('body', userSettingsSchema), async (re
 router.get('/', reqValidation('query', dateRangeSchema), async (req, res) => {
   const user = await requireUserFromRequest(req)
   res.json(await getFeed(user, req.query))
+})
+
+router.get('/init', async (req, res) => {
+  const user = await requireUserFromRequest(req)
+  res.json(await releasesInit(user))
 })
