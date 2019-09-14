@@ -2,10 +2,9 @@
 
 > Backend service
 
-[![](https://circleci.com/gh/kirillgroshkov/kg-backend3.svg?style=shield&circle-token=123)](https://circleci.com/gh/kirillgroshkov/kg-backend3)
+[![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m783459759-f4f2dab58a403606ca545a78.svg?style=flat-square)](https://stats.uptimerobot.com/LvXvNC2j5)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Features
 
 - ...
-
