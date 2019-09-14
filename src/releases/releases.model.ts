@@ -1,4 +1,11 @@
-import { booleanSchema, integerSchema, objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
+import {
+  booleanSchema,
+  dateStringSchema,
+  integerSchema,
+  objectSchema,
+  stringSchema,
+} from '@naturalcycles/nodejs-lib'
+import { Release } from '@src/releases/release.model'
 import { ReleasesUserFM } from '@src/releases/releasesUser.model'
 
 export interface ReleasesQuery {
@@ -75,8 +82,19 @@ export const authInputSchema = objectSchema<AuthInput>({
 export interface BackendResponse {
   newUser?: boolean
   userFM?: ReleasesUserFM
+  releases?: Release[]
 }
 
 export const backendResponseSchema = objectSchema<BackendResponse>({
   newUser: booleanSchema.optional(),
 })
+
+export interface DateRange {
+  minIncl?: string
+  maxExcl?: string
+}
+
+export const dateRangeSchema = objectSchema<DateRange>({
+  minIncl: dateStringSchema.optional(),
+  maxExcl: dateStringSchema.optional(),
+}).options({ stripUnknown: false })

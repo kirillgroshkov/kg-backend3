@@ -4,15 +4,20 @@ import { reqAdmin } from '@src/admin/admin.service'
 import { getGlobalReleases } from '@src/releases/getGlobalReleases'
 import { getRepoNames, getRepoOrgs } from '@src/releases/getRepoNames'
 import { getRepoReleases } from '@src/releases/getRepoReleases'
+import { requireUserFromRequest } from '@src/releases/getUserFromRequest'
+import { getFeed } from '@src/releases/handlers/getFeed'
 import { authUser } from '@src/releases/handlers/releasesAuthHandler'
+import { saveUserSettings } from '@src/releases/handlers/saveUserSettings'
 import {
   authInputSchema,
+  dateRangeSchema,
   ReleasesQuery,
   releasesQuerySchema,
   RepoAuthorName,
   repoAuthorNameSchema,
 } from '@src/releases/releases.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
+import { userSettingsSchema } from '@src/releases/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 const router = getDefaultRouter()
@@ -79,4 +84,16 @@ router.get('/updateReleases', reqAdmin(), async (req, res) => {
 
 router.post('/auth', reqValidation('body', authInputSchema), async (req, res) => {
   res.json(await authUser(req.body))
+})
+
+router.put('/userSettings', reqValidation('body', userSettingsSchema), async (req, res) => {
+  // todo: optimize, use projection query (where needed)
+  const user = await requireUserFromRequest(req)
+  res.json(await saveUserSettings(user, req.body))
+})
+
+// feed
+router.get('/', reqValidation('query', dateRangeSchema), async (req, res) => {
+  const user = await requireUserFromRequest(req)
+  res.json(await getFeed(user, req.query))
 })

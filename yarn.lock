@@ -767,9 +767,9 @@
     type-fest "^0.7.1"
 
 "@naturalcycles/mongo-lib@^1.0.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/mongo-lib/-/mongo-lib-1.1.1.tgz#bdf25b3e7a69d8d2a7bc9a7abc56355bfb9a3900"
-  integrity sha512-F/QeedVnAs9l4ad2d316qOQFS1+Ylegz+2Y18ya7trqgSGN4zmShayr78sM5G5bkP+ibrewWmYijiOAuKbgtTg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/mongo-lib/-/mongo-lib-1.1.2.tgz#eb84a53d34751561d71acadf607653fb46affe6a"
+  integrity sha512-5hGwNzFS5s4BsU9kJZDcc7Pc1SE4kk/jbwV3RvsW81BUh3wAOE2oqRo9hfvAo3Aj6YQeIRvk4MvIqRq4J5XbAA==
   dependencies:
     "@naturalcycles/db-lib" "^1.9.1"
     "@naturalcycles/js-lib" "^8.6.1"
