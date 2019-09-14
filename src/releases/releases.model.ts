@@ -1,4 +1,5 @@
-import { integerSchema, objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
+import { booleanSchema, integerSchema, objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
+import { ReleasesUserFM } from '@src/releases/releasesUser.model'
 
 export interface ReleasesQuery {
   /**
@@ -57,4 +58,25 @@ export interface RepoAuthorName {
 export const repoAuthorNameSchema = objectSchema<RepoAuthorName>({
   repoAuthor: stringSchema,
   repoName: stringSchema,
+})
+
+export interface AuthInput {
+  username: string
+  accessToken: string
+  idToken: string
+}
+
+export const authInputSchema = objectSchema<AuthInput>({
+  username: stringSchema,
+  accessToken: stringSchema,
+  idToken: stringSchema,
+})
+
+export interface BackendResponse {
+  newUser?: boolean
+  userFM?: ReleasesUserFM
+}
+
+export const backendResponseSchema = objectSchema<BackendResponse>({
+  newUser: booleanSchema.optional(),
 })

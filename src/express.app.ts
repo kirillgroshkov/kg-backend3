@@ -8,10 +8,16 @@ const { swaggerStatsEnabled } = env()
 
 export const expressApp = createDefaultApp(
   {
-    resources: {
-      '/': rootResource,
-      '/releases': releasesResource,
-    },
+    resources: [
+      {
+        path: '/',
+        handler: rootResource,
+      },
+      {
+        path: '/releases',
+        handler: releasesResource,
+      },
+    ],
     swaggerStatsEnabled,
   },
   sentryService,

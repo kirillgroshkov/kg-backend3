@@ -30,6 +30,8 @@ export interface ReleasesUpdaterOpts {
   maxReleasesPerRepo?: number
 
   throwOnError?: boolean
+
+  onlyUserIds?: string[]
 }
 
 const log = Debug('app:releases')
@@ -88,10 +90,14 @@ class ReleasesUpdater {
    * Returns new releases
    */
   async run (opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
-    const { forceUpdateAll, concurrency = 16, throwOnError } = opts
+    const { forceUpdateAll, concurrency = 16, throwOnError, onlyUserIds } = opts
     // 1. Get, merge, dedupe starred repos from all active users
 
-    const q = releasesUserDao.createQuery().filter('accessToken', '>', '')
+    let q = releasesUserDao.createQuery().filter('accessToken', '>', '')
+
+    if (onlyUserIds) {
+      q = q.filter('id', 'in', onlyUserIds)
+    }
 
     const users = await releasesUserDao.runQuery(q)
     const repoIdsTotal = users.reduce((ids, u) => ids.concat(u.starredRepos), [] as string[])

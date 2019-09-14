@@ -22,5 +22,5 @@ workflows:
           filters:
             branches:
               only:
-                - master123
+                - master
       - tools/test-job

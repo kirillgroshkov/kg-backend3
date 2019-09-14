@@ -4,7 +4,9 @@ import { reqAdmin } from '@src/admin/admin.service'
 import { getGlobalReleases } from '@src/releases/getGlobalReleases'
 import { getRepoNames, getRepoOrgs } from '@src/releases/getRepoNames'
 import { getRepoReleases } from '@src/releases/getRepoReleases'
+import { authUser } from '@src/releases/handlers/releasesAuthHandler'
 import {
+  authInputSchema,
   ReleasesQuery,
   releasesQuerySchema,
   RepoAuthorName,
@@ -73,4 +75,8 @@ router.get('/updateReleases', reqAdmin(), async (req, res) => {
     forceUpdateAll: !!forceUpdateAll,
   })
   res.json({ ok: 1 })
+})
+
+router.post('/auth', reqValidation('body', authInputSchema), async (req, res) => {
+  res.json(await authUser(req.body))
 })
