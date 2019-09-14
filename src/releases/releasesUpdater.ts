@@ -56,7 +56,7 @@ class ReleasesUpdater {
         )
       } else {
         void slackService.send(
-          `releasesUpdater was already started since ${this.lastStarted.fromNow()}`,
+          `releasesUpdater was already started since ${this.lastStarted.toPretty()}`,
         )
         return
       }
@@ -88,7 +88,7 @@ class ReleasesUpdater {
    * Returns new releases
    */
   async run (opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
-    const { forceUpdateAll, concurrency = 16 } = opts
+    const { forceUpdateAll, concurrency = 16, throwOnError } = opts
     // 1. Get, merge, dedupe starred repos from all active users
 
     const q = releasesUserDao.createQuery().filter('accessToken', '>', '')
@@ -120,8 +120,9 @@ class ReleasesUpdater {
         repos,
         async repo => {
           return this.checkRepo(repo).catch(err => {
-            console.error(err)
-            // todo: collect errors
+            if (throwOnError) throw err
+            void slackReleases.error(`checkRepo ${repo.id}`)
+            void slackReleases.error(err)
             return []
           })
         },
@@ -137,7 +138,10 @@ class ReleasesUpdater {
    * Mutates and saves repo with .releasesChecked = now
    */
   async checkRepo (repo: ReleasesRepo, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
-    let releases = await this.fetchReleases(repo.id, opts)
+    let releases: Release[] = (await this.fetchReleases(repo.id, opts)).map(r => ({
+      ...r,
+      avatarUrl: repo.avatarUrl,
+    }))
 
     if (releases.length) {
       releases = await releaseDao.saveBatch(releases)

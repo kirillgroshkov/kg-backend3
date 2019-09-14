@@ -1,4 +1,6 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
+import { dayjs } from '@naturalcycles/time-lib'
+import { reqAdmin } from '@src/admin/admin.service'
 import { getGlobalReleases } from '@src/releases/getGlobalReleases'
 import { getRepoNames, getRepoOrgs } from '@src/releases/getRepoNames'
 import { getRepoReleases } from '@src/releases/getRepoReleases'
@@ -8,6 +10,8 @@ import {
   RepoAuthorName,
   repoAuthorNameSchema,
 } from '@src/releases/releases.model'
+import { releasesUpdater } from '@src/releases/releasesUpdater'
+import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 const router = getDefaultRouter()
 export const releasesResource = router
@@ -32,6 +36,14 @@ router.get('/global', reqValidation('query', releasesQuerySchema), async (req, r
   })
 })
 
+router.get('/global/pretty', async (req, res) => {
+  const releases = (await getGlobalReleases()).map(r =>
+    [dayjs.unix(r.published).toPretty(), r.repoFullName, r.tagName].join(' - '),
+  )
+
+  res.json(releases)
+})
+
 router.get(
   '/:repoAuthor/:repoName',
   reqValidation('query', releasesQuerySchema),
@@ -48,3 +60,17 @@ router.get(
     })
   },
 )
+
+router.get('/updateStars', reqAdmin(), async (req, res) => {
+  const { forceUpdateAll } = req.query
+  void userStarsUpdater.start(!!forceUpdateAll)
+  res.json({ ok: 1 })
+})
+
+router.get('/updateReleases', reqAdmin(), async (req, res) => {
+  const { forceUpdateAll } = req.query
+  void releasesUpdater.start({
+    forceUpdateAll: !!forceUpdateAll,
+  })
+  res.json({ ok: 1 })
+})

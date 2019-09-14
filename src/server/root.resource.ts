@@ -8,6 +8,7 @@ import { adminService, reqAdmin } from '@src/admin/admin.service'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 import { env } from '@src/srv/env.service'
+import { firebaseService } from '@src/srv/firebase.service'
 import { slackService } from '@src/srv/slack.service'
 import { warmup } from '@src/warmup'
 
@@ -16,7 +17,7 @@ export const rootResource = router
 
 router.get('/', okHandler())
 
-router.get('/login.html', loginHtml(adminService))
+router.get('/login.html', loginHtml(firebaseService.cfg))
 
 router.get('/status', reqAdmin(), async (req, res) => {
   res.json({

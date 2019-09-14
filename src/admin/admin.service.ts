@@ -1,5 +1,4 @@
 import { BaseAdminService, createAdminMiddleware } from '@naturalcycles/backend-lib'
-import { secret } from '@naturalcycles/nodejs-lib'
 import { env } from '@src/srv/env.service'
 import { firebaseService } from '@src/srv/firebase.service'
 
@@ -16,9 +15,7 @@ class AdminService extends BaseAdminService {
   }
 }
 
-export const adminService = new AdminService(firebaseService.admin().auth(), {
-  firebaseAuthDomain: secret('SECRET_FIREBASE_AUTH_DOMAIN'),
-  firebaseApiKey: secret('SECRET_FIREBASE_API_KEY'),
+export const adminService = new AdminService(firebaseService.auth(), {
   authEnabled,
 })
 

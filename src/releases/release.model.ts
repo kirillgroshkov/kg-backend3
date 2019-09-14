@@ -23,6 +23,8 @@ export interface Release extends BaseDBEntity {
   author: string
   authorThumb?: string
 
+  avatarUrl?: string
+
   /**
    * @example 0.3.6
    */
@@ -45,6 +47,7 @@ export const releaseUnsavedSchema = objectSchema<Unsaved<Release>>({
   descrHtml: stringSchema.optional(),
   author: stringSchema,
   authorThumb: urlSchema().optional(),
+  avatarUrl: urlSchema().optional(),
   v: stringSchema.lowercase(),
   tagName: stringSchema.lowercase(),
   type: stringSchema.valid(RELEASE_TYPE_VALUES),

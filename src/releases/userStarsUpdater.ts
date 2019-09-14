@@ -31,7 +31,7 @@ class UserStarsUpdater {
         )
       } else {
         void slackService.send(
-          `userStarsUpdater was already started since ${this.lastStarted.fromNow()}`,
+          `userStarsUpdater was already started since ${this.lastStarted.toPretty()}`,
         )
         return
       }

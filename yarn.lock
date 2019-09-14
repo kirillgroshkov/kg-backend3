@@ -366,12 +366,12 @@
     through2 "^3.0.0"
 
 "@google-cloud/paginator@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-2.0.0.tgz#187af93634341e79cf1d41dccde5c9082508a0f2"
-  integrity sha512-droVsitvSUGSoMV7Hbk2B5dCFkZIz9YNu3D1AxgFh+hmbSEWJ9SgB/M3WrU8CUx3pseH7IbLuq8jgs3HEFzeHw==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-2.0.1.tgz#89ca97933eecfdd7eaa07bd79ed01c9869c9531b"
+  integrity sha512-HZ6UTGY/gHGNriD7OCikYWL/Eu0sTEur2qqse2w6OVsz+57se3nTkqH14JIPxtf0vlEJ8IJN5w3BdZ22pjCB8g==
   dependencies:
     arrify "^2.0.0"
-    extend "^3.0.1"
+    extend "^3.0.2"
 
 "@google-cloud/profiler@^2.0.2":
   version "2.0.2"
@@ -655,9 +655,9 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/backend-lib@^2.4.0":
-  version "2.11.2"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.11.2.tgz#4e137a7a44879d00b0cd6fd06624b02ba037e3f6"
-  integrity sha512-Q3ePadbfkJH87jtjL7KfEEEtu3wwch59PDlCiuM0x67EOqO7z1eKrwblmmo3CMc30vddHGagElcRvJ8rnEfYhA==
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.15.0.tgz#90cb5761e61d5956a7525c7bb52304fc3c271dd2"
+  integrity sha512-jF4l1cPo4yB99Dv4L3EIDn5YxxkhwBzBqIeSRjI9Y8fC7357w970FqENBXqf0seP45jyI8GSgaIZ+Tj8gD5jrA==
   dependencies:
     "@naturalcycles/fs-lib" "^2.3.0"
     "@naturalcycles/js-lib" "^8.0.0"
@@ -675,6 +675,7 @@
     ejs "^2.6.2"
     express "^4.16.4"
     express-promise-router "^3.0.3"
+    firebase-admin "^8.3.0"
     fs-extra "^8.1.0"
     got "^9.6.0"
     helmet "^3.18.0"
@@ -752,9 +753,9 @@
     yargs "^14.0.0"
 
 "@naturalcycles/js-lib@^8.0.0", "@naturalcycles/js-lib@^8.2.1", "@naturalcycles/js-lib@^8.3.0", "@naturalcycles/js-lib@^8.4.0", "@naturalcycles/js-lib@^8.5.1", "@naturalcycles/js-lib@^8.6.1":
-  version "8.6.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.6.1.tgz#a9576f39648ee6e8615ae11ac6a8774c729d170f"
-  integrity sha512-NHYkPt0GBuE71JBjDu2IQKzBLLWGqUjpZlqi9IbJV3O93j10wVZb6qSPb0OMKKo94UsN4jNmt3zTOAeIlbPO5A==
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.7.0.tgz#7ad23043162492fe9339bc7fa9a152942bf2a26e"
+  integrity sha512-Az0F760zadDvGWSGwzUv+OqPuBMn/fdhKzVX6qPCA7Hsm98a4YOM/3aq7fpxczF0jiu6gvc+SJ62Q5TmhL7WuA==
   dependencies:
     type-fest "^0.7.1"
 
@@ -772,9 +773,9 @@
     rxjs "^6.5.2"
 
 "@naturalcycles/nodejs-lib@^6.11.1", "@naturalcycles/nodejs-lib@^6.13.0", "@naturalcycles/nodejs-lib@^6.15.0", "@naturalcycles/nodejs-lib@^6.3.1", "@naturalcycles/nodejs-lib@^6.5.0", "@naturalcycles/nodejs-lib@^6.8.0":
-  version "6.17.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.17.0.tgz#6058859b8a687b86749735933e334df363ec77eb"
-  integrity sha512-mbBL276OML5aA+VA627+XHN0az1YhUGtc/T8g6lmH6CzWAum+5d7Q2I5RNygHInYubGwEfb5Db7sKZ+ODRsD/w==
+  version "6.17.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.17.1.tgz#8d4a0394dd035c6aadab07ac3abe89ef7a7081a7"
+  integrity sha512-RnMEEZnX1gInYMGWfs/1EBQjtCnHP5NnZ/CVV9HtjwVeWhxN7VMEmg1skGJz8wS79ETVv0vocUpfyn3D0J/iDA==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"
@@ -1206,9 +1207,9 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/mongodb@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.0.tgz#f9e24b211e7cf8d3a6c51793f3f3e0234cd4d9b7"
-  integrity sha512-YMrve0uBOqFDEiezQk3AfWV73g871/rQTAEb8Y2CSlbySnV/2OyerI1DAOUUJQaIqGEWWaYF6GMPO6wTErLUuw==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.1.tgz#9569ffcb356fbb5313ae2d3afa88c230bf8cf0d1"
+  integrity sha512-Va7o1fN3zeabmIJSQ6yuAWkqPvrT38HSTIi4YbVOb2UL7FJ4diXrWt+OUuuEFWAVPtF9VZV5h+7LDYdzgXWgQA==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
@@ -2392,9 +2393,9 @@ date-fns@^1.27.2:
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
 dayjs@^1.8.14:
-  version "1.8.15"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.15.tgz#7121bc04e6a7f2621ed6db566be4a8aaf8c3913e"
-  integrity sha512-HYHCI1nohG52B45vCQg8Re3hNDZbMroWPkhz50yaX7Lu0ATyjGsTdoYZBpjED9ar6chqTx2dmSmM8A51mojnAg==
+  version "1.8.16"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.16.tgz#2a3771de537255191b947957af2fd90012e71e64"
+  integrity sha512-XPmqzWz/EJiaRHjBqSJ2s6hE/BUoCIHKgdS2QPtTQtKcS9E4/Qn0WomoH1lXanWCzri+g7zPcuNV4aTZ8PMORQ==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -3260,11 +3261,11 @@ gaxios@^2.0.0, gaxios@^2.0.1:
     node-fetch "^2.3.0"
 
 gcp-metadata@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-2.0.1.tgz#7f4657b0f52af1c9f6f3a1e0f54a24d72bbdf84f"
-  integrity sha512-nrbLj5O1MurvpLC/doFwzdTfKnmYGDYXlY/v7eQ4tJNVIvQXbOK672J9UFbradbtmuTkyHzjpzD8HD0Djz0LWw==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-2.0.2.tgz#6b391c531cdd0c1d1ebde35050fdaaf5462aa544"
+  integrity sha512-dxPXBvjyfz5qFEBXzEwNmuZXwsGYfuASGYeg3CKZDaQRXdiWti9J3/Ezmtyon1OrCNpDO2YekyoSjEqMtsrcXw==
   dependencies:
-    gaxios "^2.0.0"
+    gaxios "^2.0.1"
     json-bigint "^0.3.0"
 
 gcs-resumable-upload@^2.0.0:
