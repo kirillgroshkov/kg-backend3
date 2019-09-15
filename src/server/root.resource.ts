@@ -46,6 +46,13 @@ router.get('/debug', reqAdmin(), async (req, res) => {
   })
 })
 
+router.get('/crash', reqAdmin(), async (req, res) => {
+  setTimeout(() => {
+    throw new Error('should be unhandled')
+  }, 500)
+  res.json({})
+})
+
 router.get('/_ah/warmup', async (req, res) => {
   await warmup()
   res.status(200).end()
