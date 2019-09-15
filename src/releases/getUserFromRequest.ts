@@ -18,5 +18,13 @@ export async function requireUserFromRequest (req: Request): Promise<ReleasesUse
     })
   }
 
-  return releasesUserDao.requireById(uid)
+  const user = await releasesUserDao.getById(uid)
+  if (!user) {
+    throw new HttpError(`user not found: ${uid}`, {
+      httpStatusCode: 401,
+      userFriendly: true,
+    })
+  }
+
+  return user
 }
