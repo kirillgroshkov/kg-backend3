@@ -7,7 +7,7 @@ DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateUserReleases.ts
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib'
-import { releasesUserDao } from '@src/releases/releasesUser.model'
+import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 
 runScript(async () => {
   // const u = await firestoreDB.getById('ReleasesUser', 'xlmyalsayaftqgcz')

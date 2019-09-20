@@ -1,5 +1,5 @@
-import { Release, releaseDao } from '@src/releases/release.model'
-import { ReleasesQuery } from '@src/releases/releases.model'
+import { Release, releaseDao } from '@src/releases/model/release.model'
+import { ReleasesQuery } from '@src/releases/model/releases.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
 
 export async function getRepoReleases(

@@ -9,7 +9,7 @@ import '@src/bootstrap'
 import { _omit } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { atomService } from '@src/releases/atom.service'
-import { releasesRepoDao } from '@src/releases/releasesRepo.model'
+import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
 import * as got from 'got'
 
 runScript(async () => {

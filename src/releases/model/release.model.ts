@@ -5,7 +5,7 @@ import {
   unixTimestampSchema,
   urlSchema,
 } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
+import { defaultDaoCfg } from '@src/srv/db'
 
 export enum ReleaseType {
   RELEASE = 'RELEASE',

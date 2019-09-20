@@ -1,4 +1,4 @@
-import { Release, releaseDao } from '@src/releases/release.model'
+import { Release, releaseDao } from '@src/releases/model/release.model'
 
 class ReleasesService {
   /*

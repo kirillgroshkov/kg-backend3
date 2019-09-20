@@ -1,4 +1,4 @@
-import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao, Saved } from '@naturalcycles/db-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -6,9 +6,8 @@ import {
   integerSchema,
   objectSchema,
   stringSchema,
-  validate,
 } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
+import { defaultDaoCfg } from '@src/srv/db'
 
 export interface UserSettings {
   notificationEmail?: string
@@ -71,15 +70,12 @@ export const releasesUserSchema = objectSchema<ReleasesUser>({
   settings: userSettingsSchema,
 }).concat(baseDBEntitySchema)
 
-class ReleasesUserDao extends CommonDao<ReleasesUser> {
-  bmToFM(bm: ReleasesUser): ReleasesUserTM {
-    return validate(
-      {
-        ...bm,
-        starredReposCount: bm.starredRepos.length,
-      },
-      releasesUserTMSchema,
-    )
+class ReleasesUserDao extends CommonDao<ReleasesUser, Saved<ReleasesUser>, ReleasesUserTM> {
+  async beforeBMToTM(bm: ReleasesUser): Promise<ReleasesUserTM> {
+    return {
+      ...bm,
+      starredReposCount: bm.starredRepos.length,
+    } as ReleasesUserTM
   }
 }
 

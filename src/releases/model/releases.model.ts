@@ -5,8 +5,8 @@ import {
   objectSchema,
   stringSchema,
 } from '@naturalcycles/nodejs-lib'
-import { Release } from '@src/releases/release.model'
-import { ReleasesUserTM } from '@src/releases/releasesUser.model'
+import { Release } from '@src/releases/model/release.model'
+import { ReleasesUserTM } from '@src/releases/model/releasesUser.model'
 
 export interface ReleasesQuery {
   /**

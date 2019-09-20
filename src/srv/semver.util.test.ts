@@ -1,4 +1,4 @@
-import { parseSemver } from '@src/releases/semver.util'
+import { parseSemver } from '@src/srv/semver.util'
 
 test('parseSemver', () => {
   expect(parseSemver('0.3.0')).toBe('0.3.0')

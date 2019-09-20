@@ -5,7 +5,7 @@ import {
   createdUpdatedFields,
 } from '@naturalcycles/db-lib'
 import { objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
+import { defaultDaoCfg } from '@src/srv/db'
 
 /**
  * id = key

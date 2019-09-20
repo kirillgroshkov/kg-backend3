@@ -1,4 +1,4 @@
-import { CacheDB, InMemoryDB } from '@naturalcycles/db-lib'
+import { CacheDB, CommonDaoLogLevel, InMemoryDB } from '@naturalcycles/db-lib'
 import { MongoDB } from '@naturalcycles/mongo-lib'
 import { secret } from '@naturalcycles/nodejs-lib'
 
@@ -42,3 +42,12 @@ export const mongoMemoryCachedDB = new CacheDB({
 //   logDownstream: true,
 //   awaitCache: true,
 // })
+
+export const defaultDaoCfg = {
+  // db: firestoreCacheDB,
+  db: mongoDB,
+  throwOnDaoCreateObject: true,
+  throwOnEntityValidationError: true,
+  logStarted: true,
+  logLevel: CommonDaoLogLevel.OPERATIONS,
+}

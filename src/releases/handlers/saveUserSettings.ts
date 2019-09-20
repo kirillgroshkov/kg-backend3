@@ -1,5 +1,5 @@
-import { BackendResponse } from '@src/releases/releases.model'
-import { ReleasesUser, releasesUserDao, UserSettings } from '@src/releases/releasesUser.model'
+import { BackendResponse } from '@src/releases/model/releases.model'
+import { ReleasesUser, releasesUserDao, UserSettings } from '@src/releases/model/releasesUser.model'
 
 export async function saveUserSettings(
   user: ReleasesUser,
@@ -11,6 +11,6 @@ export async function saveUserSettings(
   })
 
   return {
-    userFM: releasesUserDao.bmToFM(user),
+    userFM: await releasesUserDao.bmToTM(user),
   }
 }

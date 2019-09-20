@@ -6,7 +6,7 @@ import {
   unixTimestampSchema,
   urlSchema,
 } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
+import { defaultDaoCfg } from '@src/srv/db'
 
 export interface ReleasesRepo extends BaseDBEntity {
   // id == fullName, e.g `facebook/react`

@@ -7,8 +7,8 @@ APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateUserStars.ts
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib'
-import { releasesRepoDao } from '@src/releases/releasesRepo.model'
-import { releasesUserDao } from '@src/releases/releasesUser.model'
+import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
+import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 runScript(async () => {

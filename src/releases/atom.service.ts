@@ -1,6 +1,6 @@
 import { createdUpdatedFields } from '@naturalcycles/db-lib'
 import { dayjs } from '@naturalcycles/time-lib'
-import { Release, ReleaseType } from '@src/releases/release.model'
+import { Release, ReleaseType } from '@src/releases/model/release.model'
 import * as semver from 'semver'
 import { promisify } from 'util'
 import { OptionsV2, parseString as _parseString, processors } from 'xml2js'

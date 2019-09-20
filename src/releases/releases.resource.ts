@@ -1,24 +1,25 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { reqAdmin } from '@src/admin/admin.service'
-import { getGlobalReleases } from '@src/releases/getGlobalReleases'
-import { getRepoNames, getRepoOrgs } from '@src/releases/getRepoNames'
-import { getRepoReleases } from '@src/releases/getRepoReleases'
 import { requireUserFromRequest } from '@src/releases/getUserFromRequest'
 import { getFeed } from '@src/releases/handlers/getFeed'
+import { getGlobalReleases } from '@src/releases/handlers/getGlobalReleases'
+import { getRepoNames, getRepoOrgs } from '@src/releases/handlers/getRepoNames'
+import { getRepoReleases } from '@src/releases/handlers/getRepoReleases'
 import { authUser } from '@src/releases/handlers/releasesAuthHandler'
 import { releasesInit } from '@src/releases/handlers/releasesInit'
 import { saveUserSettings } from '@src/releases/handlers/saveUserSettings'
 import {
   authInputSchema,
+  BackendResponse,
   dateRangeSchema,
   ReleasesQuery,
   releasesQuerySchema,
   RepoAuthorName,
   repoAuthorNameSchema,
-} from '@src/releases/releases.model'
+} from '@src/releases/model/releases.model'
+import { userSettingsSchema } from '@src/releases/model/releasesUser.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
-import { userSettingsSchema } from '@src/releases/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 const router = getDefaultRouter()
@@ -41,7 +42,7 @@ router.get('/global', reqValidation('query', releasesQuerySchema), async (req, r
   res.json({
     releases,
     // query,
-  })
+  } as BackendResponse)
 })
 
 router.get('/global/pretty', async (req, res) => {
@@ -65,7 +66,7 @@ router.get(
     res.json({
       releases,
       // query,
-    })
+    } as BackendResponse)
   },
 )
 

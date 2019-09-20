@@ -5,7 +5,7 @@ import {
   stringSchema,
   unixTimestampSchema,
 } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
+import { defaultDaoCfg } from '@src/srv/db'
 
 export interface Job extends BaseDBEntity {
   type: string

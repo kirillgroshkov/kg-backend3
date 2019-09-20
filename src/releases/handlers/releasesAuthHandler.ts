@@ -1,11 +1,11 @@
 import { createdUpdatedFields, Saved } from '@naturalcycles/db-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { DEF_FROM } from '@src/cnst/email.cnst'
-import { jobDao } from '@src/releases/job.model'
-import { AuthInput, BackendResponse } from '@src/releases/releases.model'
-import { releasesRepoDao } from '@src/releases/releasesRepo.model'
+import { jobDao } from '@src/releases/model/job.model'
+import { AuthInput, BackendResponse } from '@src/releases/model/releases.model'
+import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
+import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
-import { ReleasesUser, releasesUserDao } from '@src/releases/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 import { firebaseService } from '@src/srv/firebase.service'
 import { sendgridService } from '@src/srv/sendgrid.service'
@@ -39,7 +39,7 @@ export async function authUser(input: AuthInput): Promise<BackendResponse> {
 
   return {
     newUser,
-    userFM: releasesUserDao.bmToFM(user),
+    userFM: await releasesUserDao.bmToTM(user),
   }
 }
 

@@ -1,7 +1,7 @@
 import { pDelay } from '@naturalcycles/js-lib'
-import { etagDao } from '@src/releases/etag.model'
 import { authUser } from '@src/releases/handlers/releasesAuthHandler'
-import { releasesUserDao } from '@src/releases/releasesUser.model'
+import { etagDao } from '@src/releases/model/etag.model'
+import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { firebaseService } from '@src/srv/firebase.service'
 
 const { GITHUB_TOKEN } = process.env

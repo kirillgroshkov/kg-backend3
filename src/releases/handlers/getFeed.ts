@@ -1,7 +1,7 @@
 import { dayjs } from '@naturalcycles/time-lib'
-import { releaseDao } from '@src/releases/release.model'
-import { BackendResponse, DateRange } from '@src/releases/releases.model'
-import { ReleasesUser } from '@src/releases/releasesUser.model'
+import { releaseDao } from '@src/releases/model/release.model'
+import { BackendResponse, DateRange } from '@src/releases/model/releases.model'
+import { ReleasesUser } from '@src/releases/model/releasesUser.model'
 
 export interface GetFeedOpt extends DateRange {}
 
@@ -30,5 +30,5 @@ export async function getFeed(user: ReleasesUser, opt: GetFeedOpt = {}): Promise
 
   return {
     releases,
-  } as BackendResponse
+  }
 }

@@ -1,7 +1,6 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
 import { objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
-import { defaultDaoCfg } from '@src/releases/dao'
-import { mongoMemoryCachedDB } from '@src/srv/db'
+import { defaultDaoCfg, mongoMemoryCachedDB } from '@src/srv/db'
 
 export interface Etag extends BaseDBEntity {
   etag: string
