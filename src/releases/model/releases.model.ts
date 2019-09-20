@@ -83,6 +83,7 @@ export interface BackendResponse {
   newUser?: boolean
   userFM?: ReleasesUserTM
   releases?: Release[]
+  releasesUpdaterLastFinished?: number
 }
 
 export const backendResponseSchema = objectSchema<BackendResponse>({

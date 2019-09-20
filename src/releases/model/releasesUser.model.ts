@@ -2,7 +2,6 @@ import { BaseDBEntity, baseDBEntitySchema, CommonDao, Saved } from '@naturalcycl
 import {
   arraySchema,
   booleanSchema,
-  emailSchema,
   integerSchema,
   objectSchema,
   stringSchema,
@@ -16,7 +15,7 @@ export interface UserSettings {
 }
 
 export const userSettingsSchema = objectSchema<UserSettings>({
-  notificationEmail: emailSchema.optional(),
+  notificationEmail: stringSchema.email().optional(),
   notifyEmailRealtime: booleanSchema.optional(),
   notifyEmailDaily: booleanSchema.optional(),
 })
@@ -24,9 +23,6 @@ export const userSettingsSchema = objectSchema<UserSettings>({
 export interface ReleasesUser extends BaseDBEntity {
   username: string
   displayName: string
-  notificationEmail?: string
-  notifyEmailDaily?: boolean
-  notifyEmailRealtime?: boolean
 
   /**
    * Empty accessToken means it was revoked.
@@ -60,9 +56,6 @@ export const releasesUserTMSchema = objectSchema<ReleasesUserTM>({
 export const releasesUserSchema = objectSchema<ReleasesUser>({
   username: stringSchema,
   displayName: stringSchema,
-  notificationEmail: emailSchema.optional(),
-  notifyEmailDaily: booleanSchema.optional(),
-  notifyEmailRealtime: booleanSchema.optional(),
   accessToken: stringSchema.optional(),
   starredRepos: arraySchema(stringSchema.lowercase())
     .default([])
