@@ -647,9 +647,9 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/backend-lib@^2.4.0":
-  version "2.26.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.26.0.tgz#b078106cbb374468ae6bc6e981bafe3b9f845cb3"
-  integrity sha512-2YH03GwhbPS2C5o3PUxWS+35TNK6S5rAFNOGz0LRPHJXHv96uTKQv3xE8Zsds09wIwNuLmV5G9n2ZY78axv0wg==
+  version "2.26.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.26.1.tgz#805603d5ab377ca822eb5e3fd9c4653debc8f0e4"
+  integrity sha512-xBgtAuwP71kzQeQBDm11UWJTMjjuijA1o/ZIS2caRfZvgvzxbK4ps6J3F1bC50m1J329qin2omzELCSx+xK6aQ==
   dependencies:
     "@naturalcycles/fs-lib" "^2.3.0"
     "@naturalcycles/js-lib" "^8.0.0"
