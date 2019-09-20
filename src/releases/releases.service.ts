@@ -51,7 +51,7 @@ class ReleasesService {
     }
   }*/
 
-  async getLastReleases (): Promise<Release[]> {
+  async getLastReleases(): Promise<Release[]> {
     const q = releaseDao
       .createQuery()
       .order('published', true)

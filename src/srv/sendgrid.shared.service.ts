@@ -40,9 +40,9 @@ export interface SendgridSharedServiceCfg {
 }
 
 export class SendgridSharedService {
-  constructor (public cfg: SendgridSharedServiceCfg) {}
+  constructor(public cfg: SendgridSharedServiceCfg) {}
 
-  async send (msg: EmailMsg): Promise<void> {
+  async send(msg: EmailMsg): Promise<void> {
     const body: SendgridPost = {
       personalizations: [
         {

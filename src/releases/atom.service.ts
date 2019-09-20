@@ -41,7 +41,7 @@ export interface AtomRelease {
 }
 
 class AtomService {
-  async parseAsReleases (
+  async parseAsReleases(
     atom: string,
     repoFullName: string,
     type: ReleaseType = ReleaseType.RELEASE,
@@ -50,7 +50,7 @@ class AtomService {
     return atomReleases.map(a => this.mapToRelease(a, repoFullName, type))
   }
 
-  mapToRelease (a: AtomRelease, repoFullName: string, type: ReleaseType): Release {
+  mapToRelease(a: AtomRelease, repoFullName: string, type: ReleaseType): Release {
     return {
       published: a.updated,
       repoFullName,
@@ -65,7 +65,7 @@ class AtomService {
     }
   }
 
-  async parse (atom: string): Promise<AtomRelease[]> {
+  async parse(atom: string): Promise<AtomRelease[]> {
     const res: GithubReleasesAtom = await parseString(atom, {
       trim: true,
       explicitArray: true,

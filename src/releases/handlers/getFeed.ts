@@ -5,7 +5,7 @@ import { ReleasesUser } from '@src/releases/releasesUser.model'
 
 export interface GetFeedOpt extends DateRange {}
 
-export async function getFeed (user: ReleasesUser, opt: GetFeedOpt = {}): Promise<BackendResponse> {
+export async function getFeed(user: ReleasesUser, opt: GetFeedOpt = {}): Promise<BackendResponse> {
   const {
     minIncl = dayjs()
       .subtract(3, 'day')

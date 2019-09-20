@@ -35,7 +35,7 @@ test('auth kirill', async () => {
   await pDelay(600000)
 }, 999999)
 
-async function cleanup () {
+async function cleanup() {
   // delete all etags
   await etagDao.deleteByQuery(etagDao.createQuery())
 

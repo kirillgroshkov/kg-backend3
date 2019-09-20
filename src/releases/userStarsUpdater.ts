@@ -23,7 +23,7 @@ class UserStarsUpdater {
   lastStarted?: Dayjs
   lastFinished?: Dayjs
 
-  async start (forceUpdateAll = false): Promise<void> {
+  async start(forceUpdateAll = false): Promise<void> {
     if (this.lastStarted) {
       if (this.lastStarted.isBefore(dayjs().subtract(timeoutToRestartMinutes, 'minute'))) {
         void slackService.send(
@@ -61,7 +61,7 @@ class UserStarsUpdater {
   /**
    * Returns array of updated user ids.
    */
-  async run (forceUpdateAll = false): Promise<string[]> {
+  async run(forceUpdateAll = false): Promise<string[]> {
     // 1. Fetch users that need to be updated
     const updatedThreshold = dayjs().subtract(forceUpdateAll ? 0 : updateAfterMinutes, 'minute')
     const q = releasesUserDao
@@ -105,7 +105,7 @@ class UserStarsUpdater {
    *
    * Mutates existingRepoIds set
    */
-  async updateUser (u: ReleasesUser, existingRepoIds: Set<string>): Promise<boolean> {
+  async updateUser(u: ReleasesUser, existingRepoIds: Set<string>): Promise<boolean> {
     const initialStarredRepos = u.starredRepos
 
     const repos = await githubService.getUserStarredRepos(u)

@@ -3,16 +3,16 @@ import { secret, secretOptional } from '@naturalcycles/nodejs-lib'
 import * as admin from 'firebase-admin'
 
 class FirebaseService extends FirebaseSharedService {
-  async verifyIdToken (idToken: string): Promise<admin.auth.DecodedIdToken> {
+  async verifyIdToken(idToken: string): Promise<admin.auth.DecodedIdToken> {
     return this.auth().verifyIdToken(idToken)
   }
 
-  async getUser (uid?: string): Promise<admin.auth.UserRecord | undefined> {
+  async getUser(uid?: string): Promise<admin.auth.UserRecord | undefined> {
     if (!uid) return
     return this.auth().getUser(uid)
   }
 
-  async requireUser (uid: string): Promise<admin.auth.UserRecord> {
+  async requireUser(uid: string): Promise<admin.auth.UserRecord> {
     const user = this.auth().getUser(uid)
     if (!user) {
       throw new Error(`Firebase User not found: ${uid}`)

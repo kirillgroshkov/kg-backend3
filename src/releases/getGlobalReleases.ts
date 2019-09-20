@@ -1,7 +1,7 @@
 import { Release, releaseDao } from '@src/releases/release.model'
 import { ReleasesQuery } from '@src/releases/releases.model'
 
-export async function getGlobalReleases (query: ReleasesQuery = {}): Promise<Release[]> {
+export async function getGlobalReleases(query: ReleasesQuery = {}): Promise<Release[]> {
   const {
     // maxDaysOld = 90,
     // maxReleasesPerRepo = 10,

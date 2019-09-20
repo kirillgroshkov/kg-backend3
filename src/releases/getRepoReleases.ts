@@ -2,7 +2,7 @@ import { Release, releaseDao } from '@src/releases/release.model'
 import { ReleasesQuery } from '@src/releases/releases.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
 
-export async function getRepoReleases (
+export async function getRepoReleases(
   repoFullName: string,
   query: ReleasesQuery = {},
 ): Promise<Release[]> {

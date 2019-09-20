@@ -17,7 +17,7 @@ export const sentryService = new SentrySharedService({
       root: srcDir,
     }),
     new Sentry.Integrations.OnUncaughtException({
-      onFatalError (err: Error, secondError?: Error): void {
+      onFatalError(err: Error, secondError?: Error): void {
         console.error(`onFatalError`, err, secondError)
       },
     }),
