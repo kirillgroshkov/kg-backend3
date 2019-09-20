@@ -1,4 +1,5 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
+import { Saved } from '@naturalcycles/db-lib'
 import { _flatten, _uniq, pMap } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { Dayjs, dayjs, since } from '@naturalcycles/time-lib'
@@ -50,7 +51,7 @@ class ReleasesUpdater {
   lastStarted?: Dayjs
   lastFinished?: Dayjs
 
-  async start (opts: ReleasesUpdaterOpts = {}): Promise<void> {
+  async start(opts: ReleasesUpdaterOpts = {}): Promise<void> {
     if (this.lastStarted) {
       if (this.lastStarted.isBefore(dayjs().subtract(timeoutToRestartMinutes, 'minute'))) {
         void slackService.send(
@@ -89,7 +90,7 @@ class ReleasesUpdater {
   /**
    * Returns new releases
    */
-  async run (opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
+  async run(opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
     const { forceUpdateAll, concurrency = 16, throwOnError, onlyUserIds } = opts
     // 1. Get, merge, dedupe starred repos from all active users
 
@@ -143,7 +144,7 @@ class ReleasesUpdater {
    * Returns new releases array (can be empty if no updates).
    * Mutates and saves repo with .releasesChecked = now
    */
-  async checkRepo (repo: ReleasesRepo, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
+  async checkRepo(repo: Saved<ReleasesRepo>, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
     let releases: Release[] = (await this.fetchReleases(repo.id, opts)).map(r => ({
       ...r,
       avatarUrl: repo.avatarUrl,
@@ -159,7 +160,7 @@ class ReleasesUpdater {
     return releases
   }
 
-  async fetchReleases (repoFullName: string, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
+  async fetchReleases(repoFullName: string, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
     const { maxReleasesPerRepo = 100, updateExisting, throwOnError } = opts
     log(`fetchReleases ${repoFullName}...`, { maxReleasesPerRepo })
 

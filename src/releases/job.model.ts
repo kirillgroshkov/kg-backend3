@@ -1,4 +1,4 @@
-import { BaseDBEntity, CommonDao, Unsaved } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
 import {
   anyObjectSchema,
   objectSchema,
@@ -15,19 +15,19 @@ export interface Job extends BaseDBEntity {
   status: string
 }
 
-export const jobUnsavedSchema = objectSchema<Unsaved<Job>>({
+export const jobSchema = objectSchema<Job>({
   type: stringSchema,
   started: unixTimestampSchema,
   finished: unixTimestampSchema.optional(),
   result: anyObjectSchema.optional(),
   status: stringSchema,
-})
+}).concat(baseDBEntitySchema)
 
 class JobDao extends CommonDao<Job> {}
 
 export const jobDao = new JobDao({
   ...defaultDaoCfg,
   table: 'Job',
-  bmUnsavedSchema: jobUnsavedSchema,
-  dbmUnsavedSchema: jobUnsavedSchema,
+  bmSchema: jobSchema,
+  dbmSchema: jobSchema,
 })

@@ -1,4 +1,4 @@
-import { createdUpdatedFields } from '@naturalcycles/db-lib'
+import { createdUpdatedFields, Saved } from '@naturalcycles/db-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { DEF_FROM } from '@src/cnst/email.cnst'
 import { jobDao } from '@src/releases/job.model'
@@ -11,7 +11,7 @@ import { firebaseService } from '@src/srv/firebase.service'
 import { sendgridService } from '@src/srv/sendgrid.service'
 import { slackReleases } from '@src/srv/slack.service'
 
-export async function authUser (input: AuthInput): Promise<BackendResponse> {
+export async function authUser(input: AuthInput): Promise<BackendResponse> {
   const { username, idToken, accessToken } = input
   // it will throw an error if token is invalid
   const { uid } = await firebaseService.verifyIdToken(idToken)
@@ -19,7 +19,7 @@ export async function authUser (input: AuthInput): Promise<BackendResponse> {
   const existingUser = await releasesUserDao.getById(uid)
   const newUser = !existingUser
 
-  let user: ReleasesUser = {
+  const user = await releasesUserDao.save({
     settings: {
       notificationEmail: email,
     }, // default
@@ -30,9 +30,7 @@ export async function authUser (input: AuthInput): Promise<BackendResponse> {
     username,
     accessToken,
     displayName,
-  }
-
-  user = await releasesUserDao.save(user)
+  })
 
   if (newUser) {
     void emailNewUser(user)
@@ -45,7 +43,7 @@ export async function authUser (input: AuthInput): Promise<BackendResponse> {
   }
 }
 
-async function emailNewUser (user: ReleasesUser): Promise<void> {
+async function emailNewUser(user: ReleasesUser): Promise<void> {
   await Promise.all([
     slackReleases.send(`New user! ${user.username} ${user.id}`),
 
@@ -58,7 +56,7 @@ async function emailNewUser (user: ReleasesUser): Promise<void> {
   ])
 }
 
-async function initNewUser (user: ReleasesUser): Promise<void> {
+async function initNewUser(user: Saved<ReleasesUser>): Promise<void> {
   const now = dayjs()
   const { id } = user
 

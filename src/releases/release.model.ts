@@ -1,4 +1,4 @@
-import { BaseDBEntity, CommonDao, Unsaved } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
 import {
   objectSchema,
   stringSchema,
@@ -38,10 +38,8 @@ export interface Release extends BaseDBEntity {
   type: ReleaseType
 }
 
-export const releaseUnsavedSchema = objectSchema<Unsaved<Release>>({
+export const releaseSchema = objectSchema<Release>({
   id: stringSchema.lowercase().optional(),
-  created: unixTimestampSchema.optional(),
-  updated: unixTimestampSchema.optional(),
   published: unixTimestampSchema,
   repoFullName: stringSchema.lowercase(),
   descrHtml: stringSchema.optional(),
@@ -51,7 +49,7 @@ export const releaseUnsavedSchema = objectSchema<Unsaved<Release>>({
   v: stringSchema.lowercase(),
   tagName: stringSchema.lowercase(),
   type: stringSchema.valid(RELEASE_TYPE_VALUES),
-})
+}).concat(baseDBEntitySchema)
 
 class ReleaseDao extends CommonDao<Release> {
   // createId (dbm: Release): string {
@@ -62,7 +60,6 @@ class ReleaseDao extends CommonDao<Release> {
 export const releaseDao = new ReleaseDao({
   ...defaultDaoCfg,
   table: 'Release',
-  bmUnsavedSchema: releaseUnsavedSchema,
-  dbmUnsavedSchema: releaseUnsavedSchema,
-  idSchema: stringSchema.lowercase(),
+  bmSchema: releaseSchema,
+  dbmSchema: releaseSchema,
 })

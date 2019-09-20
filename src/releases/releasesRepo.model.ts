@@ -1,4 +1,4 @@
-import { BaseDBEntity, CommonDao, ObjectWithId, Unsaved } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao, ObjectWithId } from '@naturalcycles/db-lib'
 import {
   integerSchema,
   objectSchema,
@@ -43,10 +43,8 @@ export interface ReleasesRepo extends BaseDBEntity {
   releasesChecked: number
 }
 
-export const releasesRepoUnsavedSchema = objectSchema<Unsaved<ReleasesRepo>>({
+export const releasesRepoSchema = objectSchema<ReleasesRepo>({
   id: stringSchema.lowercase().optional(),
-  created: unixTimestampSchema.optional(),
-  updated: unixTimestampSchema.optional(),
   author: stringSchema.lowercase(),
   name: stringSchema.lowercase(),
   githubId: integerSchema,
@@ -56,8 +54,7 @@ export const releasesRepoUnsavedSchema = objectSchema<Unsaved<ReleasesRepo>>({
   stargazersCount: integerSchema.optional(),
   // lastReleaseTag: stringSchema.optional(),
   releasesChecked: unixTimestampSchema.default(0).optional(),
-})
-// .concat(unsavedDBEntitySchema)
+}).concat(baseDBEntitySchema)
 
 class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
   /*
@@ -75,7 +72,7 @@ class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
       .toLowerCase()
   }*/
 
-  async getAllIds (): Promise<string[]> {
+  async getAllIds(): Promise<string[]> {
     const items: ObjectWithId[] = await this.runQuery(this.createQuery().select([]))
     return items.map(i => i.id)
   }
@@ -84,7 +81,6 @@ class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
 export const releasesRepoDao = new ReleasesRepoDao({
   ...defaultDaoCfg,
   table: 'ReleasesRepo',
-  bmUnsavedSchema: releasesRepoUnsavedSchema,
-  dbmUnsavedSchema: releasesRepoUnsavedSchema,
-  idSchema: stringSchema.lowercase(),
+  bmSchema: releasesRepoSchema,
+  dbmSchema: releasesRepoSchema,
 })

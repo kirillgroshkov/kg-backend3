@@ -1,10 +1,10 @@
 import {
   BaseDBEntity,
+  baseDBEntitySchema,
   CommonDao,
   createdUpdatedFields,
-  Unsaved,
 } from '@naturalcycles/db-lib'
-import { objectSchema, stringSchema, unixTimestampSchema } from '@naturalcycles/nodejs-lib'
+import { objectSchema, stringSchema } from '@naturalcycles/nodejs-lib'
 import { defaultDaoCfg } from '@src/releases/dao'
 
 /**
@@ -19,21 +19,17 @@ export enum KV_ID {
   RELEASES_STATE = 'RELEASES_STATE',
 }
 
-export const kvUnsavedSchema = objectSchema<Unsaved<KV>>({
-  id: stringSchema.optional(),
-  created: unixTimestampSchema.optional(),
-  updated: unixTimestampSchema.optional(),
+export const kvSchema = objectSchema<KV>({
   v: stringSchema.optional(),
-})
-// .concat(unsavedDBEntitySchema)
+}).concat(baseDBEntitySchema)
 
 class KVDao extends CommonDao<KV> {
-  async getJson<T = any> (id: string): Promise<T> {
+  async getJson<T = any>(id: string): Promise<T> {
     const kv = await this.getByIdOrEmpty(id)
     return JSON.parse(kv.v || '{}')
   }
 
-  async saveJson (id: string, v: any = {}): Promise<void> {
+  async saveJson(id: string, v: any = {}): Promise<void> {
     await this.save({
       id,
       v: JSON.stringify(v),
@@ -45,7 +41,6 @@ class KVDao extends CommonDao<KV> {
 export const kvDao = new KVDao({
   ...defaultDaoCfg,
   table: 'KV',
-  bmUnsavedSchema: kvUnsavedSchema,
-  dbmUnsavedSchema: kvUnsavedSchema,
-  idSchema: stringSchema,
+  bmSchema: kvSchema,
+  dbmSchema: kvSchema,
 })

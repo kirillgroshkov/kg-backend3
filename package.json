@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@google-cloud/debug-agent": "^4.0.3",
-    "@google-cloud/profiler": "^2.0.2",
+    "@google-cloud/profiler": "^3.0.0",
     "@google-cloud/trace-agent": "^4.1.1",
     "@naturalcycles/backend-lib": "^2.4.0",
     "@naturalcycles/db-lib": "^1.3.0",
@@ -18,7 +18,6 @@
     "@naturalcycles/js-lib": "^8.3.0",
     "@naturalcycles/mongo-lib": "^1.0.0",
     "@naturalcycles/nodejs-lib": "^6.8.0",
-    "@naturalcycles/redis-lib": "^1.0.0",
     "@naturalcycles/time-lib": "^1.4.3",
     "@sentry/integrations": "^5.6.1",
     "@sentry/node": "^5.6.1",
@@ -32,7 +31,7 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "@naturalcycles/dev-lib": "^7.15.1",
+    "@naturalcycles/dev-lib": "^8.1.0",
     "@naturalcycles/secret-lib": "^2.0.2",
     "@types/got": "^9.6.6",
     "@types/node": "^12.7.1",
@@ -41,7 +40,7 @@
     "@types/xml2js": "^0.4.4",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
-    "type-fest": "^0.7.1"
+    "type-fest": "^0.8.0"
   },
   "private": true,
   "repository": {

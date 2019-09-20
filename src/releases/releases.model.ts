@@ -6,7 +6,7 @@ import {
   stringSchema,
 } from '@naturalcycles/nodejs-lib'
 import { Release } from '@src/releases/release.model'
-import { ReleasesUserFM } from '@src/releases/releasesUser.model'
+import { ReleasesUserTM } from '@src/releases/releasesUser.model'
 
 export interface ReleasesQuery {
   /**
@@ -81,7 +81,7 @@ export const authInputSchema = objectSchema<AuthInput>({
 
 export interface BackendResponse {
   newUser?: boolean
-  userFM?: ReleasesUserFM
+  userFM?: ReleasesUserTM
   releases?: Release[]
 }
 

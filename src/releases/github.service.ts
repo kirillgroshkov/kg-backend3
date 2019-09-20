@@ -1,5 +1,4 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
-import { Unsaved } from '@naturalcycles/db-lib'
 import { filterFalsyValues, StringMap } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { since } from '@naturalcycles/time-lib'
@@ -15,7 +14,7 @@ const API = 'https://api.github.com'
 const log = Debug('app:gh')
 
 class GithubService {
-  headers (token: string): StringMap {
+  headers(token: string): StringMap {
     return {
       Accept: 'application/vnd.github.v3+json',
       'User-Agent': 'kirillgroshkov',
@@ -26,15 +25,15 @@ class GithubService {
   /**
    * Undefined means "not changed".
    */
-  async getUserStarredRepos (
+  async getUserStarredRepos(
     u: ReleasesUser,
     maxPages = 100, // 10.000 stars is a cap now
-  ): Promise<Unsaved<ReleasesRepo>[] | undefined> {
+  ): Promise<ReleasesRepo[] | undefined> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
     let unchanged = false
-    const allRepos: Unsaved<ReleasesRepo>[] = []
-    let repos: Unsaved<ReleasesRepo>[] | undefined
+    const allRepos: ReleasesRepo[] = []
+    let repos: ReleasesRepo[] | undefined
     let page = 0
     const [lastStarredRepo] = u.starredRepos
 
@@ -69,21 +68,21 @@ class GithubService {
    * Manages etag cache internally (via etagDao).
    * Only uses etag cache for page 1 - loads (sync), saves (async) if non-304 (200) is returned.
    */
-  private async getUserStarredReposPage (
+  private async getUserStarredReposPage(
     page: number,
     u: ReleasesUser,
-  ): Promise<Unsaved<ReleasesRepo>[] | undefined> {
+  ): Promise<ReleasesRepo[] | undefined> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
 
     let ifNoneMatch: string | undefined
-    let urlEtag: Unsaved<Etag> | undefined
+    let urlEtag: Etag | undefined
 
     const url = `${API}/users/${u.username}/starred?per_page=${per_page}&page=${page}`
 
     if (page === 1) {
       urlEtag = await etagDao.getByIdOrEmpty(url, { skipValidation: true }) // todo: figure out validation here
-      ifNoneMatch = urlEtag.etag
+      ifNoneMatch = urlEtag!.etag
     }
 
     const opt: GotJSONOptions = {
@@ -121,7 +120,7 @@ class GithubService {
     return ((resp.body as any) as any[]).map(r => this.mapRepo(r))
   }
 
-  stripW (etag?: string): string {
+  stripW(etag?: string): string {
     if (!etag) return undefined as any
     if (etag.startsWith('W/')) {
       return etag.substr(2)
@@ -129,7 +128,7 @@ class GithubService {
     return etag
   }
 
-  private mapRepo (r: any): Unsaved<ReleasesRepo> {
+  private mapRepo(r: any): ReleasesRepo {
     // console.log('mapRepo', r, r.repo.full_name)
     const [author, name] = r.repo.full_name.toLowerCase().split('/')
 

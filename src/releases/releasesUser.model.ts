@@ -1,4 +1,4 @@
-import { BaseDBEntity, CommonDao, Unsaved, unsavedDBEntitySchema } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -42,7 +42,7 @@ export interface ReleasesUser extends BaseDBEntity {
   settings: UserSettings
 }
 
-export interface ReleasesUserFM {
+export interface ReleasesUserTM {
   id: string
   username: string
   starredReposCount: number
@@ -50,7 +50,7 @@ export interface ReleasesUserFM {
   settings: UserSettings
 }
 
-export const releasesUserFMSchema = objectSchema<ReleasesUserFM>({
+export const releasesUserTMSchema = objectSchema<ReleasesUserTM>({
   id: stringSchema,
   username: stringSchema,
   starredReposCount: integerSchema,
@@ -58,7 +58,7 @@ export const releasesUserFMSchema = objectSchema<ReleasesUserFM>({
   settings: userSettingsSchema,
 })
 
-export const releasesUserUnsavedSchema = objectSchema<Unsaved<ReleasesUser>>({
+export const releasesUserSchema = objectSchema<ReleasesUser>({
   username: stringSchema,
   displayName: stringSchema,
   notificationEmail: emailSchema.optional(),
@@ -69,16 +69,16 @@ export const releasesUserUnsavedSchema = objectSchema<Unsaved<ReleasesUser>>({
     .default([])
     .optional(),
   settings: userSettingsSchema,
-}).concat(unsavedDBEntitySchema)
+}).concat(baseDBEntitySchema)
 
 class ReleasesUserDao extends CommonDao<ReleasesUser> {
-  bmToFM (bm: ReleasesUser): ReleasesUserFM {
+  bmToFM(bm: ReleasesUser): ReleasesUserTM {
     return validate(
       {
         ...bm,
         starredReposCount: bm.starredRepos.length,
       },
-      releasesUserFMSchema,
+      releasesUserTMSchema,
     )
   }
 }
@@ -86,6 +86,7 @@ class ReleasesUserDao extends CommonDao<ReleasesUser> {
 export const releasesUserDao = new ReleasesUserDao({
   ...defaultDaoCfg,
   table: 'ReleasesUser',
-  bmUnsavedSchema: releasesUserUnsavedSchema,
-  dbmUnsavedSchema: releasesUserUnsavedSchema,
+  bmSchema: releasesUserSchema,
+  dbmSchema: releasesUserSchema,
+  tmSchema: releasesUserTMSchema,
 })
