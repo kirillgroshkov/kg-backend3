@@ -2,7 +2,7 @@ import { SentrySharedService } from '@naturalcycles/backend-lib'
 import { secret } from '@naturalcycles/nodejs-lib'
 import { RewriteFrames } from '@sentry/integrations'
 import * as Sentry from '@sentry/node'
-import { srcDir } from '@src/cnst/paths.cnst'
+import { projectDir } from '@src/cnst/paths.cnst'
 import { env } from '@src/srv/env.service'
 
 const { sentryServiceCfg, sentryEnabled } = env()
@@ -14,7 +14,7 @@ export const sentryService = new SentrySharedService({
   dsn: sentryEnabled ? secret('SECRET_SENTRY_DSN') : undefined,
   integrations: [
     new RewriteFrames({
-      root: srcDir,
+      root: projectDir,
     }),
     new Sentry.Integrations.OnUncaughtException({
       onFatalError(err: Error, secondError?: Error): void {
