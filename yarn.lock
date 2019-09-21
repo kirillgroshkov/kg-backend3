@@ -678,9 +678,9 @@
     swagger-stats "^0.95.7"
 
 "@naturalcycles/db-lib@^1.2.1", "@naturalcycles/db-lib@^1.3.0", "@naturalcycles/db-lib@^1.9.1":
-  version "1.23.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-1.23.1.tgz#8b0325515c017b6cd575008d65da0de2aceb1604"
-  integrity sha512-PuWL+5pPzIzZufESGrJrLoNHlR9aGUd4v1RyNW+5PpfwRLdqyjxguIQivWuyY1OmHeuSWQVGBtrsmelUcyvFxQ==
+  version "1.23.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-1.23.2.tgz#8da3cd8b2ffbd9b6dd101004cafc8448a0af821c"
+  integrity sha512-QBfzoZf3uz2t3YoO+5Z7f426yeOqYDnpp9EyIHJvHhU1OJ5Uoa/p9Yqxd1I9p1gMZlPh7TLxAzGHLtiFH4zPCA==
   dependencies:
     "@naturalcycles/js-lib" "^8.2.1"
     "@naturalcycles/nodejs-lib" "^6.5.0"
@@ -721,9 +721,9 @@
     yargs "^14.0.0"
 
 "@naturalcycles/firestore-lib@^1.0.0":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/firestore-lib/-/firestore-lib-1.0.7.tgz#cc8bbb0c72c2a73ef6d742ec147091c17ce17045"
-  integrity sha512-uoskpZ6ZwwNLuGmoWoQNA2G1SsMXH4I8NEL4Eb1heDCI00AYH5DoY+RamQmyu05c+3bnFxzF4ZXZ8yoaomf/3g==
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/firestore-lib/-/firestore-lib-1.0.8.tgz#ee2aaf38caba8e2283d5f2236034020c3a8df36c"
+  integrity sha512-IItF9gkRzE4iKWFFve6Jk1Bm8cPu2+7ziy2jsObTgJRjRGIO+CjBPsDkchvLYjMX7Zsnjtng0MmujtEtDf8X9g==
   dependencies:
     "@naturalcycles/db-lib" "^1.2.1"
     "@naturalcycles/js-lib" "^8.2.1"
