@@ -29,6 +29,7 @@ import { filterUndefinedValues, pHang } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { ms } from '@naturalcycles/time-lib'
 import { expressApp } from '@src/express.app'
+import { notifyOfNewReleasesDaily } from '@src/releases/handlers/notifyOfNewReleases'
 import { releasesUpdater, releasesUpdaterSchedule } from '@src/releases/releasesUpdater'
 import { userStarsUpdater, userStarsUpdaterSchedule } from '@src/releases/userStarsUpdater'
 import { slackService } from '@src/srv/slack.service'
@@ -75,6 +76,7 @@ runScript(async () => {
     // schedule
     nodeSchedule.scheduleJob(userStarsUpdaterSchedule, () => userStarsUpdater.start())
     nodeSchedule.scheduleJob(releasesUpdaterSchedule, () => releasesUpdater.start())
+    nodeSchedule.scheduleJob('0 2 * * *', () => notifyOfNewReleasesDaily())
   }
 
   await pHang() // keep server running

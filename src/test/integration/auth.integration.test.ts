@@ -37,7 +37,7 @@ test('auth kirill', async () => {
 
 async function cleanup() {
   // delete all etags
-  await etagDao.deleteByQuery(etagDao.createQuery())
+  await etagDao.query().deleteByQuery()
 
   // delete user
   await releasesUserDao.deleteById(uid)

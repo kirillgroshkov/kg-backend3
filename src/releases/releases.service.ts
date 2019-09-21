@@ -52,11 +52,11 @@ class ReleasesService {
   }*/
 
   async getLastReleases(): Promise<Release[]> {
-    const q = releaseDao
-      .createQuery()
+    return await releaseDao
+      .query()
       .order('published', true)
       .limit(200)
-    return releaseDao.runQuery(q, { onlyCache: true })
+      .runQuery()
   }
 }
 

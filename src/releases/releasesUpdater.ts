@@ -94,10 +94,10 @@ class ReleasesUpdater {
     const { forceUpdateAll, concurrency = 16, throwOnError, onlyUserIds } = opts
     // 1. Get, merge, dedupe starred repos from all active users
 
-    let q = releasesUserDao.createQuery().filter('accessToken', '>', '')
+    const q = releasesUserDao.query().filter('accessToken', '>', '')
 
     if (onlyUserIds) {
-      q = q.filter('id', 'in', onlyUserIds)
+      q.filter('id', 'in', onlyUserIds)
     }
 
     const users = await releasesUserDao.runQuery(q)
@@ -106,11 +106,10 @@ class ReleasesUpdater {
 
     // 2. Select only those that was last updated longer than threshold (or non-existing for some reason)
     const updatedThreshold = dayjs().subtract(forceUpdateAll ? 0 : updateAfterMinutes, 'minute')
-    const queryToBeChecked = releasesRepoDao
-      .createQuery()
+    const repos = await releasesRepoDao
+      .query()
       .filter('releasesChecked', '<', updatedThreshold.unix())
-
-    const repos = await releasesRepoDao.runQuery(queryToBeChecked)
+      .runQuery()
 
     void slackService.send(
       `releasesUpdater: total repos / unique / to check ${[

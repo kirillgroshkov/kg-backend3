@@ -64,12 +64,12 @@ class UserStarsUpdater {
   async run(forceUpdateAll = false): Promise<string[]> {
     // 1. Fetch users that need to be updated
     const updatedThreshold = dayjs().subtract(forceUpdateAll ? 0 : updateAfterMinutes, 'minute')
-    const q = releasesUserDao
-      .createQuery()
+    const users = await releasesUserDao
+      .query()
       .filter('accessToken', '>', '')
       .filter('updated', '<', updatedThreshold.unix())
+      .runQuery()
 
-    const users = await releasesUserDao.runQuery(q)
     log(
       `${c.white(String(users.length))} user(s) with accessToken and .updated < ${c.dim(
         updatedThreshold.toPretty(),

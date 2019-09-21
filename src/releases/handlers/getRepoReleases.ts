@@ -16,12 +16,12 @@ export async function getRepoReleases(
   let releases: Release[] = []
 
   if (!skipCache) {
-    const q = releaseDao
-      .createQuery()
+    releases = await releaseDao
+      .query()
       .filter('repoFullName', '=', repoFullName)
       .order('published', true)
       .limit(maxReleasesTotal)
-    releases = await releaseDao.runQuery(q)
+      .runQuery()
   }
 
   if (!releases.length) {

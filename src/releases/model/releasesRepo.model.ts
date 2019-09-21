@@ -73,7 +73,9 @@ class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
   }*/
 
   async getAllIds(): Promise<string[]> {
-    const items: ObjectWithId[] = await this.runQuery(this.createQuery().select([]))
+    const items = await this.query()
+      .select([])
+      .runQuery<ObjectWithId>()
     return items.map(i => i.id)
   }
 }

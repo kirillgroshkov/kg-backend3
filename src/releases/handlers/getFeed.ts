@@ -18,15 +18,14 @@ export async function getFeed(user: ReleasesUser, opt: GetFeedOpt = {}): Promise
 
   const { starredRepos } = user
 
-  const q = releaseDao
-    .createQuery()
+  const releases = await releaseDao
+    .query()
     .filter('repoFullName', 'in', starredRepos)
     .filter('published', '>=', publishedMinIncl)
     .filter('published', '<', publishedMaxExcl)
     .order('published', true)
     .limit(100)
-
-  const releases = await releaseDao.runQuery(q)
+    .runQuery()
 
   return {
     releases,
