@@ -4,7 +4,7 @@ import { secret } from '@naturalcycles/nodejs-lib'
 
 // const firestore = firebaseService.admin().firestore()
 //
-// export const db = new FirestoreDB({
+// export const firestoreDB = new FirestoreDB({
 //   firestore,
 // })
 

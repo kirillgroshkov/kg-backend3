@@ -2,6 +2,7 @@ import { BaseDBEntity, baseDBEntitySchema, CommonDao, Saved } from '@naturalcycl
 import {
   arraySchema,
   booleanSchema,
+  emailSchema,
   integerSchema,
   objectSchema,
   stringSchema,
@@ -15,7 +16,7 @@ export interface UserSettings {
 }
 
 export const userSettingsSchema = objectSchema<UserSettings>({
-  notificationEmail: stringSchema.email().optional(),
+  notificationEmail: emailSchema.optional(),
   notifyEmailRealtime: booleanSchema.optional(),
   notifyEmailDaily: booleanSchema.optional(),
 })
@@ -55,7 +56,7 @@ export const releasesUserTMSchema = objectSchema<ReleasesUserTM>({
 
 export const releasesUserSchema = objectSchema<ReleasesUser>({
   username: stringSchema,
-  displayName: stringSchema,
+  displayName: stringSchema.optional(),
   accessToken: stringSchema.optional(),
   starredRepos: arraySchema(stringSchema.lowercase())
     .default([])
