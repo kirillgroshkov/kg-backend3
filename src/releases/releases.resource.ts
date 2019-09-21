@@ -21,9 +21,16 @@ import {
 import { userSettingsSchema } from '@src/releases/model/releasesUser.model'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
+import { log } from '@src/srv/log.service'
 
 const router = getDefaultRouter()
 export const releasesResource = router
+
+router.all('/hooks/marketplace', async (req, res) => {
+  const { body } = req
+  log(body)
+  res.json({ ok: 1 })
+})
 
 router.get('/repos', async (req, res) => {
   const repoNames = await getRepoNames()
