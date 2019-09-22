@@ -179,12 +179,15 @@ class ReleasesUpdater {
     // log(`${repo.id} ${existingTagNames.size} existing releases`, [...existingTagNames])
 
     do {
-      const url = `${releasesUrl}?after=${after}`
+      const url = `${releasesUrl}?after=${encodeURIComponent(after)}`
       // log(`>> ${url}`)
       const started = Date.now()
 
       const { body, statusCode, statusMessage } = await got(url, {
         throwHttpErrors: false,
+      }).catch(err => {
+        void slackReleases.error(err)
+        throw err
       })
 
       if (!body || !statusCode || statusCode >= 400) {

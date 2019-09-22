@@ -48,6 +48,6 @@ export const defaultDaoCfg = {
   db: mongoDB,
   throwOnDaoCreateObject: true,
   throwOnEntityValidationError: true,
-  logStarted: true,
+  // logStarted: true,
   logLevel: CommonDaoLogLevel.OPERATIONS,
 }
