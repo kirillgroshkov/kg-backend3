@@ -1,7 +1,0 @@
-{
-  "gaeProject": "kg-backend3",
-  "gaeService": "default",
-  "prodBranch": "master",
-  "appEnvDefault": "prod",
-  "appYamlPassEnv": "SECRET_ENCRYPTION_KEY"
-}
