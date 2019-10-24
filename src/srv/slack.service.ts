@@ -1,5 +1,4 @@
-import { SlackSharedService } from '@naturalcycles/backend-lib'
-import { DebugLogLevel, secret } from '@naturalcycles/nodejs-lib'
+import { DebugLogLevel, secret, SlackSharedService } from '@naturalcycles/nodejs-lib'
 import { env } from '@src/srv/env.service'
 
 const defaults = {

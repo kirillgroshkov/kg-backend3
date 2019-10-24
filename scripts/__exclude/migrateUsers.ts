@@ -1,6 +1,6 @@
 /*
 
-APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/migrateUsers.ts
+APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn ./scripts/migrateUsers.ts
 
  */
 

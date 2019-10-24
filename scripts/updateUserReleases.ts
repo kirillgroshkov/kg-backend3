@@ -1,6 +1,6 @@
 /*
 
-DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateUserReleases.ts
+DEBUG=app*,kg:*,nc:* yarn tsn ./scripts/updateUserReleases.ts
 
  */
 

@@ -1,6 +1,6 @@
 /*
 
-APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/fetchRepoAtom.ts
+APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn ./scripts/fetchRepoAtom.ts
 
  */
 

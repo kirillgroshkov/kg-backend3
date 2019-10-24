@@ -1,6 +1,6 @@
 /*
 
-APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn-script ./scripts/updateRepoReleases.ts
+APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn ./scripts/updateRepoReleases.ts
 
  */
 
