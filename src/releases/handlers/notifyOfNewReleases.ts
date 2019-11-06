@@ -1,4 +1,4 @@
-import { _truncate, _uniq, pMap } from '@naturalcycles/js-lib'
+import { _truncate, _uniq, ErrorMode, pMap } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { DEF_FROM } from '@src/cnst/email.cnst'
 import { viewsDir } from '@src/cnst/paths.cnst'
@@ -67,7 +67,7 @@ export async function notifyOfNewReleasesDaily(daily = true): Promise<void> {
 
       emailsSent++
     },
-    { concurrency: 1, stopOnError: false },
+    { concurrency: 1, errorMode: ErrorMode.THROW_AGGREGATED },
   ).catch(err => sentryService.captureException(err))
 
   void slackService.send(`notifyOfNewReleasesDaily sent ${emailsSent} email(s)`)
