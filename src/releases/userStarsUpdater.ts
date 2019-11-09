@@ -88,14 +88,16 @@ class UserStarsUpdater {
 
     const existingRepoIds = new Set(await releasesRepoDao.getAllIds())
 
-    const updatedUserIds = (await pMap(
-      users,
-      async user => {
-        const updated = await this.updateUser(user, existingRepoIds)
-        return updated ? user.id : undefined
-      },
-      { concurrency: 1 },
-    )).filter(Boolean) as string[]
+    const updatedUserIds = (
+      await pMap(
+        users,
+        async user => {
+          const updated = await this.updateUser(user, existingRepoIds)
+          return updated ? user.id : undefined
+        },
+        { concurrency: 1 },
+      )
+    ).filter(Boolean) as string[]
 
     return updatedUserIds
   }

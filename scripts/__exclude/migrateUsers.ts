@@ -9,7 +9,11 @@ import '@src/bootstrap'
 import { BaseDBEntity, DBQuery, Saved, SavedDBEntity } from '@naturalcycles/db-lib'
 import { runScript, validate } from '@naturalcycles/nodejs-lib'
 import { dayjs } from '@naturalcycles/time-lib'
-import { ReleasesUser, releasesUserSchema, UserSettings } from '@src/releases/model/releasesUser.model'
+import {
+  ReleasesUser,
+  releasesUserSchema,
+  UserSettings,
+} from '@src/releases/model/releasesUser.model'
 import { firestoreDB, mongoDB } from '@src/srv/db'
 
 interface LegacyUser extends SavedDBEntity {
@@ -24,7 +28,7 @@ runScript(async () => {
   const now = dayjs()
 
   const q = new DBQuery<LegacyUser>('users')
-  const {records: users} = await firestoreDB.runQuery(q)
+  const { records: users } = await firestoreDB.runQuery(q)
   console.log(users)
 
   const newUsers: Saved<ReleasesUser>[] = users.map(u => {
@@ -46,7 +50,3 @@ runScript(async () => {
 
   await mongoDB.saveBatch('ReleasesUser', newUsers)
 })
-
-
-
-

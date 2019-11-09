@@ -27,7 +27,6 @@
     "got": "^9.6.0",
     "node-schedule": "^1.3.2",
     "semver": "^6.3.0",
-    "swagger-stats": "^0.95.7",
     "tsconfig-paths": "^3.8.0",
     "xml2js": "^0.4.19"
   },
