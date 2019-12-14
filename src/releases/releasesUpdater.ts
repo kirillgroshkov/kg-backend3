@@ -9,8 +9,8 @@ import { ReleasesRepo, releasesRepoDao } from '@src/releases/model/releasesRepo.
 import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { mongoDB } from '@src/srv/db'
 import { slackReleases, slackService } from '@src/srv/slack.service'
-import c from 'chalk'
-import * as got from 'got'
+import * as c from 'chalk'
+import got from 'got'
 
 export interface ReleasesUpdaterOpts {
   forceUpdateAll?: boolean

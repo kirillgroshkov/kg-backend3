@@ -10,7 +10,7 @@ import { _omit } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib'
 import { atomService } from '@src/releases/atom.service'
 import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
-import * as got from 'got'
+import got from 'got'
 
 runScript(async () => {
   const repoFullName = 'deanoemcke/thegreatsuspender'

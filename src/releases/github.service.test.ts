@@ -1,6 +1,6 @@
 import { pMap } from '@naturalcycles/js-lib'
 import { atomService } from '@src/releases/atom.service'
-import * as got from 'got'
+import got from 'got'
 
 test('test1', async () => {
   // const repos: any[] = await githubService.getUserStarredRepos()

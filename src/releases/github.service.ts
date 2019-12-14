@@ -5,9 +5,8 @@ import { since } from '@naturalcycles/time-lib'
 import { Etag, etagDao } from '@src/releases/model/etag.model'
 import { ReleasesRepo } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser } from '@src/releases/model/releasesUser.model'
-import c from 'chalk'
-import { GotJSONOptions } from 'got'
-import * as got from 'got'
+import * as c from 'chalk'
+import got, { GotOptions } from 'got'
 
 const API = 'https://api.github.com'
 
@@ -85,8 +84,8 @@ class GithubService {
       ifNoneMatch = urlEtag!.etag
     }
 
-    const opt: GotJSONOptions = {
-      json: true,
+    const opt: GotOptions = {
+      responseType: 'json',
       headers: filterFalsyValues({
         ...this.headers(u.accessToken!),
         Accept: 'application/vnd.github.v3.star+json', // will include "star creation timestamps" starred_at
@@ -98,7 +97,7 @@ class GithubService {
     const started = Date.now()
     log(`>> GET ${c.dim(url)} ${ifNoneMatch || ''}`)
 
-    const resp = await got.get(url, opt)
+    const resp = await got.get(url, opt as any)
     const etagReturned = resp.headers.etag as string | undefined
 
     log(

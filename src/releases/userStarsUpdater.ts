@@ -5,7 +5,7 @@ import { githubService } from '@src/releases/github.service'
 import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { slackService } from '@src/srv/slack.service'
-import c from 'chalk'
+import * as c from 'chalk'
 
 const log = Debug('app:stars')
 

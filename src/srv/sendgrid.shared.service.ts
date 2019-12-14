@@ -1,4 +1,4 @@
-import * as got from 'got'
+import got from 'got'
 
 export interface EmailMsg {
   to: EmailAddress
@@ -64,11 +64,10 @@ export class SendgridSharedService {
     // console.log(JSON.stringify(body, null, 2))
 
     await got.post(`https://api.sendgrid.com/v3/mail/send`, {
-      json: true,
       headers: {
         authorization: `Bearer ${this.cfg.apiKey}`,
       },
-      body,
+      json: body,
     })
   }
 }
