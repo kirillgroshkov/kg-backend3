@@ -11,7 +11,7 @@ class SLApiService {
     cacheFactory: () => new LRUMemoCache({ maxAge: 15000 }),
   })
   async getDepartures(siteId: string, timeWindow = 30): Promise<any> {
-    const { body } = await got(url, {
+    const body = await got(url, {
       responseType: 'json',
       searchParams: {
         key,
@@ -22,7 +22,7 @@ class SLApiService {
         Tram: false,
         Ship: false,
       },
-    })
+    }).json<any>()
 
     return {
       fetchedAt: dayjs().toPretty(),
