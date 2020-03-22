@@ -1,4 +1,4 @@
-import { _truncate, _uniq, ErrorMode, pMap } from '@naturalcycles/js-lib'
+import { ErrorMode, pMap, _truncate, _uniq } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { DEF_FROM } from '@src/cnst/email.cnst'
 import { viewsDir } from '@src/cnst/paths.cnst'
@@ -12,9 +12,7 @@ import * as ejs from 'ejs'
 import * as fs from 'fs-extra'
 
 export async function notifyOfNewReleasesDaily(daily = true): Promise<void> {
-  const maxExcl = dayjs()
-    .utc()
-    .startOf('day')
+  const maxExcl = dayjs().utc().startOf('day')
   const minIncl = maxExcl.subtract(1, 'day')
   void slackService.send(`notifyOfNewReleasesDaily: ${minIncl.toPretty()} - ${maxExcl.toPretty()}`)
 

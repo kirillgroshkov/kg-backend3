@@ -8,9 +8,5 @@ export async function getGlobalReleases(query: ReleasesQuery = {}): Promise<Rele
     maxReleasesTotal = 100,
   } = query
 
-  return await releaseDao
-    .query()
-    .order('published', true)
-    .limit(maxReleasesTotal)
-    .runQuery()
+  return await releaseDao.query().order('published', true).limit(maxReleasesTotal).runQuery()
 }

@@ -52,11 +52,7 @@ class ReleasesService {
   }*/
 
   async getLastReleases(): Promise<Release[]> {
-    return await releaseDao
-      .query()
-      .order('published', true)
-      .limit(200)
-      .runQuery()
+    return await releaseDao.query().order('published', true).limit(200).runQuery()
   }
 }
 

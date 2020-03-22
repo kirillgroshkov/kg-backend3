@@ -58,9 +58,7 @@ export const releasesUserSchema = objectSchema<ReleasesUser>({
   username: stringSchema,
   displayName: stringSchema.optional(),
   accessToken: stringSchema.optional(),
-  starredRepos: arraySchema(stringSchema.lowercase())
-    .default([])
-    .optional(),
+  starredRepos: arraySchema(stringSchema.lowercase()).default([]).optional(),
   settings: userSettingsSchema,
 }).concat(baseDBEntitySchema)
 

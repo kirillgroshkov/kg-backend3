@@ -6,12 +6,7 @@ import { ReleasesUser } from '@src/releases/model/releasesUser.model'
 export interface GetFeedOpt extends DateRange {}
 
 export async function getFeed(user: ReleasesUser, opt: GetFeedOpt = {}): Promise<BackendResponse> {
-  const {
-    minIncl = dayjs()
-      .subtract(3, 'day')
-      .toISODate(),
-    maxExcl = '2999-01-01',
-  } = opt
+  const { minIncl = dayjs().subtract(3, 'day').toISODate(), maxExcl = '2999-01-01' } = opt
 
   const publishedMinIncl = dayjs(minIncl).unix()
   const publishedMaxExcl = dayjs(maxExcl).unix()

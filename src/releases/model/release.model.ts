@@ -48,7 +48,7 @@ export const releaseSchema = objectSchema<Release>({
   avatarUrl: urlSchema().optional(),
   v: stringSchema.lowercase(),
   tagName: stringSchema.lowercase(),
-  type: stringSchema.valid(RELEASE_TYPE_VALUES),
+  type: stringSchema.valid(...RELEASE_TYPE_VALUES),
 }).concat(baseDBEntitySchema)
 
 class ReleaseDao extends CommonDao<Release> {
