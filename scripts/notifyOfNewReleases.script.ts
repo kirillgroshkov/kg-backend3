@@ -1,6 +1,6 @@
 /*
 
-APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn ./scripts/notifyOfNewReleases.script.ts
+APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn notifyOfNewReleases.script.ts
 
  */
 

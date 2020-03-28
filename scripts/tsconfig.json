@@ -9,5 +9,5 @@
       "@src/*": ["../src/*"]
     }
   },
-  "exclude": ["**/__exclude", "**/@linked"]
+  "exclude": ["**/__exclude"]
 }

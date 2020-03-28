@@ -13,7 +13,6 @@ import {
   authInputSchema,
   BackendResponse,
   dateRangeSchema,
-  ReleasesQuery,
   releasesQuerySchema,
   RepoAuthorName,
   repoAuthorNameSchema,
@@ -33,21 +32,16 @@ router.all('/hooks/marketplace', async (req, res) => {
 })
 
 router.get('/repos', async (req, res) => {
-  const repoNames = await getRepoNames()
-  res.json(repoNames)
+  res.json(await getRepoNames())
 })
 
 router.get('/repos/orgs', async (req, res) => {
-  const repoOrgs = await getRepoOrgs()
-  res.json(repoOrgs)
+  res.json(await getRepoOrgs())
 })
 
 router.get('/global', reqValidation('query', releasesQuerySchema), async (req, res) => {
-  const query: ReleasesQuery = req.query
-  const releases = await getGlobalReleases(query)
-
   res.json({
-    releases,
+    releases: await getGlobalReleases(req.query),
     // query,
   } as BackendResponse)
 })
@@ -65,10 +59,9 @@ router.get(
   reqValidation('query', releasesQuerySchema),
   reqValidation('params', repoAuthorNameSchema),
   async (req, res) => {
-    const query: ReleasesQuery = req.query
     const { repoAuthor, repoName } = (req.params as any) as RepoAuthorName
     const repoFullName = [repoAuthor, repoName].join('/')
-    const releases = await getRepoReleases(repoFullName, query)
+    const releases = await getRepoReleases(repoFullName, req.query)
 
     res.json({
       releases,

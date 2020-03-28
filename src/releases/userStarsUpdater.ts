@@ -1,11 +1,10 @@
 import { pMap } from '@naturalcycles/js-lib'
-import { Debug } from '@naturalcycles/nodejs-lib'
+import { Debug, dimGrey, white } from '@naturalcycles/nodejs-lib'
 import { Dayjs, dayjs, since } from '@naturalcycles/time-lib'
 import { githubService } from '@src/releases/github.service'
 import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { slackService } from '@src/srv/slack.service'
-import * as c from 'chalk'
 
 const log = Debug('app:stars')
 
@@ -71,9 +70,9 @@ class UserStarsUpdater {
       .runQuery()
 
     log(
-      `${c.white(String(users.length))} user(s) with accessToken and .updated < ${c.dim(
+      `${white(String(users.length))} user(s) with accessToken and .updated < ${dimGrey(
         updatedThreshold.toPretty(),
-      )} (${c.dim(users.map(u => [u.id, u.displayName].join('_')).join(', '))})`,
+      )} (${dimGrey(users.map(u => [u.id, u.displayName].join('_')).join(', '))})`,
     )
 
     void slackService.send(

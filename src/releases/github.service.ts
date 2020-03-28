@@ -1,26 +1,24 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
-import { filterFalsyValues, StringMap } from '@naturalcycles/js-lib'
-import { Debug } from '@naturalcycles/nodejs-lib'
+import { filterFalsyValues } from '@naturalcycles/js-lib'
+import { Debug, dimGrey, getGot } from '@naturalcycles/nodejs-lib'
 import { since } from '@naturalcycles/time-lib'
 import { Etag, etagDao } from '@src/releases/model/etag.model'
 import { ReleasesRepo } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser } from '@src/releases/model/releasesUser.model'
-import * as c from 'chalk'
-import got, { GotOptions } from 'got'
 
 const API = 'https://api.github.com'
 
 const log = Debug('app:gh')
 
-class GithubService {
-  headers(token: string): StringMap {
-    return {
-      Accept: 'application/vnd.github.v3+json',
-      'User-Agent': 'kirillgroshkov',
-      Authorization: `token ${token}`,
-    }
-  }
+const githubGot = getGot().extend({
+  headers: {
+    Accept: 'application/vnd.github.v3+json',
+    'User-Agent': 'kirillgroshkov',
+    // Authorization: `token ${token}`, // will be set
+  },
+})
 
+class GithubService {
   /**
    * Undefined means "not changed".
    */
@@ -84,26 +82,24 @@ class GithubService {
       ifNoneMatch = urlEtag!.etag
     }
 
-    const opt: GotOptions = {
+    const started = Date.now()
+    log(`>> GET ${dimGrey(url)} ${ifNoneMatch || ''}`)
+
+    const resp = await githubGot(url, {
       responseType: 'json',
       headers: filterFalsyValues({
-        ...this.headers(u.accessToken!),
+        Authorization: `token ${u.accessToken}`,
         Accept: 'application/vnd.github.v3.star+json', // will include "star creation timestamps" starred_at
         'If-None-Match': ifNoneMatch,
       }),
-      timeout: 10000,
-    }
-
-    const started = Date.now()
-    log(`>> GET ${c.dim(url)} ${ifNoneMatch || ''}`)
-
-    const resp = await got.get(url, opt as any)
+      timeout: 10_000,
+    })
     const etagReturned = resp.headers.etag as string | undefined
 
     log(
-      `<< ${coloredHttpCode(resp.statusCode)} GET ${c.dim(url)} ${etagReturned || ''} in ${c.dim(
-        since(started),
-      )}`,
+      `<< ${coloredHttpCode(resp.statusCode)} GET ${dimGrey(url)} ${
+        etagReturned || ''
+      } in ${dimGrey(since(started))}`,
     )
 
     if (resp.statusCode === 304) {

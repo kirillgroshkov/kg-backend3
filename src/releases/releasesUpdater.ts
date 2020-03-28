@@ -1,7 +1,7 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
 import { Saved } from '@naturalcycles/db-lib'
 import { pMap, _flatten, _uniq } from '@naturalcycles/js-lib'
-import { Debug } from '@naturalcycles/nodejs-lib'
+import { Debug, dimGrey } from '@naturalcycles/nodejs-lib'
 import { Dayjs, dayjs, since } from '@naturalcycles/time-lib'
 import { atomService } from '@src/releases/atom.service'
 import { Release, releaseDao } from '@src/releases/model/release.model'
@@ -9,7 +9,6 @@ import { ReleasesRepo, releasesRepoDao } from '@src/releases/model/releasesRepo.
 import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { mongoDB } from '@src/srv/db'
 import { slackReleases, slackService } from '@src/srv/slack.service'
-import * as c from 'chalk'
 import got from 'got'
 
 export interface ReleasesUpdaterOpts {
@@ -195,7 +194,7 @@ class ReleasesUpdater {
         if (throwOnError) throw new Error(errMsg)
         if ([451, 404].includes(statusCode)) {
           // Unavailable for legal reasons, e.g: "gloomyson/StarCraft"
-          log(`<< GET ${coloredHttpCode(statusCode)} ${c.dim(url)} skipping`)
+          log(`<< GET ${coloredHttpCode(statusCode)} ${dimGrey(url)} skipping`)
         } else {
           void slackReleases.error(errMsg)
         }

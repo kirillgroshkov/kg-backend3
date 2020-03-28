@@ -21,6 +21,5 @@ workflows:
       - tools/deploy-gae-job:
           filters:
             branches:
-              only:
-                - master
+              only: [master]
       - tools/test-job

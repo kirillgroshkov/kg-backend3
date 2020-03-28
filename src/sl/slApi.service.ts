@@ -1,17 +1,18 @@
 import { memo } from '@naturalcycles/js-lib'
-import { LRUMemoCache, secret } from '@naturalcycles/nodejs-lib'
+import { getGot, LRUMemoCache, secret } from '@naturalcycles/nodejs-lib'
 import { dayjs } from '@naturalcycles/time-lib'
-import got from 'got'
 
 const key = secret('SECRET_SL_REALTIME_API_KEY')
 const url = `https://api.sl.se/api2/realtimedeparturesV4.json`
 
+const slGot = getGot()
+
 class SLApiService {
   @memo({
-    cacheFactory: () => new LRUMemoCache({ maxAge: 15000 }),
+    cacheFactory: () => new LRUMemoCache({ maxAge: 15_000 }),
   })
   async getDepartures(siteId: string, timeWindow = 30): Promise<any> {
-    const body = await got(url, {
+    const body = await slGot(url, {
       responseType: 'json',
       searchParams: {
         key,

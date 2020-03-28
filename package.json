@@ -9,8 +9,6 @@
     "start": "node ./dist/startServer.js"
   },
   "dependencies": {
-    "@google-cloud/debug-agent": "^4.0.3",
-    "@google-cloud/profiler": "^3.0.0",
     "@google-cloud/trace-agent": "^4.1.1",
     "@naturalcycles/backend-lib": "^2.4.0",
     "@naturalcycles/db-lib": "^3.4.0",
@@ -20,7 +18,6 @@
     "@naturalcycles/time-lib": "^1.4.3",
     "@sentry/integrations": "^5.6.1",
     "@sentry/node": "^5.6.1",
-    "chalk": "^3.0.0",
     "dotenv": "^8.0.0",
     "ejs": "^3.0.1",
     "firebase-admin": "^8.3.0",

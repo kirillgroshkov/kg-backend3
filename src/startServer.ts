@@ -10,7 +10,7 @@ const bootstrapStartedAt = Date.now()
 if (process.env.GAE_INSTANCE) {
   // Agents are only enabled in GAE environment
   require('@google-cloud/trace-agent').start()
-  require('@google-cloud/debug-agent').start()
+  // require('@google-cloud/debug-agent').start()
   // void require('@google-cloud/profiler').start()
 }
 
