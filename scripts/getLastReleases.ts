@@ -6,7 +6,7 @@ DEBUG=app*,kg:*,nc:* yarn tsn getLastReleases.ts
 
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
-import { runScript } from '@naturalcycles/nodejs-lib'
+import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { dayjs } from '@naturalcycles/time-lib'
 import { releasesService } from '@src/releases/releases.service'
 

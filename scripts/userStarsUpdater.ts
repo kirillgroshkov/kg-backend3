@@ -7,7 +7,7 @@ APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn userStarsUpdater.ts
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
 import { pDelay } from '@naturalcycles/js-lib'
-import { runScript } from '@naturalcycles/nodejs-lib'
+import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 runScript(async () => {

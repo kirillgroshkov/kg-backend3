@@ -1,5 +1,6 @@
 import { pMap } from '@naturalcycles/js-lib'
-import { Debug, dimGrey, white } from '@naturalcycles/nodejs-lib'
+import { Debug } from '@naturalcycles/nodejs-lib'
+import { dimGrey, yellow } from '@naturalcycles/nodejs-lib/dist/colors'
 import { Dayjs, dayjs, since } from '@naturalcycles/time-lib'
 import { githubService } from '@src/releases/github.service'
 import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
@@ -70,7 +71,7 @@ class UserStarsUpdater {
       .runQuery()
 
     log(
-      `${white(String(users.length))} user(s) with accessToken and .updated < ${dimGrey(
+      `${yellow(users.length)} user(s) with accessToken and .updated < ${dimGrey(
         updatedThreshold.toPretty(),
       )} (${dimGrey(users.map(u => [u.id, u.displayName].join('_')).join(', '))})`,
     )

@@ -6,7 +6,7 @@ DEBUG=app*,kg:*,nc:* yarn tsn updateUserReleases.ts
 
 /* tslint:disable:ordered-imports */
 import '@src/bootstrap'
-import { runScript } from '@naturalcycles/nodejs-lib'
+import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 
 runScript(async () => {

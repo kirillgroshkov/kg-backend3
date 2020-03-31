@@ -1,6 +1,7 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
 import { filterFalsyValues } from '@naturalcycles/js-lib'
-import { Debug, dimGrey, getGot } from '@naturalcycles/nodejs-lib'
+import { Debug, getGot } from '@naturalcycles/nodejs-lib'
+import { dimGrey } from '@naturalcycles/nodejs-lib/dist/colors'
 import { since } from '@naturalcycles/time-lib'
 import { Etag, etagDao } from '@src/releases/model/etag.model'
 import { ReleasesRepo } from '@src/releases/model/releasesRepo.model'
