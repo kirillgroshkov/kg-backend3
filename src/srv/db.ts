@@ -1,4 +1,5 @@
-import { CacheDB, CommonDaoLogLevel, InMemoryDB } from '@naturalcycles/db-lib'
+import { CommonDaoLogLevel, InMemoryDB } from '@naturalcycles/db-lib'
+import { CacheDB } from '@naturalcycles/db-lib/dist/adapter/cachedb'
 import { MongoDB } from '@naturalcycles/mongo-lib'
 import { secret } from '@naturalcycles/nodejs-lib'
 
