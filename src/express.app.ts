@@ -1,4 +1,5 @@
 import { createDefaultApp } from '@naturalcycles/backend-lib'
+import { metrikiResource } from '@src/metriki/metriki.resource'
 import { releasesResource } from '@src/releases/releases.resource'
 import { rootResource } from '@src/server/root.resource'
 import { slResource } from '@src/sl/sl.resource'
@@ -18,6 +19,10 @@ export const expressApp = createDefaultApp(
       {
         path: '/sl',
         handler: slResource,
+      },
+      {
+        path: '/metriki',
+        handler: metrikiResource,
       },
     ],
   },
