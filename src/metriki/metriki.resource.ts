@@ -88,7 +88,7 @@ router.get('/:accountId/metrics', async (req, res) => {
   const metrics = await metrikiMetricDao
     .query()
     .filterEq('accountId', accountId)
-    .select(['updated', 'name'])
+    .select(['code', 'updated', 'name'])
     .runQuery()
 
   res.json({
