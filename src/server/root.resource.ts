@@ -4,6 +4,7 @@ import {
   okHandler,
   statusHandlerData,
 } from '@naturalcycles/backend-lib'
+import { StringMap } from '@naturalcycles/js-lib'
 import { adminService, reqAdmin } from '@src/admin/admin.service'
 import { releasesUpdater } from '@src/releases/releasesUpdater'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
@@ -59,7 +60,7 @@ router.get('/_ah/warmup', async (req, res) => {
 })
 
 router.get('/slack', async (req, res) => {
-  const { msg = 'test msg' } = req.query
+  const { msg = 'test msg' } = req.query as StringMap
   await slackService.send(msg, req)
   res.json({ ok: 1 })
 })
