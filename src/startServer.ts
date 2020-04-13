@@ -25,9 +25,8 @@ import './bootstrap'
 // 3. Further imports and bootstrap
 //
 import { isGAE, startServer } from '@naturalcycles/backend-lib'
-import { filterUndefinedValues, pHang } from '@naturalcycles/js-lib'
+import { filterUndefinedValues, pHang, ms } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
-import { ms } from '@naturalcycles/time-lib'
 import { expressApp } from '@src/express.app'
 import { notifyOfNewReleasesDaily } from '@src/releases/handlers/notifyOfNewReleases'
 import { releasesUpdater, releasesUpdaterSchedule } from '@src/releases/releasesUpdater'
