@@ -1,5 +1,5 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
-import { filterFalsyValues, since } from '@naturalcycles/js-lib'
+import { _filterFalsyValues, _since } from '@naturalcycles/js-lib'
 import { Debug, getGot } from '@naturalcycles/nodejs-lib'
 import { dimGrey } from '@naturalcycles/nodejs-lib/dist/colors'
 import { Etag, etagDao } from '@src/releases/model/etag.model'
@@ -87,7 +87,7 @@ class GithubService {
 
     const resp = await githubGot(url, {
       responseType: 'json',
-      headers: filterFalsyValues({
+      headers: _filterFalsyValues({
         Authorization: `token ${u.accessToken}`,
         Accept: 'application/vnd.github.v3.star+json', // will include "star creation timestamps" starred_at
         'If-None-Match': ifNoneMatch,
@@ -99,7 +99,7 @@ class GithubService {
     log(
       `<< ${coloredHttpCode(resp.statusCode)} GET ${dimGrey(url)} ${
         etagReturned || ''
-      } in ${dimGrey(since(started))}`,
+      } in ${dimGrey(_since(started))}`,
     )
 
     if (resp.statusCode === 304) {

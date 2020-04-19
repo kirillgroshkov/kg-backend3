@@ -25,7 +25,7 @@ import './bootstrap'
 // 3. Further imports and bootstrap
 //
 import { isGAE, startServer } from '@naturalcycles/backend-lib'
-import { filterUndefinedValues, pHang, ms } from '@naturalcycles/js-lib'
+import { _filterUndefinedValues, pHang, _ms } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { expressApp } from '@src/express.app'
 import { notifyOfNewReleasesDaily } from '@src/releases/handlers/notifyOfNewReleases'
@@ -37,7 +37,7 @@ import * as nodeSchedule from 'node-schedule'
 
 runScript(async () => {
   const { APP_ENV } = process.env
-  const kv = filterUndefinedValues({
+  const kv = _filterUndefinedValues({
     // APP_ENV,
     // GOOGLE_CLOUD_PROJECT, GAE_SERVICE, GAE_VERSION, GAE_INSTANCE,
   })
@@ -66,7 +66,7 @@ runScript(async () => {
 
   if (isGAE()) {
     void slackService.sendMsg({
-      text: `kg-backend3 *${APP_ENV}* server started in ${ms(bootstrapMillis)}`,
+      text: `kg-backend3 *${APP_ENV}* server started in ${_ms(bootstrapMillis)}`,
       kv,
     })
 

@@ -1,5 +1,5 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
-import { filterUndefinedValues, StringMap } from '@naturalcycles/js-lib'
+import { StringMap, _filterUndefinedValues } from '@naturalcycles/js-lib'
 import {
   anyObjectSchema,
   numberSchema,
@@ -59,7 +59,7 @@ router.put(
     const metricId = [accountId, metricCode].join('_')
 
     await metrikiRecordDao.save(
-      filterUndefinedValues({
+      _filterUndefinedValues({
         metricId,
         ts,
         v: metricValue,

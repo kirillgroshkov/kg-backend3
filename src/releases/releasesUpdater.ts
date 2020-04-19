@@ -1,6 +1,6 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
 import { Saved } from '@naturalcycles/db-lib'
-import { pMap, since, _flatten, _uniq } from '@naturalcycles/js-lib'
+import { pMap, _flatten, _since, _uniq } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { dimGrey } from '@naturalcycles/nodejs-lib/dist/colors'
 import { Dayjs, dayjs } from '@naturalcycles/time-lib'
@@ -80,7 +80,7 @@ class ReleasesUpdater {
     void slackService.send(
       `releasesUpdater ${newReleases.length} new releases from ${
         fromRepos.length
-      } repos (${newReleases.map(r => r.id).join(', ')}) in ${since(this.lastStarted.valueOf())}`,
+      } repos (${newReleases.map(r => r.id).join(', ')}) in ${_since(this.lastStarted.valueOf())}`,
     )
 
     this.lastFinished = dayjs()
@@ -209,7 +209,7 @@ class ReleasesUpdater {
         void slackReleases.error(err)
         return [] // 0 releases
       })
-      log(`<< ${url} in ${since(started)}: ${fetchedReleases.length} release(s)`)
+      log(`<< ${url} in ${_since(started)}: ${fetchedReleases.length} release(s)`)
 
       if (!fetchedReleases.length) break
 

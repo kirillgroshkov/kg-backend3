@@ -1,4 +1,4 @@
-import { pMap, since } from '@naturalcycles/js-lib'
+import { pMap, _since } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { dimGrey, yellow } from '@naturalcycles/nodejs-lib/dist/colors'
 import { Dayjs, dayjs } from '@naturalcycles/time-lib'
@@ -51,7 +51,7 @@ class UserStarsUpdater {
     void slackService.send(
       `userStarsUpdater ${updatedUserIds.length} users have stars updated (${updatedUserIds.join(
         ', ',
-      )}) in ${since(this.lastStarted.valueOf())}`,
+      )}) in ${_since(this.lastStarted.valueOf())}`,
     )
 
     this.lastFinished = dayjs()
