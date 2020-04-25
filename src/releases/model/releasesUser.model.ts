@@ -63,7 +63,7 @@ export const releasesUserSchema = objectSchema<ReleasesUser>({
 }).concat(baseDBEntitySchema)
 
 class ReleasesUserDao extends CommonDao<ReleasesUser, Saved<ReleasesUser>, ReleasesUserTM> {
-  async beforeBMToTM(bm: ReleasesUser): Promise<ReleasesUserTM> {
+  beforeBMToTM(bm: ReleasesUser): ReleasesUserTM {
     return {
       ...bm,
       starredReposCount: bm.starredRepos.length,
