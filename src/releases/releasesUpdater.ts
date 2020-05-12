@@ -3,7 +3,7 @@ import { Saved } from '@naturalcycles/db-lib'
 import { pMap, _flatten, _since, _uniq } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { dimGrey } from '@naturalcycles/nodejs-lib/dist/colors'
-import { Dayjs, dayjs } from '@naturalcycles/time-lib'
+import { dayjs, IDayjs } from '@naturalcycles/time-lib'
 import { atomService } from '@src/releases/atom.service'
 import { Release, releaseDao } from '@src/releases/model/release.model'
 import { ReleasesRepo, releasesRepoDao } from '@src/releases/model/releasesRepo.model'
@@ -48,8 +48,8 @@ const updateAfterMinutes = 30
 const timeoutToRestartMinutes = 120
 
 class ReleasesUpdater {
-  lastStarted?: Dayjs
-  lastFinished?: Dayjs
+  lastStarted?: IDayjs
+  lastFinished?: IDayjs
 
   async start(opts: ReleasesUpdaterOpts = {}): Promise<void> {
     if (this.lastStarted) {
@@ -80,7 +80,9 @@ class ReleasesUpdater {
     void slackService.send(
       `releasesUpdater ${newReleases.length} new releases from ${
         fromRepos.length
-      } repos (${newReleases.map(r => r.id).join(', ')}) in ${_since(this.lastStarted.valueOf())}`,
+      } repos (${newReleases.map(r => r.id).join(', ')}) in ${_since(
+        this.lastStarted.unixMillis(),
+      )}`,
     )
 
     this.lastFinished = dayjs()

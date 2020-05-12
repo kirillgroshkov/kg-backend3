@@ -1,7 +1,7 @@
 import { pMap, _since } from '@naturalcycles/js-lib'
 import { Debug } from '@naturalcycles/nodejs-lib'
 import { dimGrey, yellow } from '@naturalcycles/nodejs-lib/dist/colors'
-import { Dayjs, dayjs } from '@naturalcycles/time-lib'
+import { dayjs, IDayjs } from '@naturalcycles/time-lib'
 import { githubService } from '@src/releases/github.service'
 import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
@@ -20,8 +20,8 @@ const updateAfterMinutes = 30
 const timeoutToRestartMinutes = 60
 
 class UserStarsUpdater {
-  lastStarted?: Dayjs
-  lastFinished?: Dayjs
+  lastStarted?: IDayjs
+  lastFinished?: IDayjs
 
   async start(forceUpdateAll = false): Promise<void> {
     if (this.lastStarted) {
@@ -51,7 +51,7 @@ class UserStarsUpdater {
     void slackService.send(
       `userStarsUpdater ${updatedUserIds.length} users have stars updated (${updatedUserIds.join(
         ', ',
-      )}) in ${_since(this.lastStarted.valueOf())}`,
+      )}) in ${_since(this.lastStarted.unixMillis())}`,
     )
 
     this.lastFinished = dayjs()
