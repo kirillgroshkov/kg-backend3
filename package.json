@@ -23,7 +23,7 @@
     "@sentry/node": "^5.6.1",
     "dotenv": "^8.0.0",
     "ejs": "^3.0.1",
-    "firebase-admin": "^8.3.0",
+    "firebase-admin": "^9.0.0",
     "got": "^11.0.1",
     "node-schedule": "^1.3.2",
     "semver": "^7.1.1",
