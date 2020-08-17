@@ -39,8 +39,8 @@ class UserStarsUpdater {
 
     this.lastStarted = dayjs()
 
-    void slackService.sendMsg({
-      text: 'userStarsUpdater.start',
+    void slackService.send({
+      items: 'userStarsUpdater.start',
       kv: {
         lastFinished: this.lastFinished ? this.lastFinished.toPretty() : 'never',
       },

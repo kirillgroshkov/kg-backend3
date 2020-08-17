@@ -67,8 +67,8 @@ class ReleasesUpdater {
 
     this.lastStarted = dayjs()
 
-    void slackService.sendMsg({
-      text: 'releasesUpdater.start',
+    void slackService.send({
+      items: 'releasesUpdater.start',
       kv: {
         lastFinished: this.lastFinished ? this.lastFinished.toPretty() : 'never',
       },
@@ -129,8 +129,7 @@ class ReleasesUpdater {
         async repo => {
           return this.checkRepo(repo).catch(err => {
             if (throwOnError) throw err
-            void slackReleases.error(`checkRepo ${repo.id}`)
-            void slackReleases.error(err)
+            void slackReleases.log(`checkRepo ${repo.id}`, err)
             return []
           })
         },
@@ -188,7 +187,7 @@ class ReleasesUpdater {
       const { body, statusCode, statusMessage } = await got(url, {
         throwHttpErrors: false,
       }).catch(err => {
-        void slackReleases.error(err)
+        void slackReleases.log(err)
         throw err
       })
 
@@ -199,7 +198,7 @@ class ReleasesUpdater {
           // Unavailable for legal reasons, e.g: "gloomyson/StarCraft"
           log(`<< GET ${coloredHttpCode(statusCode)} ${dimGrey(url)} skipping`)
         } else {
-          void slackReleases.error(errMsg)
+          void slackReleases.log(errMsg)
         }
         break
       }
@@ -207,8 +206,7 @@ class ReleasesUpdater {
       fetchedReleases = await atomService.parseAsReleases(body, repoFullName).catch(err => {
         if (throwOnError) throw err
         log.error(repoFullName, err)
-        void slackReleases.error(`atomService.parseAsReleases ${url}`)
-        void slackReleases.error(err)
+        void slackReleases.log(`atomService.parseAsReleases ${url}`, err)
         return [] // 0 releases
       })
       log(`<< ${url} in ${_since(started)}: ${fetchedReleases.length} release(s)`)

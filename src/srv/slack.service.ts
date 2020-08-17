@@ -1,4 +1,4 @@
-import { DebugLogLevel, secret, SlackSharedService } from '@naturalcycles/nodejs-lib'
+import { DebugLogLevel, secret, SlackService } from '@naturalcycles/nodejs-lib'
 import { env } from '@src/srv/env.service'
 
 const defaults = {
@@ -11,12 +11,12 @@ const defaults = {
 const { slackEnabled } = env()
 const webhookUrl = slackEnabled ? secret('SECRET_SLACK_HOOK_URL') : undefined
 
-export const slackService = new SlackSharedService({
+export const slackService = new SlackService({
   webhookUrl,
   defaults,
 })
 
-export const slackReleases = new SlackSharedService({
+export const slackReleases = new SlackService({
   webhookUrl,
   defaults: {
     ...defaults,

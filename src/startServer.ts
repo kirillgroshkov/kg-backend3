@@ -69,8 +69,8 @@ runScript(async () => {
   })
 
   if (isGAE()) {
-    void slackService.sendMsg({
-      text: `kg-backend3 *${APP_ENV}* server started in ${_ms(bootstrapMillis)}`,
+    void slackService.send({
+      items: `kg-backend3 *${APP_ENV}* server started in ${_ms(bootstrapMillis)}`,
       kv,
     })
 
