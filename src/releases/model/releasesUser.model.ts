@@ -16,7 +16,7 @@ export interface UserSettings {
 }
 
 export const userSettingsSchema = objectSchema<UserSettings>({
-  notificationEmail: emailSchema.optional(),
+  notificationEmail: emailSchema.allow(null).optional(),
   notifyEmailRealtime: booleanSchema.optional(),
   notifyEmailDaily: booleanSchema.optional(),
 })
