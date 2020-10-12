@@ -3,7 +3,6 @@ import {
   baseDBEntitySchema,
   CommonDao,
   CommonDaoLogLevel,
-  Saved,
 } from '@naturalcycles/db-lib'
 import { _split } from '@naturalcycles/js-lib'
 import { MongoDB } from '@naturalcycles/mongo-lib'
@@ -98,40 +97,25 @@ export const metrikiApiKeyDao = new CommonDao<MetrikiApiKey>({
   dbmSchema: metrikiApiKeySchema,
 })
 
-class MetrikiMetricDao extends CommonDao<MetrikiMetric> {
-  createId(m: Saved<MetrikiMetric>): string {
-    return [m.accountId, m.code].join('_')
-  }
+class MetrikiMetricDao extends CommonDao<MetrikiMetric> {}
 
-  parseNaturalId(id: string): Partial<MetrikiMetric> {
-    const [accountId, code] = _split(id, '_', 2)
-    return {
-      accountId,
-      code,
-    }
-  }
-}
-
-class MetrikiRecordDao extends CommonDao<MetrikiRecord> {
-  createId(r: Saved<MetrikiRecord>): string {
-    return [r.metricId, r.ts].join('_')
-  }
-
-  parseNaturalId(id: string): Partial<MetrikiRecord> {
-    const [accountId, code, ts] = _split(id, '_', 3)
-    const metricId = [accountId, code].join('_')
-    return {
-      metricId,
-      ts: parseInt(ts),
-    }
-  }
-}
+class MetrikiRecordDao extends CommonDao<MetrikiRecord> {}
 
 export const metrikiMetricDao = new MetrikiMetricDao({
   ...defaultMetrikiDaoCfg,
   table: 'MetrikiMetric',
   bmSchema: metrikiMetricSchema,
   dbmSchema: metrikiMetricSchema,
+  hooks: {
+    createId: m => [m.accountId, m.code].join('_'),
+    parseNaturalId: id => {
+      const [accountId, code] = _split(id, '_', 2)
+      return {
+        accountId,
+        code,
+      }
+    },
+  },
 })
 
 export const metrikiRecordDao = new MetrikiRecordDao({
@@ -139,4 +123,15 @@ export const metrikiRecordDao = new MetrikiRecordDao({
   table: 'MetrikiRecord',
   bmSchema: metrikiRecordSchema,
   dbmSchema: metrikiRecordSchema,
+  hooks: {
+    createId: r => [r.metricId, r.ts].join('_'),
+    parseNaturalId: id => {
+      const [accountId, code, ts] = _split(id, '_', 3)
+      const metricId = [accountId, code].join('_')
+      return {
+        metricId,
+        ts: parseInt(ts),
+      }
+    },
+  },
 })

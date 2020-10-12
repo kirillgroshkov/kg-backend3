@@ -62,14 +62,7 @@ export const releasesUserSchema = objectSchema<ReleasesUser>({
   settings: userSettingsSchema,
 }).concat(baseDBEntitySchema)
 
-class ReleasesUserDao extends CommonDao<ReleasesUser, Saved<ReleasesUser>, ReleasesUserTM> {
-  beforeBMToTM(bm: ReleasesUser): ReleasesUserTM {
-    return {
-      ...bm,
-      starredReposCount: bm.starredRepos.length,
-    } as ReleasesUserTM
-  }
-}
+class ReleasesUserDao extends CommonDao<ReleasesUser, Saved<ReleasesUser>, ReleasesUserTM> {}
 
 export const releasesUserDao = new ReleasesUserDao({
   ...defaultDaoCfg,
@@ -77,4 +70,12 @@ export const releasesUserDao = new ReleasesUserDao({
   bmSchema: releasesUserSchema,
   dbmSchema: releasesUserSchema,
   tmSchema: releasesUserTMSchema,
+  hooks: {
+    beforeBMToTM: bm => {
+      return {
+        ...bm,
+        starredReposCount: bm.starredRepos.length,
+      } as ReleasesUserTM
+    },
+  },
 })

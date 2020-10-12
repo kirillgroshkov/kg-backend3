@@ -3,9 +3,9 @@ import { HttpError } from '@naturalcycles/js-lib'
 import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { Request } from 'express'
 
-export async function getUserFromRequest(req: Request): Promise<Saved<ReleasesUser> | undefined> {
+export async function getUserFromRequest(req: Request): Promise<Saved<ReleasesUser> | null> {
   const uid = req.header('uid')
-  if (!uid) return
+  if (!uid) return null
 
   return await releasesUserDao.getById(uid)
 }
