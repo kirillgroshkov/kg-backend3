@@ -1,5 +1,5 @@
 import { coloredHttpCode } from '@naturalcycles/backend-lib'
-import { _filterFalsy, _since } from '@naturalcycles/js-lib'
+import { _filterFalsyValues, _since } from '@naturalcycles/js-lib'
 import { Debug, getGot } from '@naturalcycles/nodejs-lib'
 import { dimGrey } from '@naturalcycles/nodejs-lib/dist/colors'
 import { Etag, etagDao } from '@src/releases/model/etag.model'
@@ -20,17 +20,17 @@ const githubGot = getGot().extend({
 
 class GithubService {
   /**
-   * Undefined means "not changed".
+   * Null means "not changed".
    */
   async getUserStarredRepos(
     u: ReleasesUser,
     maxPages = 100, // 10.000 stars is a cap now
-  ): Promise<ReleasesRepo[] | undefined> {
+  ): Promise<ReleasesRepo[] | null> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
     let unchanged = false
     const allRepos: ReleasesRepo[] = []
-    let repos: ReleasesRepo[] | undefined
+    let repos: ReleasesRepo[] | null
     let page = 0
     const [lastStarredRepo] = u.starredRepos
 
@@ -53,14 +53,14 @@ class GithubService {
     } while (repos.length === per_page && page < maxPages)
 
     if (unchanged) {
-      return
+      return null
     }
 
     return allRepos
   }
 
   /**
-   * Returns undefined if not changed (practically possible only on page1).
+   * Returns null if not changed (practically possible only on page1).
    *
    * Manages etag cache internally (via etagDao).
    * Only uses etag cache for page 1 - loads (sync), saves (async) if non-304 (200) is returned.
@@ -68,7 +68,7 @@ class GithubService {
   private async getUserStarredReposPage(
     page: number,
     u: ReleasesUser,
-  ): Promise<ReleasesRepo[] | undefined> {
+  ): Promise<ReleasesRepo[] | null> {
     // tslint:disable-next-line:variable-name
     const per_page = 100
 
@@ -87,7 +87,7 @@ class GithubService {
 
     const resp = await githubGot(url, {
       responseType: 'json',
-      headers: _filterFalsy({
+      headers: _filterFalsyValues({
         Authorization: `token ${u.accessToken}`,
         Accept: 'application/vnd.github.v3.star+json', // will include "star creation timestamps" starred_at
         'If-None-Match': ifNoneMatch,
@@ -104,7 +104,7 @@ class GithubService {
 
     if (resp.statusCode === 304) {
       // not changed
-      return
+      return null
     }
 
     if (etagReturned && urlEtag) {

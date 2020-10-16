@@ -29,7 +29,7 @@ import './bootstrap'
 // 3. Further imports and bootstrap
 //
 import { isGAE, startServer } from '@naturalcycles/backend-lib'
-import { pHang, _ms, _filterNullish } from '@naturalcycles/js-lib'
+import { pHang, _ms, _filterNullishValues } from '@naturalcycles/js-lib'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { expressApp } from '@src/express.app'
 import { notifyOfNewReleasesDaily } from '@src/releases/handlers/notifyOfNewReleases'
@@ -41,7 +41,7 @@ import * as nodeSchedule from 'node-schedule'
 
 runScript(async () => {
   const { APP_ENV } = process.env
-  const kv = _filterNullish({
+  const kv = _filterNullishValues({
     // APP_ENV,
     // GOOGLE_CLOUD_PROJECT, GAE_SERVICE, GAE_VERSION, GAE_INSTANCE,
   })

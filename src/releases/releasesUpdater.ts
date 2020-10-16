@@ -161,7 +161,7 @@ class ReleasesUpdater {
   }
 
   async fetchReleases(repoFullName: string, opts: ReleasesUpdaterOpts = {}): Promise<Release[]> {
-    const { maxReleasesPerRepo = 100, updateExisting, throwOnError } = opts
+    const { maxReleasesPerRepo = 10, updateExisting, throwOnError } = opts
     log(`fetchReleases ${repoFullName}...`, { maxReleasesPerRepo })
 
     const existingTagNames = updateExisting
