@@ -841,6 +841,18 @@
   resolved "https://registry.yarnpkg.com/@kwsites/promise-deferred/-/promise-deferred-1.1.1.tgz#8ace5259254426ccef57f3175bc64ed7095ed919"
   integrity sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==
 
+"@naturalcycles/airtable-lib@^2.9.16":
+  version "2.9.16"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/airtable-lib/-/airtable-lib-2.9.16.tgz#005e50af75f7d577286cfa6750dfaf805452e718"
+  integrity sha512-/dfkZKW+aXHMRdwguMY2Jo9KzDhjMO0xtf8CLPPSf461T6rn/CaIvbkJSm/QgS1/tDtj8hElJ7+CvxAOeUAvag==
+  dependencies:
+    "@naturalcycles/db-lib" "^8.0.0"
+    "@naturalcycles/js-lib" "^14.0.0"
+    "@naturalcycles/nodejs-lib" "^12.0.0"
+    airtable "^0.10.0"
+    fs-extra "^9.0.0"
+    rxjs "^6.5.2"
+
 "@naturalcycles/backend-lib@^2.4.0":
   version "2.49.10"
   resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.49.10.tgz#1a2f37dfc8d67f57a084a59857fa8bcef217b55f"
@@ -894,16 +906,16 @@
     fs-extra "^9.0.0"
     type-fest "^0.16.0"
 
-"@naturalcycles/db-lib@^8.0.1", "@naturalcycles/db-lib@^8.0.2":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-8.0.3.tgz#addda760d2aeb7b1ccf653c0f7ffdfaceab4e8d3"
-  integrity sha512-lPU4vaQb3f3PyBul30dH7PCh1Iz/OdcNmTJ1qT+Nd9tBbKQfJ/ZIsfIoEp8k+we8b7NL4joHZjhyjQO+tgLRrg==
+"@naturalcycles/db-lib@^8.0.0", "@naturalcycles/db-lib@^8.0.1", "@naturalcycles/db-lib@^8.0.2":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-8.1.0.tgz#3a5e02007852aba87eac132945ae0fdb39e7810e"
+  integrity sha512-Nm+eEexjuinkiKTMAj7RZ4XomJpvN7VQ76DjprNDmOqZp4UDi2mYNe93Uk4lysr21uyeYm8xEPVouZ2g02yCGg==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/nodejs-lib" "^12.0.0"
     "@naturalcycles/time-lib" "^3.0.1"
     fs-extra "^9.0.0"
-    type-fest "^0.17.0"
+    type-fest "^0.18.0"
 
 "@naturalcycles/dev-lib@^10.2.0":
   version "10.18.0"
@@ -1485,7 +1497,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^14.0.0", "@types/node@^14.0.5":
+"@types/node@*", "@types/node@^14.0.0", "@types/node@^14.0.14", "@types/node@^14.0.5":
   version "14.11.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.10.tgz#8c102aba13bf5253f35146affbf8b26275069bef"
   integrity sha512-yV1nWZPlMFpoXyoknm4S56y2nlTAuFYaJuQtYRAOU7xA/FJ9RY0Xm7QOkaYMMmr8ESdHIuUb6oQgR/0+2NqlyA==
@@ -1621,6 +1633,11 @@ abort-controller@^3.0.0:
   dependencies:
     event-target-shim "^5.0.0"
 
+abortcontroller-polyfill@^1.4.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.5.0.tgz#2c562f530869abbcf88d949a2b60d1d402e87a7c"
+  integrity sha512-O6Xk757Jb4o0LMzMOMdWvxpHWrQzruYBaUruFaIOfAQRnWFxfdXYobw12jrVHGtoXk6WiiyYzc0QWN9aL62HQA==
+
 accepts@~1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
@@ -1653,6 +1670,17 @@ agent-base@6:
   integrity sha512-01q25QQDwLSsyfhrKbn8yuur+JNw0H+0Y4JiGIKd3z9aYk/w/2kxD/Upc+t2ZBBSUNff50VjPsSW2YxM8QYKVg==
   dependencies:
     debug "4"
+
+airtable@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.10.0.tgz#29f7f5fb209b898b72238fe847142cf2a41210b2"
+  integrity sha512-6gBUG+z1kqvwyHYWlc+y74TfYpc18mvmNuVcefjlvd6MSgLP9Hk47ByyBS6Ke8zdSk6kBTDpdiwCjoJQUpu6yg==
+  dependencies:
+    "@types/node" "^14.0.14"
+    abort-controller "^3.0.0"
+    abortcontroller-polyfill "^1.4.0"
+    lodash "4.17.19"
+    node-fetch "^2.6.0"
 
 ajv@^6.12.3:
   version "6.12.6"
@@ -2985,9 +3013,9 @@ emitter-listener@^1.0.1, emitter-listener@^1.1.1:
     shimmer "^1.2.0"
 
 emittery@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.7.1.tgz#c02375a927a40948c0345cc903072597f5270451"
-  integrity sha512-d34LN4L6h18Bzz9xpoku2nPwKxCPlPMr3EEKTkoEBi+1/+b0lcRkRJ1UVyyZaKNeqGR3swcGl6s390DNO4YVgQ==
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.7.2.tgz#25595908e13af0f5674ab419396e2fb394cdfa82"
+  integrity sha512-A8OG5SR/ij3SsJdWDJdkkSYUjQdCUx6APQXem0SaEePBSRg4eymGYwBkKo1Y6DU+af/Jn2dBQqDBvjnr9Vi8nQ==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -5233,6 +5261,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
+lodash@4.17.19:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
+
 lodash@^4.17.11, lodash@^4.17.15, lodash@^4.17.19:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
@@ -5652,7 +5685,7 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-fetch@^2.3.0, node-fetch@^2.6.1:
+node-fetch@^2.3.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -6689,7 +6722,7 @@ run-parallel@^1.1.9:
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
   integrity sha512-DEqnSRTDw/Tc3FXf49zedI638Z9onwUotBMiUFKmrO2sdFKIbXamXGQ3Axd4qgphxKB4kw/qP1w5kTxnfU1B9Q==
 
-rxjs@^6.3.3:
+rxjs@^6.3.3, rxjs@^6.5.2:
   version "6.6.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
   integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==
@@ -7576,10 +7609,10 @@ type-fest@^0.16.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.16.0.tgz#3240b891a78b0deae910dbeb86553e552a148860"
   integrity sha512-eaBzG6MxNzEn9kiwvtre90cXaNLkmadMWa1zQMs3XORCXNbsH/OewwbxC5ia9dCxIxnTAsSxXJaa/p5y8DlvJg==
 
-type-fest@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.17.0.tgz#268bb55d38701ce3915f60a4367a1e9f28672deb"
-  integrity sha512-EFi9HE4hHj85XnVV80uAUMgICQmhxYgiEvtmfpcD6jqn6zYr36HxAU6k+i/DSY28TK7/lYL0s4v/kWmiKdqaoA==
+type-fest@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.18.0.tgz#2edfa6382d48653707344f7fccdb0443d460e8d6"
+  integrity sha512-fbDukFPnJBdn2eZ3RR+5mK2slHLFd6gYHY7jna1KWWy4Yr4XysHuCdXRzy+RiG/HwG4WJat00vdC2UHky5eKiQ==
 
 type-fest@^0.6.0:
   version "0.6.0"

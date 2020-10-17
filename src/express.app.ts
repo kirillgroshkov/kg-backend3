@@ -1,4 +1,5 @@
 import { createDefaultApp } from '@naturalcycles/backend-lib'
+import { airtableResource } from '@src/airtable/airtable.resource'
 import { grafanaResource } from '@src/grafana/grafana.resource'
 import { metrikiResource } from '@src/metriki/metriki.resource'
 import { releasesResource } from '@src/releases/releases.resource'
@@ -29,6 +30,14 @@ export const expressApp = createDefaultApp(
         path: '/grafana',
         handler: grafanaResource,
       },
+      {
+        path: '/airtable',
+        handler: airtableResource,
+      },
+      // {
+      //   path: '/spotify',
+      //   handler: spotifyResource,
+      // },
     ],
   },
   sentryService,

@@ -11,6 +11,7 @@
   "dependencies": {
     "@google-cloud/profiler": "^4.0.0",
     "@google-cloud/trace-agent": "^5.1.0",
+    "@naturalcycles/airtable-lib": "^2.9.16",
     "@naturalcycles/backend-lib": "^2.4.0",
     "@naturalcycles/db-lib": "^8.0.1",
     "@naturalcycles/github-db": "^1.2.3",
