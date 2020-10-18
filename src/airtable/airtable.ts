@@ -1,4 +1,4 @@
-import { AirtableDB } from '@naturalcycles/airtable-lib'
+import { AirtableAttachment, AirtableDB } from '@naturalcycles/airtable-lib'
 import { CommonDao } from '@naturalcycles/db-lib'
 import { secret } from '@naturalcycles/nodejs-lib'
 
@@ -12,3 +12,6 @@ export const airtableDao = new CommonDao({
   createdUpdated: false,
   readOnly: true, // safety, for now
 })
+
+export const airtableImagesMapper = (v: AirtableAttachment[] | undefined) =>
+  (v || []).map(r => r.url)

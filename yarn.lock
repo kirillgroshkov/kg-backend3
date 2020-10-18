@@ -907,9 +907,9 @@
     type-fest "^0.16.0"
 
 "@naturalcycles/db-lib@^8.0.0", "@naturalcycles/db-lib@^8.0.1", "@naturalcycles/db-lib@^8.0.2":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-8.1.0.tgz#3a5e02007852aba87eac132945ae0fdb39e7810e"
-  integrity sha512-Nm+eEexjuinkiKTMAj7RZ4XomJpvN7VQ76DjprNDmOqZp4UDi2mYNe93Uk4lysr21uyeYm8xEPVouZ2g02yCGg==
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/db-lib/-/db-lib-8.2.0.tgz#7f04891e307ff06ce326c641360cda613426a686"
+  integrity sha512-UOfA9RnQTRBu7vUknsv75ebGi6r6np+VoAte1NtwGAM1QdNp4rxJpsI5UfdmFhzsNCKeeEwzFvKIYJm0S/3jUw==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/nodejs-lib" "^12.0.0"
@@ -991,9 +991,9 @@
   integrity sha512-hrKdCoapsrXHz26jGNRiR86Do3Kc6bxEY9ehtwMsD2vIUKAlU2J33rTPB5caXUgL4lCQs6iYvX9A+Oubu7JniA==
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.5.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.5.0.tgz#a37fb754c959d709796e35d51c75a6d7c14872dc"
-  integrity sha512-qoRW1rHi6EYh9AhJVIrSulngYqa+UrWNIeUKD6lrRlIN7giLxJdsJWl0pdTtU5hAaB0GHP1VwSk3rSzNay2pYw==
+  version "14.5.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.5.1.tgz#5e267b8388359585947c5e9da75ed89240b8d9eb"
+  integrity sha512-3esXGxIKdFGpIJShp6v+OQ7fjsVf1dHKycRn75D4gTA4Np7WpZrS3UKV72E7XIe6nhHeUETwUzDl1O3iCbxiwA==
 
 "@naturalcycles/mongo-lib@^3.4.4":
   version "3.4.5"

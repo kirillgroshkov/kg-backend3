@@ -42,7 +42,8 @@
     "@types/semver": "^7.1.0",
     "@types/xml2js": "^0.4.4",
     "jest": "^26.0.1",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "type-fest": "^0.18.0"
   },
   "private": true,
   "repository": {
