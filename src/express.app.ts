@@ -3,6 +3,7 @@ import { airtableResource } from '@src/airtable/airtable.resource'
 import { grafanaResource } from '@src/grafana/grafana.resource'
 import { metrikiResource } from '@src/metriki/metriki.resource'
 import { releasesResource } from '@src/releases/releases.resource'
+import { seResource } from '@src/se/se.resource'
 import { rootResource } from '@src/server/root.resource'
 import { slResource } from '@src/sl/sl.resource'
 import { sentryService } from '@src/srv/sentry.service'
@@ -33,6 +34,10 @@ export const expressApp = createDefaultApp(
       {
         path: '/airtable',
         handler: airtableResource,
+      },
+      {
+        path: '/se',
+        handler: seResource,
       },
       // {
       //   path: '/spotify',
