@@ -8,7 +8,7 @@ const defaults = {
   text: 'no text',
 }
 
-const { slackEnabled } = env()
+const { slackEnabled } = env
 const webhookUrl = slackEnabled ? secret('SECRET_SLACK_HOOK_URL') : undefined
 
 export const slackService = new SlackService({

@@ -2,7 +2,7 @@ import { BaseAdminService, createAdminMiddleware } from '@naturalcycles/backend-
 import { env } from '@src/srv/env.service'
 import { firebaseService } from '@src/srv/firebase.service'
 
-const { authEnabled } = env()
+const { authEnabled } = env
 
 const ADMIN_EMAILS = new Set(['kirill.groshkov@naturalcycles.com', 'ceo@inventix.ru'])
 

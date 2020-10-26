@@ -18,7 +18,7 @@ export async function getRepoReleases(
   if (!skipCache) {
     releases = await releaseDao
       .query()
-      .filter('repoFullName', '=', repoFullName)
+      .filter('repoFullName', '==', repoFullName)
       .order('published', true)
       .limit(maxReleasesTotal)
       .runQuery()

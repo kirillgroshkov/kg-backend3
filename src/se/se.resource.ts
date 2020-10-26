@@ -1,4 +1,8 @@
-import { getDefaultRouter } from '@naturalcycles/backend-lib'
+import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
+import { seAccountPut } from '@src/se/handlers/seAccountPut'
+import { seInit } from '@src/se/handlers/seInit'
+import { seAccountPatchSchema } from '@src/se/seAccount.model'
+import { seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
 import { seSellerDao } from '@src/se/seSeller.model'
 
@@ -23,4 +27,14 @@ router.get('/cms/sellers/:sellerId?', async (req, res) => {
   } else {
     res.json({ data: await seSellerDao.query().runQueryAsTM() })
   }
+})
+
+router.get('/init', async (req, res) => {
+  const user = await seRequireUser(req)
+  res.json(await seInit(user))
+})
+
+router.put('/accounts', reqValidation('body', seAccountPatchSchema), async (req, res) => {
+  const user = await seRequireUser(req)
+  res.json(await seAccountPut(user, req.body))
 })

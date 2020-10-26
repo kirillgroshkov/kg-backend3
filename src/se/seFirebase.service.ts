@@ -7,8 +7,8 @@ class FirebaseService extends FirebaseSharedService {
     return await this.auth().verifyIdToken(idToken)
   }
 
-  async getUser(uid?: string): Promise<admin.auth.UserRecord | undefined> {
-    if (!uid) return
+  async getUser(uid?: string): Promise<admin.auth.UserRecord | null> {
+    if (!uid) return null
     return await this.auth().getUser(uid)
   }
 
@@ -21,9 +21,12 @@ class FirebaseService extends FirebaseSharedService {
   }
 }
 
-export const firebaseService = new FirebaseService({
-  serviceAccount: secretOptional('SECRET_FIREBASE_SERVICE_ACCOUNT'),
-  authDomain: secret('SECRET_FIREBASE_AUTH_DOMAIN'),
-  apiKey: secret('SECRET_FIREBASE_API_KEY'),
-  // appName: 'DefaultApp',
+export const seFirebaseService = new FirebaseService({
+  serviceAccount: secretOptional('SECRET_FIREBASE_SE_SERVICE_ACCOUNT'),
+  authDomain: secret('SECRET_FIREBASE_SE_AUTH_DOMAIN'),
+  apiKey: secret('SECRET_FIREBASE_SE_API_KEY'),
+  // opt: {
+  //   databaseURL: 'https://serviceexchangese.firebaseio.com',
+  // }
+  appName: 'ServiceExchange',
 })

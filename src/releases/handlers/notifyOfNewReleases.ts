@@ -29,7 +29,7 @@ export async function notifyOfNewReleasesDaily(daily = true): Promise<void> {
     .query()
     .filter('accessToken', '>', '')
     .filter('settings.notificationEmail', '>', '')
-    .filter('settings.notifyEmailDaily', '=', true)
+    .filter('settings.notifyEmailDaily', '==', true)
     .runQuery()
 
   let emailsSent = 0

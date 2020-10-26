@@ -3,7 +3,7 @@ import { secret } from '@naturalcycles/nodejs-lib'
 import * as Sentry from '@sentry/node'
 import { env } from '@src/srv/env.service'
 
-const { sentryServiceCfg, sentryEnabled } = env()
+const { sentryServiceCfg, sentryEnabled } = env
 const { APP_ENV } = process.env
 
 export const sentryService = new SentrySharedService({

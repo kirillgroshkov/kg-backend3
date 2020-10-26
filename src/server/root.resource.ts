@@ -41,7 +41,7 @@ router.get('/status', reqAdmin(), async (req, res) => {
 router.get('/debug', reqAdmin(), async (req, res) => {
   res.json({
     adminInfo: await adminService.getAdminInfo(req),
-    environment: env(),
+    environment: env,
     headers: req.headers,
     env: process.env,
   })
