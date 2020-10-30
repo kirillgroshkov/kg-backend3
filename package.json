@@ -25,6 +25,7 @@
     "@sentry/node": "^5.6.1",
     "dotenv": "^8.0.0",
     "ejs": "^3.0.1",
+    "express-fileupload": "^1.2.0",
     "firebase-admin": "^9.0.0",
     "got": "^11.0.1",
     "marked": "^1.2.0",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@naturalcycles/dev-lib": "^10.2.0",
     "@types/ejs": "^3.0.0",
+    "@types/express-fileupload": "^1.1.5",
     "@types/marked": "^1.1.0",
     "@types/node": "^14.0.5",
     "@types/node-schedule": "^1.2.4",

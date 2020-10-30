@@ -42,7 +42,7 @@ export interface SEAccountTM extends SEAccountPatch {
   phoneNumber?: string
   completed?: number // ts
   emailVerified?: boolean
-  // profilePhoto: string // todo
+  avatarId?: string
 }
 
 export interface SEAccountBM extends Merge<SEAccountTM, BaseDBEntity> {}
@@ -70,6 +70,7 @@ const seAccountSchema = objectSchema<SEAccountBM>({
   phoneNumber: mobilePhoneNumberSchema.optional(),
   completed: unixTimestampSchema.optional(),
   emailVerified: booleanSchema.optional(),
+  avatarId: stringSchema.optional(),
 })
   .concat(seAccountPatchSchema)
   .concat(baseDBEntitySchema)

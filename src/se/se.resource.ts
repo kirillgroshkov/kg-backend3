@@ -1,10 +1,13 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
+import { _assert } from '@naturalcycles/js-lib'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
+import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
 import { seInit } from '@src/se/handlers/seInit'
 import { seAccountPatchSchema } from '@src/se/seAccount.model'
 import { seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
 import { seSellerDao } from '@src/se/seSeller.model'
+import { fileUploadHandler } from '@src/server/upload.util'
 
 const router = getDefaultRouter()
 export const seResource = router
@@ -37,4 +40,11 @@ router.get('/init', async (req, res) => {
 router.put('/accounts', reqValidation('body', seAccountPatchSchema), async (req, res) => {
   const user = await seRequireUser(req)
   res.json(await seAccountPut(user, req.body))
+})
+
+router.put('/accounts/avatar', fileUploadHandler, async (req, res) => {
+  const user = await seRequireUser(req)
+  _assert(req.files?.file)
+
+  res.json(await seAvatarUpload(user, req.files.file))
 })
