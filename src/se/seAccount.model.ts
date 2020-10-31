@@ -18,10 +18,10 @@ export interface SEAccountPatch {
   name1Latin?: string
   name2Latin?: string
   zip?: number
-  personNummer?: string
+  personNummer?: number
 }
 
-export const REQ_FIELDS_FOR_COMPLETION: (keyof SEAccountTM)[] = [
+export const SE_ACCOUNT_REQ_FIELDS: (keyof SEAccountTM)[] = [
   'email',
   'phoneNumber',
   'name1Latin',
@@ -30,7 +30,7 @@ export const REQ_FIELDS_FOR_COMPLETION: (keyof SEAccountTM)[] = [
   'name2Ru',
   'zip',
   // 'emailVerified', // to check!
-  'personNummer',
+  // 'personNummer', // optional
 ]
 
 /**

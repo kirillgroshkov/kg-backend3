@@ -1,5 +1,5 @@
 import { dayjs } from '@naturalcycles/time-lib'
-import { REQ_FIELDS_FOR_COMPLETION, seAccountDao, SEAccountPatch } from '@src/se/seAccount.model'
+import { seAccountDao, SEAccountPatch, SE_ACCOUNT_REQ_FIELDS } from '@src/se/seAccount.model'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
 import { seSlack } from '@src/se/seSlack'
@@ -12,7 +12,7 @@ export async function seAccountPut(
 
   Object.assign(account, input)
 
-  const shouldBeCompleted = REQ_FIELDS_FOR_COMPLETION.every(f => account[f])
+  const shouldBeCompleted = SE_ACCOUNT_REQ_FIELDS.every(f => account[f])
 
   // Check for completion
   if (!account.completed && shouldBeCompleted) {

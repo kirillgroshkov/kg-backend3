@@ -1,10 +1,12 @@
 export enum SESchedule {
-  WORKDAYS = 'WORKDAYS',
-  EVENING = 'EVENING',
-  WEEKEND = 'WEEKEND',
+  WORKDAYS = 1,
+  EVENING = 2,
+  WEEKEND = 3,
 }
 
-export enum SEService {
+export const SE_SCHEDULE_VALUES = Object.values(SESchedule) as number[]
+
+export enum SECategory {
   REKL = 'REKL',
   CLEANING = 'CLEANING',
   CONSTRUCTION = 'CONSTRUCTION',
@@ -36,4 +38,4 @@ export enum SEService {
   OTHER = 'OTHER',
 }
 
-export const SE_SERVICE_VALUES = Object.values(SEService)
+export const SE_CATEGORY_VALUES = Object.values(SECategory)
