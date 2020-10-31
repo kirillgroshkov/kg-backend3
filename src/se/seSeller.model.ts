@@ -11,7 +11,7 @@ import {
   urlSchema,
 } from '@naturalcycles/nodejs-lib'
 import { airtableDB, airtableImagesMapper } from '@src/airtable/airtable'
-import { SEService } from '@src/se/se.model'
+import { SECategory } from '@src/se/se.model'
 import { markdownMapper } from '@src/srv/markdown'
 import { Merge } from 'type-fest'
 
@@ -23,7 +23,7 @@ export interface SESellerTM {
   name_en: string
   name_ru: string
   zip?: number
-  services?: SEService[]
+  services?: SECategory[]
   shortDescr?: string
   descr?: string
   regions?: string
