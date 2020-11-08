@@ -16,6 +16,7 @@ export interface SEServicePatch {
   regions?: string
   category?: SECategory
   schedule?: SESchedule[]
+  imageIds?: string[]
 }
 
 export interface SEServiceTM extends SEServicePatch {
@@ -23,14 +24,14 @@ export interface SEServiceTM extends SEServicePatch {
   accountId: string
   updated?: number // ts
   completed?: number // ts
-  photoIds?: string[]
+  imageIds: string[]
 }
 
 export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [
   'title',
   'descr',
   'category',
-  'photoIds',
+  'imageIds',
 ]
 
 export interface SEServiceBM extends Merge<SEServiceTM, BaseDBEntity> {}
@@ -42,12 +43,13 @@ export const seServicePatchSchema = objectSchema<SEServicePatch>({
   regions: stringSchema.max(200).optional(),
   category: stringSchema.valid(...SE_CATEGORY_VALUES).optional(),
   schedule: arraySchema(numberSchema.valid(...SE_SCHEDULE_VALUES)).optional(),
-})
+  imageIds: arraySchema(stringSchema).optional(),
+}).min(1)
 
 const seServiceSchema = objectSchema<SEServiceBM>({
   accountId: stringSchema,
   completed: unixTimestampSchema.optional(),
-  photoIds: arraySchema(stringSchema).optional(),
+  imageIds: arraySchema(stringSchema).optional().default([]),
 })
   .concat(seServicePatchSchema)
   .concat(baseDBEntitySchema)

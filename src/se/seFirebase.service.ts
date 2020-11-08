@@ -1,5 +1,6 @@
 import { FirebaseSharedService } from '@naturalcycles/backend-lib'
 import { secret, secretOptional } from '@naturalcycles/nodejs-lib'
+import { StorageBucket } from '@src/srv/storage/storageBucket'
 
 class FirebaseService extends FirebaseSharedService {}
 
@@ -12,4 +13,10 @@ export const seFirebaseService = new FirebaseService({
     storageBucket: 'serviceexchangese.appspot.com',
   },
   appName: 'ServiceExchange',
+})
+
+export const seBucket = seFirebaseService.admin().storage().bucket()
+
+export const seStorageBucket = new StorageBucket({
+  bucket: seBucket,
 })

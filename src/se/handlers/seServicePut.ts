@@ -1,3 +1,4 @@
+import { Saved } from '@naturalcycles/db-lib'
 import { _assertEquals } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { SEFirebaseUser } from '@src/se/seAuth'
@@ -14,9 +15,12 @@ export async function seServicePut(
   patch: SEServicePatch,
   id?: string,
 ): Promise<SEBackendResponseTM> {
-  let service = {} as SEServiceBM
+  let service = ({
+    imageIds: [],
+  } as any) as Saved<SEServiceBM>
 
   if (id) {
+    // Update existing Service
     service = await seServiceDao.requireById(id)
     _assertEquals(service.accountId, user.uid, 'Forbidden', { httpStatusCode: 403 })
   }
@@ -26,7 +30,7 @@ export async function seServicePut(
   })
 
   // Completeness check
-  const shouldBeCompleted = SE_SERVICE_REQ_FIELDS.every(f => service[f]) && service.photoIds?.length
+  const shouldBeCompleted = SE_SERVICE_REQ_FIELDS.every(f => service[f]) && service.imageIds?.length
 
   if (!service.completed && shouldBeCompleted) {
     service.completed = dayjs().unix()
@@ -36,13 +40,9 @@ export async function seServicePut(
 
   await seServiceDao.save(service)
 
-  // return all services
-  // Because of strong consistency guarantees - we expect the just-saved Service to be included in the results
-  const services = await seServiceDao.getBy('accountId', user.uid)
-
   return {
-    state: {
-      services,
+    changedServices: {
+      [service.id!]: service,
     },
     createdObjectId: id ? undefined : service.id,
   }

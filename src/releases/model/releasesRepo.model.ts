@@ -1,4 +1,4 @@
-import { BaseDBEntity, baseDBEntitySchema, CommonDao, ObjectWithId } from '@naturalcycles/db-lib'
+import { BaseDBEntity, baseDBEntitySchema, CommonDao } from '@naturalcycles/db-lib'
 import {
   integerSchema,
   objectSchema,
@@ -73,7 +73,7 @@ class ReleasesRepoDao extends CommonDao<ReleasesRepo> {
   }*/
 
   async getAllIds(): Promise<string[]> {
-    const items = await this.query().select([]).runQuery<ObjectWithId>()
+    const items = await this.query().select([]).runQuery()
     return items.map(i => i.id)
   }
 }

@@ -2,11 +2,9 @@ import { stringId } from '@naturalcycles/nodejs-lib'
 import { seAccountDao } from '@src/se/seAccount.model'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
-import { seFirebaseService } from '@src/se/seFirebase.service'
+import { seStorageBucket } from '@src/se/seFirebase.service'
 import { sentryService } from '@src/srv/sentry.service'
 import type { UploadedFile } from 'express-fileupload'
-
-const bucket = seFirebaseService.admin().storage().bucket()
 
 export async function seAvatarUpload(
   user: SEFirebaseUser,
@@ -16,24 +14,18 @@ export async function seAvatarUpload(
 
   // Delete previous avatar, if exists
   if (account.avatarId) {
-    const avatarPath = `public/${account.id}/${account.avatarId}.jpg`
-    await bucket
-      .file(avatarPath)
-      .delete()
-      .catch(err => {
-        console.log(`Failed to delete previous avatar at: ${avatarPath}`)
-        sentryService.captureException(err)
-      })
+    const oldAvatarPath = `public/${account.id}/${account.avatarId}.jpg`
+    await seStorageBucket.deleteFile(oldAvatarPath).catch(err => {
+      console.log(`Failed to delete previous avatar at: ${oldAvatarPath}`)
+      sentryService.captureException(err)
+    })
   }
 
-  const avatarId = stringId(8)
-  const filePath = `public/${user.uid}/${avatarId}.jpg`
-  // const fileUrl = `https://storage.googleapis.com/${bucket.name}/${filePath}`
+  account.avatarId = stringId(8)
+  const newAvatarPath = `public/${account.id}/${account.avatarId}.jpg`
 
-  await bucket.file(filePath).save(file.data)
-  await bucket.file(filePath).makePublic()
+  await seStorageBucket.savePublicFile(newAvatarPath, file.data)
 
-  account.avatarId = avatarId
   await seAccountDao.save(account)
 
   return {

@@ -3,7 +3,9 @@ import { _assert } from '@naturalcycles/js-lib'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
 import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
 import { seInit } from '@src/se/handlers/seInit'
+import { seServiceAddImage } from '@src/se/handlers/seServiceAddImage'
 import { seServiceDelete } from '@src/se/handlers/seServiceDelete'
+import { seServiceDeleteImage } from '@src/se/handlers/seServiceDeleteImage'
 import { seServicePut } from '@src/se/handlers/seServicePut'
 import { seAccountPatchSchema } from '@src/se/seAccount.model'
 import { seRequireUser } from '@src/se/seAuth'
@@ -47,7 +49,7 @@ router.put('/accounts', reqValidation('body', seAccountPatchSchema), async (req,
 
 router.put('/accounts/avatar', fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
-  _assert(req.files?.file)
+  _assert(req.files?.file) // todo: reqValidationFile('file')
 
   res.json(await seAvatarUpload(user, req.files.file))
 })
@@ -61,4 +63,17 @@ router.put(`/services/:id?`, reqValidation('body', seServicePatchSchema), async 
 router.delete(`/services/:id`, async (req, res) => {
   const user = await seRequireUser(req)
   res.json(await seServiceDelete(user, req.params.id))
+})
+
+router.post(`/services/:id/images`, fileUploadHandler, async (req, res) => {
+  const user = await seRequireUser(req)
+  _assert(req.files?.file) // todo: reqValidationFile('file')
+
+  res.json(await seServiceAddImage(user, req.files.file, req.params.id))
+})
+
+router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
+  const user = await seRequireUser(req)
+
+  res.json(await seServiceDeleteImage(user, req.params.serviceId, req.params.imageId))
 })

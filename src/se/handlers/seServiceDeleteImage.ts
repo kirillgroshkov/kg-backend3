@@ -5,26 +5,28 @@ import { seStorageBucket } from '@src/se/seFirebase.service'
 import { seServiceDao } from '@src/se/seService.model'
 import { sentryService } from '@src/srv/sentry.service'
 
-export async function seServiceDelete(
+export async function seServiceDeleteImage(
   user: SEFirebaseUser,
   serviceId: string,
+  imageId: string,
 ): Promise<SEBackendResponseTM> {
   const service = await seServiceDao.requireById(serviceId)
   _assertEquals(service.accountId, user.uid, 'Forbidden', { httpStatusCode: 403 })
 
-  // Delete images folder
-  const filePath = `public/${user.uid}/services/${serviceId}`
+  const filePath = `public/${user.uid}/services/${serviceId}/${imageId}.jpg`
 
-  await seStorageBucket.deleteFolder(filePath).catch(err => {
-    console.log(`Failed to delete service images folder at: ${filePath}`)
+  await seStorageBucket.deleteFile(filePath).catch(err => {
+    console.log(`Failed to delete previous image at: ${filePath}`)
     sentryService.captureException(err)
   })
 
-  await seServiceDao.deleteById(serviceId)
+  service.imageIds = service.imageIds.filter(id => id !== imageId)
+
+  await seServiceDao.save(service)
 
   return {
     changedServices: {
-      [serviceId]: null,
+      [service.id]: service,
     },
   }
 }

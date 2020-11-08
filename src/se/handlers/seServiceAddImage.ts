@@ -1,30 +1,32 @@
 import { _assertEquals } from '@naturalcycles/js-lib'
+import { stringId } from '@naturalcycles/nodejs-lib'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
 import { seStorageBucket } from '@src/se/seFirebase.service'
 import { seServiceDao } from '@src/se/seService.model'
-import { sentryService } from '@src/srv/sentry.service'
+import { UploadedFile } from 'express-fileupload'
 
-export async function seServiceDelete(
+export async function seServiceAddImage(
   user: SEFirebaseUser,
+  file: UploadedFile,
   serviceId: string,
 ): Promise<SEBackendResponseTM> {
   const service = await seServiceDao.requireById(serviceId)
   _assertEquals(service.accountId, user.uid, 'Forbidden', { httpStatusCode: 403 })
 
-  // Delete images folder
-  const filePath = `public/${user.uid}/services/${serviceId}`
+  const imageId = stringId(8)
+  const filePath = `public/${user.uid}/services/${serviceId}/${imageId}.jpg`
+  // const fileUrl = `https://storage.googleapis.com/${bucket.name}/${filePath}`
 
-  await seStorageBucket.deleteFolder(filePath).catch(err => {
-    console.log(`Failed to delete service images folder at: ${filePath}`)
-    sentryService.captureException(err)
-  })
+  await seStorageBucket.savePublicFile(filePath, file.data)
 
-  await seServiceDao.deleteById(serviceId)
+  service.imageIds = [...service.imageIds, imageId]
+
+  await seServiceDao.save(service)
 
   return {
     changedServices: {
-      [serviceId]: null,
+      [service.id]: service,
     },
   }
 }
