@@ -1,5 +1,5 @@
 import { Saved } from '@naturalcycles/db-lib'
-import { _assertEquals } from '@naturalcycles/js-lib'
+import { _assertEquals, _isEmpty } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
@@ -31,10 +31,7 @@ export async function seServicePut(
   })
 
   // Completeness check
-  const shouldBeCompleted =
-    SE_SERVICE_REQ_FIELDS.every(f => service[f]) &&
-    service.imageIds.length &&
-    service.regions.length
+  const shouldBeCompleted = SE_SERVICE_REQ_FIELDS.every(f => !_isEmpty(service[f]))
 
   if (!service.completed && shouldBeCompleted) {
     service.completed = dayjs().unix()

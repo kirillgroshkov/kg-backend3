@@ -1,5 +1,6 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
 import {
+  arraySchema,
   booleanSchema,
   emailSchema,
   integerSchema,
@@ -8,6 +9,7 @@ import {
   unixTimestampSchema,
 } from '@naturalcycles/nodejs-lib'
 import { seFirestoreDB } from '@src/se/se.db'
+import { SELang, SE_LANG_VALUES } from '@src/se/se.lang'
 import { Merge } from 'type-fest'
 
 export interface SEAccountPatch {
@@ -19,6 +21,7 @@ export interface SEAccountPatch {
   name2Latin?: string
   zip?: number
   personNummer?: number
+  languages?: SELang[]
 }
 
 export const SE_ACCOUNT_REQ_FIELDS: (keyof SEAccountTM)[] = [
@@ -29,6 +32,7 @@ export const SE_ACCOUNT_REQ_FIELDS: (keyof SEAccountTM)[] = [
   'name1Ru',
   'name2Ru',
   'zip',
+  'languages',
   // 'emailVerified', // to check!
   // 'personNummer', // optional
 ]
@@ -43,6 +47,7 @@ export interface SEAccountTM extends SEAccountPatch {
   completed?: number // ts
   emailVerified?: boolean
   avatarId?: string
+  languages: SELang[]
 }
 
 export interface SEAccountBM extends Merge<SEAccountTM, BaseDBEntity> {}
@@ -64,6 +69,7 @@ export const seAccountPatchSchema = objectSchema<SEAccountPatch>({
   name2Latin: nameSchema.optional(),
   zip: seZipSchema.optional(),
   personNummer: personNummerSchema.optional(),
+  languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES)).optional(),
 }).min(1)
 
 const seAccountSchema = objectSchema<SEAccountBM>({
@@ -71,6 +77,9 @@ const seAccountSchema = objectSchema<SEAccountBM>({
   completed: unixTimestampSchema.optional(),
   emailVerified: booleanSchema.optional(),
   avatarId: stringSchema.optional(),
+  languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES))
+    .optional()
+    .default([]),
 })
   .concat(seAccountPatchSchema)
   .concat(baseDBEntitySchema)

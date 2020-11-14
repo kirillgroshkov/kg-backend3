@@ -12,6 +12,7 @@ export async function seInit(user: SEFirebaseUser): Promise<SEBackendResponseTM>
     account = await seAccountDao.save({
       id: user.uid,
       phoneNumber: user.phoneNumber,
+      languages: [],
     })
 
     void seSlack.send(`Account registration: ${user.phoneNumber} ${user.uid}`)
