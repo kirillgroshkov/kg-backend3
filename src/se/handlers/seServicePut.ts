@@ -17,6 +17,7 @@ export async function seServicePut(
 ): Promise<SEBackendResponseTM> {
   let service = ({
     imageIds: [],
+    regions: [],
   } as any) as Saved<SEServiceBM>
 
   if (id) {
@@ -30,7 +31,10 @@ export async function seServicePut(
   })
 
   // Completeness check
-  const shouldBeCompleted = SE_SERVICE_REQ_FIELDS.every(f => service[f]) && service.imageIds?.length
+  const shouldBeCompleted =
+    SE_SERVICE_REQ_FIELDS.every(f => service[f]) &&
+    service.imageIds.length &&
+    service.regions.length
 
   if (!service.completed && shouldBeCompleted) {
     service.completed = dayjs().unix()

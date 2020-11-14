@@ -8,12 +8,13 @@ import {
 } from '@naturalcycles/nodejs-lib'
 import { seFirestoreDB } from '@src/se/se.db'
 import { SECategory, SESchedule, SE_CATEGORY_VALUES, SE_SCHEDULE_VALUES } from '@src/se/se.model'
+import { SE_REGION_VALUES } from '@src/se/se.regions'
 import { Merge } from 'type-fest'
 
 export interface SEServicePatch {
   title?: string
   descr?: string
-  regions?: string
+  regions?: number[]
   category?: SECategory
   schedule?: SESchedule[]
   imageIds?: string[]
@@ -25,6 +26,7 @@ export interface SEServiceTM extends SEServicePatch {
   updated?: number // ts
   completed?: number // ts
   imageIds: string[]
+  regions: []
 }
 
 export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [
@@ -32,6 +34,7 @@ export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [
   'descr',
   'category',
   'imageIds',
+  'regions',
 ]
 
 export interface SEServiceBM extends Merge<SEServiceTM, BaseDBEntity> {}
@@ -40,16 +43,19 @@ export interface SEServiceDBM extends Merge<SEServiceTM, SavedDBEntity> {}
 export const seServicePatchSchema = objectSchema<SEServicePatch>({
   title: stringSchema.max(100).optional(),
   descr: stringSchema.max(10_000).optional(),
-  regions: stringSchema.max(200).optional(),
   category: stringSchema.valid(...SE_CATEGORY_VALUES).optional(),
   schedule: arraySchema(numberSchema.valid(...SE_SCHEDULE_VALUES)).optional(),
   imageIds: arraySchema(stringSchema).optional(),
+  regions: arraySchema(numberSchema.valid(...SE_REGION_VALUES)).optional(),
 }).min(1)
 
 const seServiceSchema = objectSchema<SEServiceBM>({
   accountId: stringSchema,
   completed: unixTimestampSchema.optional(),
   imageIds: arraySchema(stringSchema).optional().default([]),
+  regions: arraySchema(numberSchema.valid(...SE_REGION_VALUES))
+    .optional()
+    .default([]),
 })
   .concat(seServicePatchSchema)
   .concat(baseDBEntitySchema)
