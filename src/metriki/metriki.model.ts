@@ -130,7 +130,7 @@ export const metrikiRecordDao = new MetrikiRecordDao({
       const metricId = [accountId, code].join('_')
       return {
         metricId,
-        ts: parseInt(ts),
+        ts: parseInt(ts!),
       }
     },
   },

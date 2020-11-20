@@ -8,5 +8,5 @@ export async function getRepoNames(): Promise<string[]> {
 
 export async function getRepoOrgs(): Promise<string[]> {
   const names = await getRepoNames()
-  return _uniq(names.map(n => n.split('/')[0]))
+  return _uniq(names.map(n => n.split('/')[0]!))
 }

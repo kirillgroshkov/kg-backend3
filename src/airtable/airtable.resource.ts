@@ -9,7 +9,7 @@ export const airtableResource = router
 const TABLES_WHITELIST = new Set(['app6IuewJyIg5GMJ3.Pages'])
 
 router.get('/:table', async (req, res) => {
-  const { table } = req.params
+  const table = req.params.table!
 
   _assert(TABLES_WHITELIST.has(table), 'Forbidden')
 

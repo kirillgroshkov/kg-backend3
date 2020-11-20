@@ -230,7 +230,7 @@ class ReleasesUpdater {
         break
       }
 
-      const [lastRelease] = [...fetchedReleases].reverse()
+      const lastRelease = [...fetchedReleases].reverse()[0]!
       after = lastRelease.tagName
     } while (fetchedReleases.length === 10 && releases.length < maxReleasesPerRepo)
 

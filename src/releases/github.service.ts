@@ -44,7 +44,7 @@ class GithubService {
 
       log(`page ${page} repos: ${repos.length}`)
 
-      if (page === 1 && lastStarredRepo && repos.length && repos[0].id === lastStarredRepo) {
+      if (page === 1 && lastStarredRepo && repos.length && repos[0]!.id === lastStarredRepo) {
         unchanged = true
         break
       }

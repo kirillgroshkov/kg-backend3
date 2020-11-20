@@ -62,18 +62,18 @@ router.put(`/services/:id?`, reqValidation('body', seServicePatchSchema), async 
 
 router.delete(`/services/:id`, async (req, res) => {
   const user = await seRequireUser(req)
-  res.json(await seServiceDelete(user, req.params.id))
+  res.json(await seServiceDelete(user, req.params.id!))
 })
 
 router.post(`/services/:id/images`, fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
   _assert(req.files?.file) // todo: reqValidationFile('file')
 
-  res.json(await seServiceAddImage(user, req.files.file, req.params.id))
+  res.json(await seServiceAddImage(user, req.files.file, req.params.id!))
 })
 
 router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
   const user = await seRequireUser(req)
 
-  res.json(await seServiceDeleteImage(user, req.params.serviceId, req.params.imageId))
+  res.json(await seServiceDeleteImage(user, req.params.serviceId!, req.params.imageId!))
 })

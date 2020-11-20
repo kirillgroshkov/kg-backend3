@@ -78,17 +78,17 @@ class AtomService {
     // console.log(res.feed!.entry![0])
 
     return (res.feed.entry || []).map(entry => {
-      const tagName = entry.id[0].split('/').reverse()[0].toLowerCase()
+      const tagName = entry.id[0]!.split('/').reverse()[0]!.toLowerCase()
       // const v = tagName.replace(/^\D/g,'') // remove leading non-digits
       const v = semver.clean(tagName, { loose: true }) || tagName
-      const mediaThumbnail = (entry['media:thumbnail'] || [])[0]
+      const mediaThumbnail = (entry['media:thumbnail'] || [])[0]!
 
       return {
         updated: dayjs(entry.updated[0]).unix(),
-        title: entry.title[0],
-        descrHtml: entry.content[0]._,
-        author: entry.author[0].name[0],
-        authorThumb: mediaThumbnail && mediaThumbnail.url[0],
+        title: entry.title[0]!,
+        descrHtml: entry.content[0]!._,
+        author: entry.author[0]!.name[0]!,
+        authorThumb: mediaThumbnail?.url[0]!,
         tagName,
         v,
       }
