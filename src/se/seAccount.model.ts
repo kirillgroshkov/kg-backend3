@@ -46,6 +46,7 @@ export interface SEAccountTM extends SEAccountPatch {
   phoneNumber?: string
   completed?: number // ts
   emailVerified?: boolean
+  // admin?: boolean
   avatarId?: string
   languages: SELang[]
 }
@@ -55,7 +56,7 @@ export interface SEAccountBM extends Merge<SEAccountTM, BaseDBEntity> {}
 export interface SEAccountDBM extends Merge<SEAccountTM, SavedDBEntity> {}
 
 // todo: move to nodejs-lib
-const mobilePhoneNumberSchema = stringSchema.regex(/^\+[0-9]{11}$/)
+export const mobilePhoneNumberSchema = stringSchema.regex(/^\+[0-9]{11}$/)
 const seZipSchema = integerSchema.min(10_000).max(99_999)
 const nameSchema = stringSchema.max(30)
 const personNummerSchema = integerSchema.min(1930_01_01_0000).max(2010_01_01_0000)
@@ -76,6 +77,7 @@ const seAccountSchema = objectSchema<SEAccountBM>({
   phoneNumber: mobilePhoneNumberSchema.optional(),
   completed: unixTimestampSchema.optional(),
   emailVerified: booleanSchema.optional(),
+  // admin: booleanSchema.optional(),
   avatarId: stringSchema.optional(),
   languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES))
     .optional()

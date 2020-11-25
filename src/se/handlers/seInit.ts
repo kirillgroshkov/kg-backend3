@@ -1,3 +1,4 @@
+import { _filterNullishValues } from '@naturalcycles/js-lib'
 import { seAccountDao } from '@src/se/seAccount.model'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
@@ -5,6 +6,8 @@ import { seServiceDao } from '@src/se/seService.model'
 import { seSlack } from '@src/se/seSlack'
 
 export async function seInit(user: SEFirebaseUser): Promise<SEBackendResponseTM> {
+  const { admin } = user
+
   let account = await seAccountDao.getById(user.uid)
 
   if (!account) {
@@ -21,9 +24,10 @@ export async function seInit(user: SEFirebaseUser): Promise<SEBackendResponseTM>
   const services = await seServiceDao.query().filterEq('accountId', account.id).runQuery()
 
   return {
-    state: {
+    state: _filterNullishValues({
       account,
       services,
-    },
+      admin,
+    }),
   }
 }

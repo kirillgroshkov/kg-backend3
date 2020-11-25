@@ -1,5 +1,7 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
 import { _assert } from '@naturalcycles/js-lib'
+import { seAdminCreateUser, seAdminCreateUserInput } from '@src/se/admin/seAdminCreateUser'
+import { seAdminGetUsers } from '@src/se/admin/seAdminGetUsers'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
 import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
 import { seInit } from '@src/se/handlers/seInit'
@@ -8,7 +10,7 @@ import { seServiceDelete } from '@src/se/handlers/seServiceDelete'
 import { seServiceDeleteImage } from '@src/se/handlers/seServiceDeleteImage'
 import { seServicePut } from '@src/se/handlers/seServicePut'
 import { seAccountPatchSchema } from '@src/se/seAccount.model'
-import { seRequireUser } from '@src/se/seAuth'
+import { seRequireAdmin, seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
 import { seSellerDao } from '@src/se/seSeller.model'
 import { seServicePatchSchema } from '@src/se/seService.model'
@@ -76,4 +78,15 @@ router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
   const user = await seRequireUser(req)
 
   res.json(await seServiceDeleteImage(user, req.params.serviceId!, req.params.imageId!))
+})
+
+router.get('/admin/users', async (req, res) => {
+  await seRequireAdmin(req)
+  res.json(await seAdminGetUsers())
+})
+
+router.post('/admin/users', reqValidation('body', seAdminCreateUserInput), async (req, res) => {
+  const user = await seRequireAdmin(req)
+  await seAdminCreateUser(user, req.body)
+  res.json({})
 })
