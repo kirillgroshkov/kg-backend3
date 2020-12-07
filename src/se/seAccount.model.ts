@@ -20,7 +20,7 @@ export interface SEAccountPatch {
   name1Latin?: string
   name2Latin?: string
   zip?: number
-  personNummer?: number
+  personNummer?: number // todo: not part of TM! review the TM interface
   languages?: SELang[]
 }
 

@@ -1,6 +1,7 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
 import { _assert } from '@naturalcycles/js-lib'
 import { seAdminCreateUser, seAdminCreateUserInput } from '@src/se/admin/seAdminCreateUser'
+import { seAdminDeleteUser } from '@src/se/admin/seAdminDeleteUser'
 import { seAdminGetUsers } from '@src/se/admin/seAdminGetUsers'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
 import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
@@ -12,7 +13,6 @@ import { seServicePut } from '@src/se/handlers/seServicePut'
 import { seAccountPatchSchema } from '@src/se/seAccount.model'
 import { seRequireAdmin, seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
-import { seSellerDao } from '@src/se/seSeller.model'
 import { seServicePatchSchema } from '@src/se/seService.model'
 import { fileUploadHandler } from '@src/server/upload.util'
 
@@ -29,14 +29,11 @@ router.get('/cms/pages/:pageId?', async (req, res) => {
   }
 })
 
-router.get('/cms/sellers/:sellerId?', async (req, res) => {
-  const { sellerId } = req.params
+router.get('/cms/data', async (req, res) => {
+  // const { sellerId } = req.params
 
-  if (sellerId) {
-    res.json({ data: await seSellerDao.getByIdAsTM(sellerId) })
-  } else {
-    res.json({ data: await seSellerDao.query().runQueryAsTM() })
-  }
+  res.json({}) // todo
+  // res.json(await seCMSData())
 })
 
 router.get('/init', async (req, res) => {
@@ -88,5 +85,11 @@ router.get('/admin/users', async (req, res) => {
 router.post('/admin/users', reqValidation('body', seAdminCreateUserInput), async (req, res) => {
   const user = await seRequireAdmin(req)
   await seAdminCreateUser(user, req.body)
+  res.json({})
+})
+
+router.delete('/admin/users/:id', async (req, res) => {
+  const user = await seRequireAdmin(req)
+  await seAdminDeleteUser(user, req.params.id!)
   res.json({})
 })

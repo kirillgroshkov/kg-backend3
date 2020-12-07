@@ -26,7 +26,7 @@ export interface SEServiceTM extends SEServicePatch {
   updated?: number // ts
   completed?: number // ts
   imageIds: string[]
-  regions: []
+  regions: number[]
 }
 
 export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [

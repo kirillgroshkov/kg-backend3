@@ -12,7 +12,7 @@ import {
 } from '@naturalcycles/nodejs-lib'
 import { airtableDB, airtableImagesMapper } from '@src/airtable/airtable'
 import { SECategory } from '@src/se/se.model'
-import { markdownMapper } from '@src/srv/markdown'
+import { mobilePhoneNumberSchema } from '@src/se/seAccount.model'
 import { Merge } from 'type-fest'
 
 export interface SESellerTM {
@@ -76,7 +76,7 @@ const seSellerTMSchema = objectSchema<SESellerTM>({
 
 const seSellerBMSchema = objectSchema<SESellerBM>({
   email: emailSchema,
-  phone: stringSchema, // todo: phoneSchema
+  phone: mobilePhoneNumberSchema,
   recommendation: stringSchema.optional(),
   source: stringSchema.optional(),
 }).concat(seSellerTMSchema)
@@ -94,7 +94,7 @@ export const seSellerDao = new CommonDao<SESellerBM, SESellerDBM, SESellerTM>({
         ...dbm,
         profilePhoto: airtableImagesMapper(dbm.profilePhoto)[0],
         portfolioPhotos: airtableImagesMapper(dbm.portfolioPhotos),
-        descr: markdownMapper(dbm.descr),
+        // descr: markdownMapper(dbm.descr), // disabled!
       }
     },
   },
