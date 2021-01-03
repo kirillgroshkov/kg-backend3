@@ -15,6 +15,7 @@ import { seRequireAdmin, seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
 import { seServicePatchSchema } from '@src/se/seService.model'
 import { fileUploadHandler } from '@src/server/upload.util'
+import { UploadedFile } from 'express-fileupload'
 
 const router = getDefaultRouter()
 export const seResource = router
@@ -50,7 +51,7 @@ router.put('/accounts/avatar', fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
   _assert(req.files?.file) // todo: reqValidationFile('file')
 
-  res.json(await seAvatarUpload(user, req.files.file))
+  res.json(await seAvatarUpload(user, req.files.file as UploadedFile))
 })
 
 router.put(`/services/:id?`, reqValidation('body', seServicePatchSchema), async (req, res) => {
@@ -68,7 +69,7 @@ router.post(`/services/:id/images`, fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
   _assert(req.files?.file) // todo: reqValidationFile('file')
 
-  res.json(await seServiceAddImage(user, req.files.file, req.params.id!))
+  res.json(await seServiceAddImage(user, req.files.file as UploadedFile, req.params.id!))
 })
 
 router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
