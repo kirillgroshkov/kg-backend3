@@ -1,4 +1,5 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
+import { _isEmpty } from '@naturalcycles/js-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -22,6 +23,8 @@ export interface SEAccountPatch {
   zip?: number
   personNummer?: number // todo: not part of TM! review the TM interface
   languages?: SELang[]
+  hasWhatsApp?: boolean
+  hasTelegram?: boolean
 }
 
 export const SE_ACCOUNT_REQ_FIELDS: (keyof SEAccountTM)[] = [
@@ -36,6 +39,10 @@ export const SE_ACCOUNT_REQ_FIELDS: (keyof SEAccountTM)[] = [
   // 'emailVerified', // to check!
   // 'personNummer', // optional
 ]
+
+export function isAccountCompleted(acc: SEAccountBM): boolean {
+  return SE_ACCOUNT_REQ_FIELDS.every(f => !_isEmpty(acc[f]))
+}
 
 /**
  * This model represents not completed Account where everything is optional.
@@ -71,6 +78,8 @@ export const seAccountPatchSchema = objectSchema<SEAccountPatch>({
   zip: seZipSchema.optional(),
   personNummer: personNummerSchema.optional(),
   languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES)).optional(),
+  hasWhatsApp: booleanSchema.optional(),
+  hasTelegram: booleanSchema.optional(),
 }).min(1)
 
 const seAccountSchema = objectSchema<SEAccountBM>({
@@ -86,9 +95,21 @@ const seAccountSchema = objectSchema<SEAccountBM>({
   .concat(seAccountPatchSchema)
   .concat(baseDBEntitySchema)
 
+export const seAccountTMSchema = objectSchema<SEAccountTM>({
+  name1Ru: nameSchema.optional(),
+  name2Ru: nameSchema.optional(),
+  name1Latin: nameSchema.optional(),
+  name2Latin: nameSchema.optional(),
+  zip: seZipSchema.optional(),
+  languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES)).optional(),
+  completed: unixTimestampSchema.optional(),
+  avatarId: stringSchema.optional(),
+}).concat(baseDBEntitySchema)
+
 export const seAccountDao = new CommonDao<SEAccountBM, SEAccountDBM, SEAccountTM>({
   db: seFirestoreDB,
   table: 'Account',
   dbmSchema: seAccountSchema,
   bmSchema: seAccountSchema,
+  tmSchema: seAccountTMSchema,
 })

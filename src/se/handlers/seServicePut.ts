@@ -1,14 +1,15 @@
 import { Saved } from '@naturalcycles/db-lib'
-import { _assertEquals, _isEmpty } from '@naturalcycles/js-lib'
+import { _assertEquals } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { SEFirebaseUser } from '@src/se/seAuth'
 import { SEBackendResponseTM } from '@src/se/seBackendResponse.model'
 import {
+  isServiceCompleted,
   SEServiceBM,
   seServiceDao,
   SEServicePatch,
-  SE_SERVICE_REQ_FIELDS,
 } from '@src/se/seService.model'
+import { seSlack } from '@src/se/seSlack'
 
 export async function seServicePut(
   user: SEFirebaseUser,
@@ -31,13 +32,15 @@ export async function seServicePut(
   })
 
   // Completeness check
-  const shouldBeCompleted = SE_SERVICE_REQ_FIELDS.every(f => !_isEmpty(service[f]))
+  const shouldBeCompleted = isServiceCompleted(service)
 
   if (!service.completed && shouldBeCompleted) {
     service.completed = dayjs().unix()
   } else if (service.completed && !shouldBeCompleted) {
     delete service.completed
   }
+
+  void seSlack.log(`Service save: ${user.phoneNumber}`, patch)
 
   await seServiceDao.save(service)
 

@@ -7,7 +7,7 @@ console.log('startServer... ')
 const bootstrapStartedAt = Date.now()
 
 // These imports should be BEFORE any other imports
-if (process.env.GAE_INSTANCE) {
+if (process.env['GAE_INSTANCE']) {
   // Agents are only enabled in GAE environment
   require('@google-cloud/trace-agent').start()
   // require('@google-cloud/debug-agent').start()

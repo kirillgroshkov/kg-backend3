@@ -1,4 +1,5 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
+import { _isEmpty } from '@naturalcycles/js-lib'
 import {
   arraySchema,
   numberSchema,
@@ -36,6 +37,10 @@ export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [
   'imageIds',
   'regions',
 ]
+
+export function isServiceCompleted(service: SEServiceBM): boolean {
+  return SE_SERVICE_REQ_FIELDS.every(f => !_isEmpty(service[f]))
+}
 
 export interface SEServiceBM extends Merge<SEServiceTM, BaseDBEntity> {}
 export interface SEServiceDBM extends Merge<SEServiceTM, SavedDBEntity> {}

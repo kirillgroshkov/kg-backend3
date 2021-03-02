@@ -94,7 +94,7 @@ class GithubService {
       }),
       timeout: 10_000,
     })
-    const etagReturned = resp.headers.etag as string | undefined
+    const etagReturned = resp.headers['etag'] as string | undefined
 
     log(
       `<< ${coloredHttpCode(resp.statusCode)} GET ${dimGrey(url)} ${

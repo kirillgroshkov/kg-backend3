@@ -5,7 +5,9 @@ import { seAdminDeleteUser } from '@src/se/admin/seAdminDeleteUser'
 import { seAdminGetUsers } from '@src/se/admin/seAdminGetUsers'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
 import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
+import { seCMSData } from '@src/se/handlers/seCMSData'
 import { seInit } from '@src/se/handlers/seInit'
+import { seRequestCreate } from '@src/se/handlers/seRequestCreate'
 import { seServiceAddImage } from '@src/se/handlers/seServiceAddImage'
 import { seServiceDelete } from '@src/se/handlers/seServiceDelete'
 import { seServiceDeleteImage } from '@src/se/handlers/seServiceDeleteImage'
@@ -30,11 +32,15 @@ router.get('/cms/pages/:pageId?', async (req, res) => {
   }
 })
 
-router.get('/cms/data', async (req, res) => {
-  // const { sellerId } = req.params
+// router.get('/cms/accounts/:accountId', async (req, res) => {
+//   const { accountId } = req.params
+//
+//   // todo: TM to have fields shaded
+//   res.json(await seAccountDao.getByIdAsTM(accountId))
+// })
 
-  res.json({}) // todo
-  // res.json(await seCMSData())
+router.get('/cms/data', async (req, res) => {
+  res.json(await seCMSData())
 })
 
 router.get('/init', async (req, res) => {
@@ -49,33 +55,38 @@ router.put('/accounts', reqValidation('body', seAccountPatchSchema), async (req,
 
 router.put('/accounts/avatar', fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
-  _assert(req.files?.file) // todo: reqValidationFile('file')
+  _assert(req.files?.['file']) // todo: reqValidationFile('file')
 
-  res.json(await seAvatarUpload(user, req.files.file as UploadedFile))
+  res.json(await seAvatarUpload(user, req.files['file'] as UploadedFile))
 })
 
 router.put(`/services/:id?`, reqValidation('body', seServicePatchSchema), async (req, res) => {
   const user = await seRequireUser(req)
 
-  res.json(await seServicePut(user, req.body, req.params.id))
+  res.json(await seServicePut(user, req.body, req.params['id']))
 })
 
 router.delete(`/services/:id`, async (req, res) => {
   const user = await seRequireUser(req)
-  res.json(await seServiceDelete(user, req.params.id!))
+  res.json(await seServiceDelete(user, req.params['id']!))
 })
 
 router.post(`/services/:id/images`, fileUploadHandler, async (req, res) => {
   const user = await seRequireUser(req)
-  _assert(req.files?.file) // todo: reqValidationFile('file')
+  _assert(req.files?.['file']) // todo: reqValidationFile('file')
 
-  res.json(await seServiceAddImage(user, req.files.file as UploadedFile, req.params.id!))
+  res.json(await seServiceAddImage(user, req.files['file'] as UploadedFile, req.params['id']!))
 })
 
 router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
   const user = await seRequireUser(req)
 
-  res.json(await seServiceDeleteImage(user, req.params.serviceId!, req.params.imageId!))
+  res.json(await seServiceDeleteImage(user, req.params['serviceId']!, req.params['imageId']!))
+})
+
+router.post(`/requests`, async (req, res) => {
+  await seRequestCreate(req.body)
+  res.json({}) // ok
 })
 
 router.get('/admin/users', async (req, res) => {
@@ -91,6 +102,6 @@ router.post('/admin/users', reqValidation('body', seAdminCreateUserInput), async
 
 router.delete('/admin/users/:id', async (req, res) => {
   const user = await seRequireAdmin(req)
-  await seAdminDeleteUser(user, req.params.id!)
+  await seAdminDeleteUser(user, req.params['id']!)
   res.json({})
 })
