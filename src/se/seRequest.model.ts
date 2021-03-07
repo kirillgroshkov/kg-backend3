@@ -23,7 +23,7 @@ export interface SERequestInput {
 export interface SERequestBM extends SERequestInput, BaseDBEntity {}
 export interface SERequestDBM extends SERequestInput, SavedDBEntity {}
 
-const seRequestInputSchema = objectSchema<SERequestInput>({
+export const seRequestInputSchema = objectSchema<SERequestInput>({
   phoneNumber: mobilePhoneNumberSchema,
   hasWhatsApp: booleanSchema.optional(),
   hasTelegram: booleanSchema.optional(),

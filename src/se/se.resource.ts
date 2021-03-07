@@ -15,6 +15,7 @@ import { seServicePut } from '@src/se/handlers/seServicePut'
 import { seAccountPatchSchema } from '@src/se/seAccount.model'
 import { seRequireAdmin, seRequireUser } from '@src/se/seAuth'
 import { sePageDao } from '@src/se/sePage.model'
+import { seRequestInputSchema } from '@src/se/seRequest.model'
 import { seServicePatchSchema } from '@src/se/seService.model'
 import { fileUploadHandler } from '@src/server/upload.util'
 import { UploadedFile } from 'express-fileupload'
@@ -84,7 +85,7 @@ router.delete(`/services/:serviceId/images/:imageId`, async (req, res) => {
   res.json(await seServiceDeleteImage(user, req.params['serviceId']!, req.params['imageId']!))
 })
 
-router.post(`/requests`, async (req, res) => {
+router.post(`/requests`, reqValidation('body', seRequestInputSchema), async (req, res) => {
   await seRequestCreate(req.body)
   res.json({}) // ok
 })
