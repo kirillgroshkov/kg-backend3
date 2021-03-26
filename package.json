@@ -46,7 +46,7 @@
     "@types/xml2js": "^0.4.4",
     "jest": "^26.0.1",
     "nodemon": "^2.0.2",
-    "type-fest": "^0.21.1"
+    "type-fest": "^1.0.1"
   },
   "private": true,
   "repository": {
@@ -54,7 +54,7 @@
     "url": "https://github.com/kirillgroshkov/kg-backend3"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "author": "Kirill Groshkov"
 }
