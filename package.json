@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "DEBUG=app*,kg:*,nc:* APP_ENV=dev nodemon",
     "serve-prod": "DEBUG=app*,kg:*,nc:* APP_ENV=prod nodemon",
-    "startJs": "TS_NODE_PROJECT=./tsconfig.dist.json APP_ENV=dev yarn start",
+    "startJs": "TS_NODE_PROJECT=./tsconfig.dist.json DEBUG=app*,kg:*,nc:* APP_ENV=dev yarn start",
     "start": "node ./dist/startServer.js"
   },
   "dependencies": {
