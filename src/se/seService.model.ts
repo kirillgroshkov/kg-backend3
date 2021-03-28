@@ -2,6 +2,7 @@ import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@nat
 import { _isEmpty } from '@naturalcycles/js-lib'
 import {
   arraySchema,
+  booleanSchema,
   numberSchema,
   objectSchema,
   stringSchema,
@@ -28,6 +29,7 @@ export interface SEServiceTM extends SEServicePatch {
   completed?: number // ts
   imageIds: string[]
   regions: number[]
+  pub?: boolean
 }
 
 export const SE_SERVICE_REQ_FIELDS: (keyof SEServiceTM)[] = [
@@ -61,6 +63,7 @@ const seServiceSchema = objectSchema<SEServiceBM>({
   regions: arraySchema(numberSchema.valid(...SE_REGION_VALUES))
     .optional()
     .default([]),
+  pub: booleanSchema.optional(),
 })
   .concat(seServicePatchSchema)
   .concat(baseDBEntitySchema)

@@ -844,9 +844,9 @@
     rxjs "^6.5.2"
 
 "@naturalcycles/backend-lib@^2.4.0":
-  version "2.54.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.54.0.tgz#d868dd8e9f523b99aaeac4303c6283b267a642a2"
-  integrity sha512-lmzp1Ues/BaGObS/TH8jKRAV7sQ4uk/GEKxM+v2FY6+b0uQ4bcfsgGsDq3S+/Mq8WVgfqL8FeF6hHZ7bkZDVtA==
+  version "2.55.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/backend-lib/-/backend-lib-2.55.0.tgz#ac50792526fc735e993b97bd20f9fc1dd0685baa"
+  integrity sha512-009KLvx5N2jPohUiwUqaAh/nYq9qM2i2lY30xwbawvlTHv7QmOV9daz9TxYjVYG4BoYj9XvSeUo6ybCoJwfQLQ==
   dependencies:
     "@naturalcycles/db-lib" "^8.0.2"
     "@naturalcycles/nodejs-lib" "^12.0.0"
@@ -895,9 +895,9 @@
     type-fest "^1.0.0"
 
 "@naturalcycles/dev-lib@^10.2.0":
-  version "10.30.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.30.0.tgz#4797a30cb5c618ae804566f20a5fb46ab938e746"
-  integrity sha512-/xWDl/m3TXF0BCk3TXRunVynTWbAmGiYwfT7MtFVy7U90eQkKrmrdvWG5ZTNAwx6Chk0vAaXL13NDv46mUmnYw==
+  version "10.31.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.31.0.tgz#5c375e672f3d427a1815b227e638ad04e89427fa"
+  integrity sha512-1uFlKySgfGkB0hf9HpeKS4TyKD49OOqlaWlMx5zz31UKYqjtj9Urn+m64rsHM3b/hfhWxEBHgBMK3WnwpjWHGA==
   dependencies:
     "@commitlint/cli" "^12.0.0"
     "@commitlint/config-conventional" "^12.0.0"
@@ -972,9 +972,9 @@
     mongodb "^3.3.0"
 
 "@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.2.2", "@naturalcycles/nodejs-lib@^12.4.0", "@naturalcycles/nodejs-lib@^12.8.0":
-  version "12.13.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.13.0.tgz#75d1c59f9d7f32e6df5f0aa00b0444b8dc3cc023"
-  integrity sha512-+aWScwQqnUgsbY/14QFmoKLoRJIOVM1MAwJJNFx8/odRVG++uYv6KLqgDGPv+gWByptKNKCax6ev7VKQ22zimA==
+  version "12.14.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.14.0.tgz#8069886e24d0b060b3c4b514d8effed419b49128"
+  integrity sha512-+6/ylWxoV68umWCXxard19PtkroIOErXcYsLDvC48AyCwLy9NPs15ZfZ8/ltYH1T11Mei2EEdFAh9IMC0ghFUw==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/time-lib" "^3.0.1"
@@ -1461,19 +1461,19 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=8.0.0 <15", "@types/node@^14.0.0", "@types/node@^14.0.5":
-  version "14.14.36"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.36.tgz#5637905dbb15c30a33a3c65b9ef7c20e3c85ebad"
-  integrity sha512-kjivUwDJfIjngzbhooRnOLhGYz6oRFi+L+EpMjxroDYXwDw9lHrJJ43E+dJ6KAd3V3WxWAJ/qZE9XKYHhjPOFQ==
+  version "14.14.37"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
+  integrity sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
 
 "@types/node@^10.10.0":
-  version "10.17.55"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.55.tgz#a147f282edec679b894d4694edb5abeb595fecbd"
-  integrity sha512-koZJ89uLZufDvToeWO5BrC4CR4OUfHnUz2qoPs/daQH6qq3IN62QFxCTZ+bKaCE0xaoCAJYE4AXre8AbghCrhg==
+  version "10.17.56"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.56.tgz#010c9e047c3ff09ddcd11cbb6cf5912725cdc2b3"
+  integrity sha512-LuAa6t1t0Bfw4CuSR0UITsm1hP17YL+u82kfHGrHUWdhlBtH7sa7jGY5z7glGaIj/WDYDkRtgGd+KCjCzxBW1w==
 
 "@types/node@^13.7.0":
-  version "13.13.47"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.47.tgz#6eca42c3462821309b26edbc2eff0db1e37ab9bc"
-  integrity sha512-R6851wTjN1YJza8ZIeX6puNBSi/ZULHVh4WVleA7q256l+cP2EtXnKbO455fTs2ytQk3dL9qkU+Wh8l/uROdKg==
+  version "13.13.48"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.48.tgz#46a3df718aed5217277f2395a682e055a487e341"
+  integrity sha512-z8wvSsgWQzkr4sVuMEEOvwMdOQjiRY2Y/ZW4fDfjfe3+TfQrZqFKOthBgk2RnVEmtOKrkwdZ7uTvsxTBLjKGDQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"

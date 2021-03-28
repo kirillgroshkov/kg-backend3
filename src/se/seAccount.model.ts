@@ -56,6 +56,7 @@ export interface SEAccountTM extends SEAccountPatch {
   // admin?: boolean
   avatarId?: string
   languages: SELang[]
+  pub?: boolean
 }
 
 export interface SEAccountBM extends Merge<SEAccountTM, BaseDBEntity> {}
@@ -91,6 +92,7 @@ const seAccountSchema = objectSchema<SEAccountBM>({
   languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES))
     .optional()
     .default([]),
+  pub: booleanSchema.optional(),
 })
   .concat(seAccountPatchSchema)
   .concat(baseDBEntitySchema)
@@ -104,6 +106,7 @@ export const seAccountTMSchema = objectSchema<SEAccountTM>({
   languages: arraySchema(stringSchema.valid(...SE_LANG_VALUES)).optional(),
   completed: unixTimestampSchema.optional(),
   avatarId: stringSchema.optional(),
+  pub: booleanSchema.optional(),
 }).concat(baseDBEntitySchema)
 
 export const seAccountDao = new CommonDao<SEAccountBM, SEAccountDBM, SEAccountTM>({

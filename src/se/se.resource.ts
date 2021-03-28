@@ -1,8 +1,12 @@
 import { getDefaultRouter, reqValidation } from '@naturalcycles/backend-lib'
 import { _assert } from '@naturalcycles/js-lib'
 import { seAdminCreateUser, seAdminCreateUserInput } from '@src/se/admin/seAdminCreateUser'
+import { seAdminDeleteService } from '@src/se/admin/seAdminDeleteService'
 import { seAdminDeleteUser } from '@src/se/admin/seAdminDeleteUser'
+import { seAdminGetServices } from '@src/se/admin/seAdminGetServices'
 import { seAdminGetUsers } from '@src/se/admin/seAdminGetUsers'
+import { seAdminPatchService } from '@src/se/admin/seAdminPatchService'
+import { seAdminPatchUser } from '@src/se/admin/seAdminPatchUser'
 import { seAccountPut } from '@src/se/handlers/seAccountPut'
 import { seAvatarUpload } from '@src/se/handlers/seAvatarUpload'
 import { seCMSData } from '@src/se/handlers/seCMSData'
@@ -90,6 +94,17 @@ router.post(`/requests`, reqValidation('body', seRequestInputSchema), async (req
   res.json({}) // ok
 })
 
+router.get('/admin/services', async (req, res) => {
+  await seRequireAdmin(req)
+  res.json(await seAdminGetServices())
+})
+
+router.delete('/admin/services/:id', async (req, res) => {
+  await seRequireAdmin(req)
+  await seAdminDeleteService(req.params['id']!)
+  res.json({})
+})
+
 router.get('/admin/users', async (req, res) => {
   await seRequireAdmin(req)
   res.json(await seAdminGetUsers())
@@ -105,4 +120,14 @@ router.delete('/admin/users/:id', async (req, res) => {
   const user = await seRequireAdmin(req)
   await seAdminDeleteUser(user, req.params['id']!)
   res.json({})
+})
+
+router.patch('/admin/users/:id', async (req, res) => {
+  const user = await seRequireAdmin(req)
+  res.json(await seAdminPatchUser(user, req.params['id']!, req.body))
+})
+
+router.patch('/admin/services/:id', async (req, res) => {
+  const user = await seRequireAdmin(req)
+  res.json(await seAdminPatchService(user, req.params['id']!, req.body))
 })

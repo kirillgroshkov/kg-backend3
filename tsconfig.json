@@ -2,7 +2,6 @@
   "extends": "@naturalcycles/backend-lib/cfg/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2020",
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"]
