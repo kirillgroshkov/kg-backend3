@@ -12,6 +12,6 @@ export async function saveUserSettings(
   })
 
   return {
-    userFM: await releasesUserDao.bmToTM(user),
+    userFM: releasesUserDao.bmToTM(user),
   }
 }

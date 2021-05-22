@@ -5,6 +5,7 @@ yarn tsn metriki/metrikiPut.script
  */
 
 /* tslint:disable:ordered-imports no-unused-variable */
+/* eslint-disable */
 import '@src/bootstrap'
 import { getGot, requireEnvKeys } from '@naturalcycles/nodejs-lib'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'

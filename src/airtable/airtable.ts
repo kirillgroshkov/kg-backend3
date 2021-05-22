@@ -13,5 +13,5 @@ export const airtableDao = new CommonDao({
   readOnly: true, // safety, for now
 })
 
-export const airtableImagesMapper = (v: AirtableAttachment[] | undefined) =>
+export const airtableImagesMapper = (v: AirtableAttachment[] | undefined): string[] =>
   (v || []).map(r => r.url)

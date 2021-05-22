@@ -59,7 +59,7 @@ router.get(
   reqValidation('query', releasesQuerySchema),
   reqValidation('params', repoAuthorNameSchema),
   async (req, res) => {
-    const { repoAuthor, repoName } = (req.params as any) as RepoAuthorName
+    const { repoAuthor, repoName } = req.params as any as RepoAuthorName
     const repoFullName = [repoAuthor, repoName].join('/')
     const releases = await getRepoReleases(repoFullName, req.query)
 

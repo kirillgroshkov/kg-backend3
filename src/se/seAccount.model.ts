@@ -59,15 +59,15 @@ export interface SEAccountTM extends SEAccountPatch {
   pub?: boolean
 }
 
-export interface SEAccountBM extends Merge<SEAccountTM, BaseDBEntity> {}
+export type SEAccountBM = Merge<SEAccountTM, BaseDBEntity>
 
-export interface SEAccountDBM extends Merge<SEAccountTM, SavedDBEntity> {}
+export type SEAccountDBM = Merge<SEAccountTM, SavedDBEntity>
 
 // todo: move to nodejs-lib
 export const mobilePhoneNumberSchema = stringSchema.regex(/^\+[0-9]{11}$/)
 const seZipSchema = integerSchema.min(10_000).max(99_999)
 const nameSchema = stringSchema.max(30)
-const personNummerSchema = integerSchema.min(1930_01_01_0000).max(2010_01_01_0000)
+const personNummerSchema = integerSchema.min(193_001_010_000).max(201_001_010_000)
 // todo: add customer mod10 check on personnummer
 
 export const seAccountPatchSchema = objectSchema<SEAccountPatch>({

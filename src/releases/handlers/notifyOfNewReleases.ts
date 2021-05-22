@@ -11,7 +11,7 @@ import { slackService } from '@src/srv/slack.service'
 import * as ejs from 'ejs'
 import * as fs from 'fs-extra'
 
-export async function notifyOfNewReleasesDaily(daily = true): Promise<void> {
+export async function notifyOfNewReleasesDaily(): Promise<void> {
   const maxExcl = dayjs().utc().startOf('day')
   const minIncl = maxExcl.subtract(1, 'day')
   void slackService.send(`notifyOfNewReleasesDaily: ${minIncl.toPretty()} - ${maxExcl.toPretty()}`)

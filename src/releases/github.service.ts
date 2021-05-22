@@ -36,6 +36,7 @@ class GithubService {
 
     do {
       page++
+      // eslint-disable-next-line no-await-in-loop
       repos = await this.getUserStarredReposPage(page, u)
       if (!repos) {
         unchanged = true
@@ -79,7 +80,7 @@ class GithubService {
 
     if (page === 1) {
       urlEtag = await etagDao.getByIdOrEmpty(url, { skipValidation: true }) // todo: figure out validation here
-      ifNoneMatch = urlEtag!.etag
+      ifNoneMatch = urlEtag.etag
     }
 
     const started = Date.now()
@@ -94,7 +95,7 @@ class GithubService {
       }),
       timeout: 10_000,
     })
-    const etagReturned = resp.headers['etag'] as string | undefined
+    const etagReturned = resp.headers['etag']
 
     log(
       `<< ${coloredHttpCode(resp.statusCode)} GET ${dimGrey(url)} ${
@@ -112,13 +113,13 @@ class GithubService {
       void etagDao.save(urlEtag)
     }
 
-    return ((resp.body as any) as any[]).map(r => this.mapRepo(r))
+    return (resp.body as any as any[]).map(r => this.mapRepo(r))
   }
 
   stripW(etag?: string): string {
     if (!etag) return undefined as any
     if (etag.startsWith('W/')) {
-      return etag.substr(2)
+      return etag.slice(2)
     }
     return etag
   }

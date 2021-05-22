@@ -27,6 +27,7 @@ export interface ReleasesQuery {
   /**
    * If true - always hit origin.
    * Otherwise will return cached if available.
+   *
    * @default false
    */
   skipCache?: boolean

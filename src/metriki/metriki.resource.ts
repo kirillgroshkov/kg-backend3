@@ -31,7 +31,7 @@ const metrikiParamsSchema = objectSchema<MetrikiParams>({
 })
 
 interface MetrikiBody {
-  meta?: object
+  meta?: Record<string, any>
 }
 const metrikiBodySchema = objectSchema<MetrikiBody>({
   meta: anyObjectSchema.optional(),
@@ -50,7 +50,7 @@ router.put(
   reqValidation('query', metrikiQuerySchema),
   reqValidation('body', metrikiBodySchema),
   async (req, res) => {
-    const { accountId, metricCode, metricValue } = (req.params as any) as MetrikiParams
+    const { accountId, metricCode, metricValue } = req.params as any as MetrikiParams
     await metrikiService.auth(req.header('authorization'), accountId, 'w')
 
     const now = dayjs()

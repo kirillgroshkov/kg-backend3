@@ -103,6 +103,7 @@ class ReleasesUpdater {
     }
 
     const users = await releasesUserDao.runQuery(q)
+    // eslint-disable-next-line unicorn/no-array-reduce
     const repoIdsTotal = users.reduce((ids, u) => ids.concat(u.starredRepos), [] as string[])
     const repoIds = _uniq(repoIdsTotal)
 
@@ -127,7 +128,7 @@ class ReleasesUpdater {
       await pMap(
         repos,
         async repo => {
-          return this.checkRepo(repo).catch(err => {
+          return await this.checkRepo(repo).catch(err => {
             if (throwOnError) throw err
             void slackReleases.log(`checkRepo ${repo.id}`, err)
             return []
@@ -184,6 +185,7 @@ class ReleasesUpdater {
       // log(`>> ${url}`)
       const started = Date.now()
 
+      // eslint-disable-next-line no-await-in-loop
       const { body, statusCode, statusMessage } = await got(url, {
         throwHttpErrors: false,
       }).catch(err => {
@@ -203,6 +205,7 @@ class ReleasesUpdater {
         break
       }
 
+      // eslint-disable-next-line no-await-in-loop
       fetchedReleases = await atomService.parseAsReleases(body, repoFullName).catch(err => {
         if (throwOnError) throw err
         log.error(repoFullName, err)

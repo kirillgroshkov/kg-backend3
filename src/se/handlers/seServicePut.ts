@@ -16,10 +16,10 @@ export async function seServicePut(
   patch: SEServicePatch,
   id?: string,
 ): Promise<SEBackendResponseTM> {
-  let service = ({
+  let service = {
     imageIds: [],
     regions: [],
-  } as any) as Saved<SEServiceBM>
+  } as any as Saved<SEServiceBM>
 
   if (id) {
     // Update existing Service
@@ -46,7 +46,7 @@ export async function seServicePut(
 
   return {
     changedServices: {
-      [service.id!]: service,
+      [service.id]: service,
     },
     createdObjectId: id ? undefined : service.id,
   }

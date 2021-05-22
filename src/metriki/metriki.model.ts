@@ -17,9 +17,7 @@ import {
 import { slugSchema } from '@naturalcycles/nodejs-lib/dist/validation/joi/joi.shared.schemas'
 import { dayjs } from '@naturalcycles/time-lib'
 
-export interface MetrikiAccount extends BaseDBEntity {
-  // id: string
-}
+export type MetrikiAccount = BaseDBEntity
 
 export interface MetrikiApiKey extends BaseDBEntity {
   // id: string // key itself
@@ -45,7 +43,7 @@ export interface MetrikiRecord extends BaseDBEntity {
   metricId: string // $accountId_$code
   ts: number
   v: number
-  meta?: object // anything, for now
+  meta?: Record<string, any> // anything, for now
 }
 
 export const metrikiAccountSchema = objectSchema<MetrikiAccount>({}).concat(baseDBEntitySchema)
@@ -130,7 +128,7 @@ export const metrikiRecordDao = new MetrikiRecordDao({
       const metricId = [accountId, code].join('_')
       return {
         metricId,
-        ts: parseInt(ts!),
+        ts: Number.parseInt(ts!),
       }
     },
   },

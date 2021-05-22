@@ -44,8 +44,8 @@ export function isServiceCompleted(service: SEServiceBM): boolean {
   return SE_SERVICE_REQ_FIELDS.every(f => !_isEmpty(service[f]))
 }
 
-export interface SEServiceBM extends Merge<SEServiceTM, BaseDBEntity> {}
-export interface SEServiceDBM extends Merge<SEServiceTM, SavedDBEntity> {}
+export type SEServiceBM = Merge<SEServiceTM, BaseDBEntity>
+export type SEServiceDBM = Merge<SEServiceTM, SavedDBEntity>
 
 export const seServicePatchSchema = objectSchema<SEServicePatch>({
   title: stringSchema.max(100).optional(),

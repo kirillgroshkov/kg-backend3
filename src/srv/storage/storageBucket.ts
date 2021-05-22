@@ -88,7 +88,7 @@ export class StorageBucket {
       directory,
       ...opt,
     })
-    return files.map(f => f.name.substr(start))
+    return files.map(f => f.name.slice(start))
   }
 
   /**

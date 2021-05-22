@@ -5,8 +5,9 @@ APP_ENV=prod DEBUG=nc* yarn tsn se/importAirtable
  */
 
 /* tslint:disable:ordered-imports no-unused-variable */
+/* eslint-disable */
 import '@src/bootstrap'
-import { _hb, pDefer, pDelay, pMap } from '@naturalcycles/js-lib'
+import { _hb, pDelay, pMap } from '@naturalcycles/js-lib'
 import { getGot, stringId } from '@naturalcycles/nodejs-lib'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { SESchedule } from '@src/se/se.model'

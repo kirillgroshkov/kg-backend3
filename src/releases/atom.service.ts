@@ -88,7 +88,7 @@ class AtomService {
         title: entry.title[0]!,
         descrHtml: entry.content[0]!._,
         author: entry.author[0]!.name[0]!,
-        authorThumb: mediaThumbnail?.url[0]!,
+        authorThumb: mediaThumbnail?.url[0] as string,
         tagName,
         v,
       }

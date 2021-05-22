@@ -9,7 +9,7 @@ export async function releasesInit(user: Saved<ReleasesUser>): Promise<BackendRe
     releasesUpdater.lastFinished && releasesUpdater.lastFinished.unix()
 
   return _filterNullishValues({
-    userFM: await releasesUserDao.bmToTM(user),
+    userFM: releasesUserDao.bmToTM(user),
     releasesUpdaterLastFinished,
   })
 }

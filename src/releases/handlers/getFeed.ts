@@ -3,7 +3,7 @@ import { releaseDao } from '@src/releases/model/release.model'
 import { BackendResponse, DateRange } from '@src/releases/model/releases.model'
 import { ReleasesUser } from '@src/releases/model/releasesUser.model'
 
-export interface GetFeedOpt extends DateRange {}
+export type GetFeedOpt = DateRange
 
 export async function getFeed(user: ReleasesUser, opt: GetFeedOpt = {}): Promise<BackendResponse> {
   const { minIncl = dayjs().subtract(3, 'day').toISODate(), maxExcl = '2999-01-01' } = opt

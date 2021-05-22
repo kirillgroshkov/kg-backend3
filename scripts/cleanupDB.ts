@@ -5,6 +5,7 @@ APP_ENV=dev DEBUG=app*,kg:*,nc:* yarn tsn cleanupDB
  */
 
 /* tslint:disable:ordered-imports no-unused-variable */
+/* eslint-disable */
 import '@src/bootstrap'
 import { runScript } from '@naturalcycles/nodejs-lib/dist/script'
 import { dayjs } from '@naturalcycles/time-lib'

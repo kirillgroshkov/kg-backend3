@@ -28,4 +28,4 @@ export const seRegionMap = {
   34: 'Österåker',
 }
 
-export const SE_REGION_VALUES = Object.keys(seRegionMap).map(Number)
+export const SE_REGION_VALUES = Object.keys(seRegionMap).map(r => Number(r))

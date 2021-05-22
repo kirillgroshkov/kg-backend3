@@ -39,7 +39,7 @@ export async function authUser(input: AuthInput): Promise<BackendResponse> {
 
   return {
     newUser,
-    userFM: await releasesUserDao.bmToTM(user),
+    userFM: releasesUserDao.bmToTM(user),
   }
 }
 

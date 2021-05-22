@@ -7,4 +7,5 @@ const markedOpt: MarkedOptions = {
   sanitizer: sanitizeHtml,
 }
 
-export const markdownMapper = (v?: string) => (v ? marked(v.trim(), markedOpt) : undefined)
+export const markdownMapper = (v?: string): string | undefined =>
+  v ? marked(v.trim(), markedOpt) : undefined
