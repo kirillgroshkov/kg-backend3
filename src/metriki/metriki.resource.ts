@@ -143,7 +143,11 @@ router.get(
 )
 
 router.delete('/:accountId/metrics/:metricCode/:ts?', async (req, res) => {
-  const { accountId, metricCode, ts } = req.params
+  const { accountId, metricCode, ts } = req.params as {
+    accountId: string
+    metricCode: string
+    ts?: string
+  }
   await metrikiService.auth(req.header('authorization'), accountId, 'w')
 
   if (ts) {

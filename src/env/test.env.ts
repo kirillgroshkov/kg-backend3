@@ -1,9 +1,9 @@
 import { EnvDev } from '@src/env/dev.env'
 
 export class EnvTest extends EnvDev {
-  name = 'test'
+  override name = 'test'
 
-  slackEnabled = false
+  override slackEnabled = false
 }
 
 export const envTest = new EnvTest()

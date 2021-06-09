@@ -28,7 +28,7 @@ const router = getDefaultRouter()
 export const seResource = router
 
 router.get('/cms/pages/:pageId?', async (req, res) => {
-  const { pageId } = req.params
+  const { pageId } = req.params as { pageId?: string }
 
   if (pageId) {
     res.json({ data: await sePageDao.getById(pageId) })

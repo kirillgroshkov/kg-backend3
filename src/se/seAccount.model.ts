@@ -1,5 +1,5 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
-import { _isEmpty } from '@naturalcycles/js-lib'
+import { Merge, _isEmpty } from '@naturalcycles/js-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -11,7 +11,6 @@ import {
 } from '@naturalcycles/nodejs-lib'
 import { seFirestoreDB } from '@src/se/se.db'
 import { SELang, SE_LANG_VALUES } from '@src/se/se.lang'
-import { Merge } from 'type-fest'
 
 export interface SEAccountPatch {
   // phoneNumber?: string // no, you cannot patch it!

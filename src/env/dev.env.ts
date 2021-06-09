@@ -1,19 +1,19 @@
 import { EnvProd } from './prod.env'
 
 export class EnvDev extends EnvProd {
-  name = 'dev'
-  prod = false
-  dev = true
+  override name = 'dev'
+  override prod = false
+  override dev = true
 
   // sentryServiceCfg: SentrySharedServiceCfg = {
   //   // dsn: undefined,
   // }
 
-  sentryEnabled = false
+  override sentryEnabled = false
 
-  authEnabled = false
+  override authEnabled = false
 
-  slackEnabled = true
+  override slackEnabled = true
 }
 
 const envDev = new EnvDev()

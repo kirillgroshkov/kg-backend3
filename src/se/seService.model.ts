@@ -1,5 +1,5 @@
 import { BaseDBEntity, baseDBEntitySchema, CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
-import { _isEmpty } from '@naturalcycles/js-lib'
+import { Merge, _isEmpty } from '@naturalcycles/js-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -11,7 +11,6 @@ import {
 import { seFirestoreDB } from '@src/se/se.db'
 import { SECategory, SESchedule, SE_CATEGORY_VALUES, SE_SCHEDULE_VALUES } from '@src/se/se.model'
 import { SE_REGION_VALUES } from '@src/se/se.regions'
-import { Merge } from 'type-fest'
 
 export interface SEServicePatch {
   title?: string

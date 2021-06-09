@@ -1,5 +1,6 @@
 import { AirtableAttachment } from '@naturalcycles/airtable-lib'
 import { CommonDao, SavedDBEntity } from '@naturalcycles/db-lib'
+import { Merge } from '@naturalcycles/js-lib'
 import {
   arraySchema,
   booleanSchema,
@@ -13,7 +14,6 @@ import {
 import { airtableDB, airtableImagesMapper } from '@src/airtable/airtable'
 import { SECategory } from '@src/se/se.model'
 import { mobilePhoneNumberSchema } from '@src/se/seAccount.model'
-import { Merge } from 'type-fest'
 
 export interface SESellerTM {
   id: string
