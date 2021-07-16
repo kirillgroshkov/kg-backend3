@@ -2,7 +2,7 @@ import { _uniq } from '@naturalcycles/js-lib'
 import { mongoDB } from '@src/srv/db'
 
 export async function getRepoNames(): Promise<string[]> {
-  const repoFullNames: string[] = await mongoDB.distinct('Release', 'repoFullName', {})
+  const repoFullNames: string[] = await mongoDB.distinct('Release', 'repoFullName')
   return repoFullNames.map(r => r.toLowerCase()).sort()
 }
 

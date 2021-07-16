@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
+    "prepare": "husky install",
     "serve": "DEBUG=app*,kg:*,nc:* APP_ENV=dev nodemon",
     "serve-prod": "DEBUG=app*,kg:*,nc:* APP_ENV=prod nodemon",
     "startJs": "TS_NODE_PROJECT=./tsconfig.dist.json DEBUG=app*,kg:*,nc:* APP_ENV=dev yarn start",
@@ -36,11 +37,11 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "@naturalcycles/dev-lib": "^11.0.5",
+    "@naturalcycles/dev-lib": "^12.0.3",
     "@types/ejs": "^3.0.0",
     "@types/express-fileupload": "^1.1.5",
     "@types/marked": "^2.0.0",
-    "@types/node": "^15.3.0",
+    "@types/node": "^16.3.3",
     "@types/node-schedule": "^1.2.4",
     "@types/semver": "^7.1.0",
     "@types/xml2js": "^0.4.4",
