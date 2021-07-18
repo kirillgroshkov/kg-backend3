@@ -12,7 +12,7 @@ import { releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { userStarsUpdater } from '@src/releases/userStarsUpdater'
 
 runScript(async () => {
-  const u = await releasesUserDao.requireById('xlmyalsayaftqgcz')
+  const u = await releasesUserDao.requireById('7FfDSISActZLSGX7FSWo4wldSFd2')
   const existingRepoIds = new Set(await releasesRepoDao.getAllIds())
   await userStarsUpdater.updateUser(u, existingRepoIds)
 })

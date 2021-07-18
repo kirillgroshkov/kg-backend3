@@ -26,6 +26,11 @@ class GithubService {
     u: ReleasesUser,
     maxPages = 100, // 10.000 stars is a cap now
   ): Promise<ReleasesRepo[] | null> {
+    if (!u.accessToken) {
+      console.warn(`user ${u.id} has no accessToken to do getUserStarredRepos`)
+      return null
+    }
+
     // tslint:disable-next-line:variable-name
     const per_page = 100
     let unchanged = false

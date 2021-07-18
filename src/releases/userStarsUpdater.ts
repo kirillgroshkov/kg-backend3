@@ -1,9 +1,9 @@
 import { pMap, _since } from '@naturalcycles/js-lib'
-import { Debug } from '@naturalcycles/nodejs-lib'
+import { Debug, HTTPError } from '@naturalcycles/nodejs-lib'
 import { dimGrey, yellow } from '@naturalcycles/nodejs-lib/dist/colors'
 import { dayjs, IDayjs } from '@naturalcycles/time-lib'
 import { githubService } from '@src/releases/github.service'
-import { releasesRepoDao } from '@src/releases/model/releasesRepo.model'
+import { ReleasesRepo, releasesRepoDao } from '@src/releases/model/releasesRepo.model'
 import { ReleasesUser, releasesUserDao } from '@src/releases/model/releasesUser.model'
 import { slackService } from '@src/srv/slack.service'
 
@@ -92,7 +92,11 @@ class UserStarsUpdater {
       await pMap(
         users,
         async user => {
-          const updated = await this.updateUser(user, existingRepoIds)
+          const updated = await this.updateUser(user, existingRepoIds).catch(err => {
+            console.error(`updateUser error for ${user.id}:`, err)
+            void slackService.log(`updateUser error for ${user.id}:`, err)
+            return undefined
+          })
           return updated ? user.id : undefined
         },
         { concurrency: 1 },
@@ -110,7 +114,29 @@ class UserStarsUpdater {
   async updateUser(u: ReleasesUser, existingRepoIds: Set<string>): Promise<boolean> {
     const initialStarredRepos = u.starredRepos
 
-    const repos = await githubService.getUserStarredRepos(u)
+    let repos: ReleasesRepo[] | null
+
+    try {
+      repos = await githubService.getUserStarredRepos(u)
+    } catch (err) {
+      if (
+        err instanceof Error &&
+        err.name === 'HTTPError' &&
+        (err as HTTPError)?.response.statusCode === 401 &&
+        err.message.includes('Bad credentials')
+      ) {
+        void slackService.send(
+          `updateUser ${u.id} returned 401 Bad credentials, removing accessToken`,
+        )
+
+        delete u.accessToken
+        await releasesUserDao.save(u)
+
+        return false
+      }
+
+      throw err // unknown error
+    }
 
     if (!repos) {
       log(`${u.id} unchanged (${initialStarredRepos.length} stars)`)
